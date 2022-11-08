@@ -59,7 +59,7 @@ const config: Readonly<AppConfig> = {
     hiddenInMenu: false,
     hiddenInBread: false,
     needLoading: false,
-    needToken: true,
+    needToken: false,
     needRouteHistory: true
   },
 

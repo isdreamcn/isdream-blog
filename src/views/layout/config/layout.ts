@@ -2,6 +2,7 @@ import type { Component } from 'vue'
 import type { AppSettingPartial } from '@/store/index'
 import mainLayout from '../mainLayout/mainLayout.vue'
 import topMenuLayout from '../topMenuLayout/topMenuLayout.vue'
+import blogLayout from '../blogLayout/blogLayout.vue'
 
 export interface LayoutFunctionItem {
   label: string
@@ -16,7 +17,7 @@ export interface LayoutMapItem {
   functions: LayoutFunctionItem[]
 }
 
-export type LayoutKeys = 'mainLayout' | 'topMenuLayout'
+export type LayoutKeys = 'blogLayout' | 'mainLayout' | 'topMenuLayout'
 
 export interface layoutOption {
   label: string
@@ -24,6 +25,15 @@ export interface layoutOption {
 }
 
 export const layoutMap = new Map<LayoutKeys, LayoutMapItem>([
+  [
+    'blogLayout',
+    {
+      componnet: blogLayout,
+      label: '博客布局',
+      appSetting: {},
+      functions: []
+    }
+  ],
   [
     'mainLayout',
     {

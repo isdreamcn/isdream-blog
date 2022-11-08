@@ -6,7 +6,7 @@ import { RoutesHandler } from '../utils'
 const loadRoutes = loadFiles<RouteRecordRaw>
 
 export const routesHandler = new RoutesHandler(
-  loadRoutes(import.meta.glob('./main/*.ts', { eager: true })),
+  loadRoutes(import.meta.glob('./blog/*.ts', { eager: true })),
   {
     generatorMenu: true,
     addRouteParentName: appConfig.routeMainName,
@@ -23,12 +23,19 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/user',
+    name: appConfig.routeLoginName,
     redirect: {
-      name: appConfig.routeLoginName
-    },
-    component: () => import('@/views/layout/userLayout/userLayout.vue'),
-    children: loadRoutes(import.meta.glob('./user/*.ts', { eager: true }))
+      name: appConfig.routeMainName
+    }
   },
+  // {
+  //   path: '/user',
+  //   redirect: {
+  //     name: appConfig.routeLoginName
+  //   },
+  //   component: () => import('@/views/layout/userLayout/userLayout.vue'),
+  //   children: loadRoutes(import.meta.glob('./user/*.ts', { eager: true }))
+  // },
   {
     path: '/:pathMatch(.*)*',
     meta: {

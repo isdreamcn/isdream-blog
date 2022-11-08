@@ -35,7 +35,7 @@ export interface AppSetting {
 
 const useAppSettingDefault = (): AppSetting => ({
   colorPrimary: '#409EFF',
-  layout: 'mainLayout',
+  layout: 'blogLayout',
   showLogo: true,
   menu: {
     collapsed: false,
