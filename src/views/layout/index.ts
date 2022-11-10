@@ -39,8 +39,8 @@ export const createTransitionVNode = (Component: VNode) => {
     Transition,
     {
       // 初次显示动画
-      appear: true,
-      'enter-active-class': 'animate__animated animate__lightSpeedInRight'
+      appear: true
+      // 'enter-active-class': 'animate__animated animate__fadeInUp'
     },
     {
       default: () => Component

@@ -39,7 +39,7 @@ const useAppSettingDefault = (): AppSetting => ({
   showLogo: true,
   menu: {
     collapsed: false,
-    mode: 'vertical',
+    mode: 'horizontal',
     backgroundColor: '#ffffff',
     textColor: '#303133',
     hoverBackgroundColor: '#ecf5ff'

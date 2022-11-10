@@ -11,6 +11,8 @@ import MenuCollapsed from './menuCollapsed/menuCollapsed.vue'
 
 import Footer from './footer/footer.vue'
 
+import BlogHeader from './blogHeader/blogHeader.vue'
+
 export {
   Menu,
   Footer,
@@ -20,5 +22,6 @@ export {
   Logo,
   MenuCollapsed,
   Breadcrumb,
-  RouteHistory
+  RouteHistory,
+  BlogHeader
 }
