@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/store'
 import { BlogHeader } from '../components/index'
 
 defineOptions({
@@ -17,6 +18,7 @@ defineOptions({
 
 // rem
 const htmlEl = document.documentElement
+const appStore = useAppStore()
 const setHtmlFontSize = () => {
   const width = document.body.clientWidth
   const scale = width / 1920
@@ -25,6 +27,10 @@ const setHtmlFontSize = () => {
     fontSize *= scale
   }
   htmlEl.style.fontSize = fontSize + 'px'
+  // 响应式
+  appStore.setAppSetting({
+    media: width > 768 ? 'pc' : 'phone'
+  })
 }
 
 setHtmlFontSize()

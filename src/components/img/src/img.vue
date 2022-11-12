@@ -41,6 +41,7 @@ const onLoad = () => {
     position: absolute;
     width: 100%;
     height: 100%;
+    object-fit: cover;
     transition: 0.3s;
     z-index: -1;
     &.ground-glass {

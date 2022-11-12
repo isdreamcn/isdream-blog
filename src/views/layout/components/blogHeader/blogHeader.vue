@@ -1,19 +1,54 @@
 <template>
   <div ref="elRef" :class="`header-container ${className}`">
-    BLOG
-    <div>navbar</div>
+    <div class="header-container__logo bottom-border" @click="goHome">
+      ISDREAM
+    </div>
+    <div class="header-container__navbar">
+      <div
+        class="navbar-item bottom-border"
+        v-for="item in userMenu"
+        :key="item.path"
+      >
+        <a class="m-flex hc" @click="clickMenuItem(item)"
+          ><MIcon :name="item.icon"></MIcon> {{ item.title }}</a
+        >
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import type { UserMenu } from '@/store'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store'
+import appConfig from '@/config'
 
 defineOptions({
   name: 'Demo'
 })
 
-const elRef = ref<HTMLElement>()
+// navbar
+const userStore = useUserStore()
+const userMenu = computed(() => userStore.userMenu)
 
+const router = useRouter()
+const clickMenuItem = (item: UserMenu) => {
+  if (item.link) {
+    window.open(item.link)
+    return
+  }
+  router.push(item.path)
+}
+
+const goHome = () => {
+  router.push({
+    name: appConfig.routeMainName
+  })
+}
+
+// 滚动修改class
+const elRef = ref<HTMLElement>()
 const className = ref('')
 let scrollTop = 0
 
@@ -45,7 +80,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 0.8rem 2rem;
   transition: 0.5s;
   color: #ffffff;
   &.hidden {
@@ -55,6 +90,45 @@ onMounted(() => {
     background-color: rgba(255, 255, 255, 0.7);
     color: #000000;
     box-shadow: 0 5px 6px -5px rgb(133 133 133 / 60%);
+    .bottom-border {
+      &:hover {
+        color: var(--el-color-primary);
+      }
+    }
+  }
+
+  .bottom-border {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &::after {
+      content: '';
+      display: block;
+      height: 0.2rem;
+      width: 0;
+      margin-top: 0.2rem;
+      background-color: var(--el-color-primary);
+      transition: 0.3s;
+    }
+
+    &:hover {
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .header-container__logo {
+    cursor: pointer;
+  }
+  .header-container__navbar {
+    .navbar-item {
+      cursor: pointer;
+      padding: 0.5rem;
+      .m-icon {
+        margin-right: 0.3rem;
+      }
+    }
   }
 }
 </style>
