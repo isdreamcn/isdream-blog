@@ -1,5 +1,5 @@
 <template>
-  <div ref="elRef" :class="`header-container ${className}`">
+  <div :class="`header-container ${className}`">
     <div class="header-container__logo bottom-border" @click="goHome">
       ISDREAM
     </div>
@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import type { UserMenu } from '@/store'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppLayoutEl } from '@/store'
 import appConfig from '@/config'
 
 defineOptions({
@@ -48,27 +48,32 @@ const goHome = () => {
 }
 
 // 滚动修改class
-const elRef = ref<HTMLElement>()
 const className = ref('')
 let scrollTop = 0
 
+const appLayoutEl = useAppLayoutEl()
 onMounted(() => {
-  elRef.value!.parentElement!.addEventListener(
-    'scroll',
-    () => {
-      const _scrollTop = elRef.value!.parentElement!.scrollTop
-      if (scrollTop < _scrollTop) {
-        className.value = 'hidden'
-      } else {
-        className.value = 'show'
-      }
-      if (_scrollTop !== 0) {
-        className.value += ' has-bg'
-      }
-      scrollTop = _scrollTop
-    },
-    false
-  )
+  nextTick(() => {
+    appLayoutEl.value?.addEventListener(
+      'scroll',
+      () => {
+        if (!appLayoutEl.value) {
+          return
+        }
+        const _scrollTop = appLayoutEl.value.scrollTop
+        if (scrollTop < _scrollTop) {
+          className.value = 'hidden'
+        } else {
+          className.value = 'show'
+        }
+        if (_scrollTop !== 0) {
+          className.value += ' has-bg'
+        }
+        scrollTop = _scrollTop
+      },
+      false
+    )
+  })
 })
 </script>
 
@@ -89,7 +94,7 @@ onMounted(() => {
   &.has-bg {
     background-color: rgba(255, 255, 255, 0.7);
     color: #000000;
-    box-shadow: 0 5px 6px -5px rgb(133 133 133 / 60%);
+    box-shadow: 0 1px 2.5rem -0.3rem rgb(0 0 0 / 50%);
     .bottom-border {
       &:hover {
         color: var(--el-color-primary);

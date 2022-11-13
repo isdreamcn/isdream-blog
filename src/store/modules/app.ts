@@ -6,8 +6,8 @@ import db from '@/storage'
 import { mergeObjDeep } from '@/utils'
 import { useCssVariable, useDark } from '@/hooks'
 
-type Theme = 'light' | 'dark'
-type Media = 'pc' | 'phone'
+export type Theme = 'light' | 'dark'
+export type Media = 'pc' | 'phone'
 
 export interface AppSetting {
   colorPrimary: string
@@ -64,12 +64,14 @@ export type AppSettingPartial = PartialDeep<AppSetting>
 
 interface AppState {
   theme: Theme
+  appLayoutEl?: HTMLElement
   appSetting: AppSetting
 }
 
 export const useAppStore = defineStore('app', {
   state: (): AppState => ({
     theme: 'light',
+    appLayoutEl: undefined,
     appSetting: useAppSettingDefault()
   }),
   getters: {},
@@ -91,7 +93,10 @@ export const useAppStore = defineStore('app', {
       useCssVariable('--text-color', menu.textColor)
       useCssVariable('--hover-bg-color', menu.hoverBackgroundColor)
     },
-    setState(state: Partial<AppState>, dbOptions?: StorageSetOptions) {
+    setState(
+      state: Partial<Omit<AppState, 'appLayoutEl'>>,
+      dbOptions?: StorageSetOptions
+    ) {
       this.$patch(state)
       db.setData(state, dbOptions)
     },
@@ -107,6 +112,10 @@ export const useAppStore = defineStore('app', {
       this.appSetting = useAppSettingDefault()
       db.set('appSetting', this.appSetting)
       this.setRootCss()
+    },
+    // el
+    setAppLayoutEl(appLayoutEl?: HTMLElement) {
+      this.appLayoutEl = appLayoutEl
     }
   }
 })
@@ -125,4 +134,9 @@ export const useAppSetting = () => {
     appIsDark,
     appMedia
   }
+}
+
+export const useAppLayoutEl = () => {
+  const appStore = useAppStore()
+  return computed(() => appStore.appLayoutEl)
 }
