@@ -25,7 +25,7 @@ import { useUserStore, useAppLayoutEl } from '@/store'
 import appConfig from '@/config'
 
 defineOptions({
-  name: 'Demo'
+  name: 'BlogHeader'
 })
 
 // navbar
@@ -80,7 +80,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .header-container {
   position: fixed;
-  z-index: 2;
+  z-index: 98;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;

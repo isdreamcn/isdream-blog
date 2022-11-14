@@ -9,27 +9,35 @@
       </MImg>
     </div>
     <div class="home__content">
-      <div v-for="i in 10" :key="i" class="blogLayout__content">
-        <div class="home__content-cover">
-          <MImg :src="p1Img"></MImg>
+      <TransitionGroup enter-active-class="animate__animated animate__fadeInUp">
+        <div v-for="i in dataListCount" :key="i" class="blogLayout__content">
+          <div class="home__content-cover">
+            <MImg :src="p1Img"></MImg>
+          </div>
+          <div class="home__content-info">
+            <div class="home__content-info-time">
+              <MIcon name="icon-clock"></MIcon>发布于2022-11-13
+            </div>
+            <div class="home__content-info-title">test Title（测试标题）</div>
+            <div class="home__content-info-statistics">
+              <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
+              <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
+              <span><MIcon name="icon-PriceTag"></MIcon>无分类</span>
+            </div>
+            <div class="home__content-info-desc">
+              测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
+              测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
+              测试一下测试一下测试一下测试一下测试一下测试一下
+              测试一下测试一下测试一下测试一下测试一下
+            </div>
+          </div>
         </div>
-        <div class="home__content-info">
-          <div class="home__content-info-time">
-            <MIcon name="icon-clock"></MIcon>发布于2022-11-13
-          </div>
-          <div class="home__content-info-title">test Title（测试标题）</div>
-          <div class="home__content-info-statistics">
-            <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
-            <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
-            <span><MIcon name="icon-PriceTag"></MIcon>无分类</span>
-          </div>
-          <div class="home__content-info-desc">
-            测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
-            测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
-            测试一下测试一下测试一下测试一下测试一下测试一下
-            测试一下测试一下测试一下测试一下测试一下
-          </div>
+      </TransitionGroup>
+      <div class="home__content-next">
+        <div v-show="isLoading" class="loading">
+          <MLottie :data="loadingData"></MLottie>
         </div>
+        <span v-show="!isLoading" @click="getNextPage">下一页</span>
       </div>
     </div>
   </div>
@@ -39,6 +47,9 @@
 import bgImg from '@/assets/img/bg.png'
 import bgMinImg from '@/assets/img/bg-min.png'
 import p1Img from '@/assets/img/p1.png'
+import loadingData from '@/assets/lottie/loading.json'
+
+import { ref } from 'vue'
 import { useAppLayoutEl } from '@/store'
 
 defineOptions({
@@ -56,6 +67,17 @@ const showContent = () => {
     behavior: 'smooth'
   })
 }
+
+const dataListCount = ref(3)
+
+const isLoading = ref(false)
+const getNextPage = () => {
+  isLoading.value = true
+  setTimeout(() => {
+    dataListCount.value += 3
+    isLoading.value = false
+  }, 1000)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -71,11 +93,10 @@ const showContent = () => {
     .home__header-tip {
       cursor: pointer;
       position: absolute;
-      bottom: 2rem;
+      bottom: 3rem;
       font-size: 2.5rem;
       color: #ffffff;
-      animation: up-down 0.8s infinite;
-      animation-direction: alternate;
+      animation: up-down-float 0.8s linear alternate infinite;
     }
     .m-img {
       &::after {
@@ -91,18 +112,41 @@ const showContent = () => {
     }
   }
 
-  @keyframes up-down {
+  @keyframes up-down-float {
     from {
-      margin: 0;
+      bottom: 3rem;
     }
 
     to {
       opacity: 0.6;
-      margin: -1rem;
+      bottom: 2rem;
     }
   }
 
   .home__content {
+    .home__content-next {
+      margin: 2rem auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 10rem;
+      span {
+        padding: 1rem 3rem;
+        border: 1px solid #d6d6d6;
+        border-radius: 3rem;
+        color: #adadad;
+        transition: 0.3s;
+        cursor: pointer;
+        &:hover {
+          color: var(--el-color-primary);
+          border-color: var(--el-color-primary);
+          box-shadow: 0 0 0.5rem var(--el-color-primary);
+        }
+      }
+      .loading {
+        width: 10rem;
+      }
+    }
     .blogLayout__content {
       display: flex;
       &:hover {
@@ -152,12 +196,8 @@ const showContent = () => {
           flex-wrap: wrap;
           align-items: center;
           span {
-            margin-right: 1rem;
             display: flex;
             align-items: center;
-            &:last-child {
-              margin-right: 0;
-            }
           }
         }
         &-desc {
@@ -169,16 +209,50 @@ const showContent = () => {
           line-height: 1.5rem;
         }
       }
-      &:nth-child(1n) {
+      &:nth-child(2n - 1) {
         flex-direction: row;
         .home__content-info {
           align-items: flex-end;
+          &-statistics {
+            justify-content: flex-end;
+            span {
+              margin-left: 1rem;
+            }
+          }
         }
       }
       &:nth-child(2n) {
         flex-direction: row-reverse;
         .home__content-info {
-          align-items: flex-start;
+          &-statistics {
+            span {
+              margin-right: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .home__content {
+      .blogLayout__content {
+        display: block;
+        .home__content-cover {
+          height: 13rem;
+        }
+        &:nth-child(2n - 1) {
+          flex-direction: row-reverse;
+          .home__content-info {
+            align-items: flex-start;
+            &-statistics {
+              justify-content: flex-start;
+              span {
+                margin-left: 0;
+                margin-right: 1rem;
+              }
+            }
+          }
         }
       }
     }

@@ -1,6 +1,7 @@
 <template>
   <div class="blogLayout" ref="blogLayoutElRef">
     <BlogHeader></BlogHeader>
+    <BackTop></BackTop>
     <div class="blogLayout__main">
       <KeepAlive><slot></slot></KeepAlive>
       <div class="blogLayout__footer">
@@ -28,7 +29,7 @@
 import type { Media } from '@/store'
 import { ref, onMounted } from 'vue'
 import { useAppStore } from '@/store'
-import { BlogHeader } from '../components/index'
+import { BlogHeader, BackTop } from '../components/index'
 
 defineOptions({
   name: 'BlogLayout'
@@ -105,7 +106,7 @@ onMounted(() => {
   // 响应式
   :deep(.blogLayout__content) {
     min-height: 18.75rem;
-    margin: 1rem auto;
+    margin: 1.5rem auto;
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
@@ -117,7 +118,7 @@ onMounted(() => {
   }
   &.pc {
     :deep(.blogLayout__content) {
-      width: 60%;
+      width: 50%;
     }
   }
   &.phone {

@@ -1,0 +1,71 @@
+<template>
+  <div
+    v-if="appMedia === 'pc'"
+    :class="`layout-back-top ${className}`"
+    @click="goBackTop"
+  >
+    <img src="@/assets/img/scroll.png" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, nextTick } from 'vue'
+import { useAppLayoutEl, useAppSetting } from '@/store'
+defineOptions({
+  name: 'BackTop'
+})
+
+const { appMedia } = useAppSetting()
+
+const appLayoutEl = useAppLayoutEl()
+const className = ref('is-hidden')
+
+const updateClassName = () => {
+  className.value = appLayoutEl.value?.scrollTop ? 'is-show' : 'is-hidden'
+}
+
+const goBackTop = () => {
+  appLayoutEl.value?.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+
+onMounted(() => {
+  nextTick(() => {
+    appLayoutEl.value?.addEventListener('scroll', updateClassName)
+    updateClassName()
+  })
+})
+</script>
+
+<style lang="scss" scoped>
+.layout-back-top {
+  position: fixed;
+  cursor: pointer;
+  right: 3rem;
+  height: 90vh;
+  width: 5rem;
+  transition: 0.5s;
+  z-index: 90;
+  animation: up-down-float 1s linear alternate infinite;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  &.is-hidden {
+    height: 0;
+  }
+
+  @keyframes up-down-float {
+    from {
+      margin-top: 0;
+    }
+
+    to {
+      margin-top: -1vh;
+    }
+  }
+}
+</style>
