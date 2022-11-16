@@ -1,38 +1,36 @@
 <template>
   <div class="home">
-    <div class="home__header">
-      <MImg :src="bgImg" :thumb="bgMinImg" class="m-flex whc">
-        <div class="home__header-logo">ISDREAM</div>
-        <div class="home__header-tip">
-          <MIcon @click="showContent" name="icon-ArrowDownBold"></MIcon>
+    <homeHeader></homeHeader>
+    <div class="home__content" ref="homeContentElRef">
+      <!-- <TransitionGroup enter-active-class="animate__animated animate__fadeInUp"> -->
+      <div
+        v-for="i in dataListCount"
+        :key="i"
+        class="blogLayout__content home__content-item"
+        ref="blogLayoutContentRefs"
+      >
+        <div class="home__content-cover">
+          <MImg :src="p1Img"></MImg>
         </div>
-      </MImg>
-    </div>
-    <div class="home__content">
-      <TransitionGroup enter-active-class="animate__animated animate__fadeInUp">
-        <div v-for="i in dataListCount" :key="i" class="blogLayout__content">
-          <div class="home__content-cover">
-            <MImg :src="p1Img"></MImg>
+        <div class="home__content-info">
+          <div class="home__content-info-time">
+            <MIcon name="icon-clock"></MIcon>发布于2022-11-13
           </div>
-          <div class="home__content-info">
-            <div class="home__content-info-time">
-              <MIcon name="icon-clock"></MIcon>发布于2022-11-13
-            </div>
-            <div class="home__content-info-title">test Title（测试标题）</div>
-            <div class="home__content-info-statistics">
-              <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
-              <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
-              <span><MIcon name="icon-PriceTag"></MIcon>无分类</span>
-            </div>
-            <div class="home__content-info-desc">
-              测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
-              测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
-              测试一下测试一下测试一下测试一下测试一下测试一下
-              测试一下测试一下测试一下测试一下测试一下
-            </div>
+          <div class="home__content-info-title">test Title（测试标题）</div>
+          <div class="home__content-info-statistics">
+            <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
+            <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
+            <span><MIcon name="icon-PriceTag"></MIcon>无分类</span>
+          </div>
+          <div class="home__content-info-desc">
+            测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
+            测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
+            测试一下测试一下测试一下测试一下测试一下测试一下
+            测试一下测试一下测试一下测试一下测试一下
           </div>
         </div>
-      </TransitionGroup>
+      </div>
+      <!-- </TransitionGroup> -->
       <div class="home__content-next">
         <div v-show="isLoading" class="loading">
           <MLottie :data="loadingData"></MLottie>
@@ -44,86 +42,66 @@
 </template>
 
 <script setup lang="ts">
-import bgImg from '@/assets/img/bg.png'
-import bgMinImg from '@/assets/img/bg-min.png'
+import { ref, nextTick, onMounted } from 'vue'
+import homeHeader from './components/homeHeader/homeHeader.vue'
 import p1Img from '@/assets/img/p1.png'
 import loadingData from '@/assets/lottie/loading.json'
-
-import { ref } from 'vue'
-import { useAppLayoutEl } from '@/store'
+import { useShowElClassName } from '@/hooks'
 
 defineOptions({
   name: 'Home'
 })
 
-// 设置滚动条
-const appLayoutEl = useAppLayoutEl()
-const showContent = () => {
-  if (!appLayoutEl.value) {
-    return
-  }
-  appLayoutEl.value.scrollTo({
-    top: document.body.clientHeight,
-    behavior: 'smooth'
+// 上浮动画
+const homeContentElRef = ref<HTMLElement>()
+const itemEls = ref<Element[]>([])
+useShowElClassName(itemEls, 'is-show', {
+  threshold: 0.1
+})
+
+const getItemEls = () => {
+  nextTick(() => {
+    itemEls.value = Array.from(
+      homeContentElRef.value!.querySelectorAll('.home__content-item')
+    )
   })
 }
 
+// 数据
 const dataListCount = ref(3)
-
 const isLoading = ref(false)
+
 const getNextPage = () => {
   isLoading.value = true
   setTimeout(() => {
     dataListCount.value += 3
     isLoading.value = false
+    getItemEls()
   }, 1000)
 }
+
+onMounted(() => {
+  getItemEls()
+})
 </script>
 
 <style lang="scss" scoped>
 .home {
-  .home__header {
-    transition: 0.3s;
-    height: 100vh;
-    .home__header-logo {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #ffffff;
-    }
-    .home__header-tip {
-      cursor: pointer;
-      position: absolute;
-      bottom: 3rem;
-      font-size: 2.5rem;
-      color: #ffffff;
-      animation: up-down-float 0.8s linear alternate infinite;
-    }
-    .m-img {
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.2);
-        z-index: -1;
-      }
-    }
-  }
-
-  @keyframes up-down-float {
+  @keyframes show-home-content-item {
     from {
-      bottom: 3rem;
-    }
-
-    to {
-      opacity: 0.6;
-      bottom: 2rem;
+      opacity: 0;
+      margin-top: 5rem;
     }
   }
 
   .home__content {
+    .home__content-item {
+      opacity: 0;
+      &.is-show {
+        animation: show-home-content-item 0.8s;
+        opacity: 1;
+      }
+    }
     .home__content-next {
       margin: 2rem auto;
       display: flex;
@@ -147,7 +125,7 @@ const getNextPage = () => {
         width: 10rem;
       }
     }
-    .blogLayout__content {
+    .home__content-item {
       display: flex;
       &:hover {
         .home__content-cover {
@@ -236,7 +214,7 @@ const getNextPage = () => {
 
   @media screen and (max-width: 600px) {
     .home__content {
-      .blogLayout__content {
+      .home__content-item {
         display: block;
         .home__content-cover {
           height: 13rem;

@@ -13,6 +13,7 @@ import Footer from './footer/footer.vue'
 
 import BlogHeader from './blogHeader/blogHeader.vue'
 import BackTop from './backTop/backTop.vue'
+import ProgressBar from './progressBar/progressBar.vue'
 
 export {
   Menu,
@@ -25,5 +26,6 @@ export {
   Breadcrumb,
   RouteHistory,
   BlogHeader,
-  BackTop
+  BackTop,
+  ProgressBar
 }

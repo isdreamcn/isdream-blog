@@ -9,6 +9,10 @@ export const imgProps = buildProps({
   // 缩略图
   thumb: {
     type: String
+  },
+  lazy: {
+    type: Boolean,
+    default: true
   }
 } as const)
 

@@ -1,6 +1,7 @@
 <template>
   <div class="blogLayout" ref="blogLayoutElRef">
     <BlogHeader></BlogHeader>
+    <ProgressBar></ProgressBar>
     <BackTop></BackTop>
     <div class="blogLayout__main">
       <KeepAlive><slot></slot></KeepAlive>
@@ -29,7 +30,7 @@
 import type { Media } from '@/store'
 import { ref, onMounted } from 'vue'
 import { useAppStore } from '@/store'
-import { BlogHeader, BackTop } from '../components/index'
+import { BlogHeader, BackTop, ProgressBar } from '../components/index'
 
 defineOptions({
   name: 'BlogLayout'

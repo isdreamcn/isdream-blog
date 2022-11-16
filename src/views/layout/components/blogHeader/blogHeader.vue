@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import type { UserMenu } from '@/store'
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore, useAppLayoutEl } from '@/store'
 import appConfig from '@/config'
@@ -52,8 +52,9 @@ const className = ref('')
 let scrollTop = 0
 
 const appLayoutEl = useAppLayoutEl()
-onMounted(() => {
-  nextTick(() => {
+watch(
+  () => appLayoutEl.value,
+  () => {
     appLayoutEl.value?.addEventListener(
       'scroll',
       () => {
@@ -71,10 +72,15 @@ onMounted(() => {
         }
         scrollTop = _scrollTop
       },
-      false
+      {
+        passive: true
+      }
     )
-  })
-})
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>

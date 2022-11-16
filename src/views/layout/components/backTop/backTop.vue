@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, watch } from 'vue'
 import { useAppLayoutEl, useAppSetting } from '@/store'
 defineOptions({
   name: 'BackTop'
@@ -31,12 +31,18 @@ const goBackTop = () => {
   })
 }
 
-onMounted(() => {
-  nextTick(() => {
-    appLayoutEl.value?.addEventListener('scroll', updateClassName)
+watch(
+  () => appLayoutEl.value,
+  () => {
+    appLayoutEl.value?.addEventListener('scroll', updateClassName, {
+      passive: true
+    })
     updateClassName()
-  })
-})
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>
@@ -55,7 +61,7 @@ onMounted(() => {
     object-fit: contain;
   }
   &.is-hidden {
-    height: 0;
+    transform: translateY(-100%);
   }
 
   @keyframes up-down-float {

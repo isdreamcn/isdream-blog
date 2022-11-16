@@ -1,21 +1,26 @@
 <template>
-  <div class="m-img">
-    <!-- src -->
-    <img loading="lazy" :src="props.src" v-bind="$attrs" @load="onLoad" />
-    <!-- thumb -->
-    <img
-      v-if="showThumb"
-      loading="lazy"
-      class="ground-glass"
-      :src="props.thumb"
-      v-bind="$attrs"
-    />
+  <div ref="mImgElRef" class="m-img">
+    <template v-if="loading">
+      <img
+        v-show="!showThumb"
+        :src="props.src"
+        v-bind="$attrs"
+        @load="onLoad"
+      />
+      <!-- thumb -->
+      <img
+        v-if="showThumb"
+        class="ground-glass"
+        :src="props.thumb"
+        v-bind="$attrs"
+      />
+    </template>
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { imgProps } from './img'
 
 defineOptions({
@@ -25,10 +30,39 @@ defineOptions({
 const props = defineProps(imgProps)
 
 const showThumb = ref(!!props.thumb)
-
 const onLoad = () => {
   showThumb.value = false
 }
+
+// lazy loading
+const loading = ref(!props.lazy)
+let observer: IntersectionObserver | null = null
+const mImgElRef = ref<HTMLElement>()
+
+onMounted(() => {
+  if (!props.lazy) {
+    return
+  }
+  observer = new IntersectionObserver((entries) => {
+    if (loading.value) {
+      observer!.disconnect()
+    }
+    if (entries[0].intersectionRatio <= 0) {
+      return
+    }
+    loading.value = true
+  })
+
+  // 开始监听一个目标元素
+  observer.observe(mImgElRef.value!)
+})
+
+// 停止监听
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect()
+  }
+})
 </script>
 
 <style lang="scss" scoped>
