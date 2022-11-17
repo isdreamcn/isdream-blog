@@ -13,6 +13,7 @@
           ><MIcon :name="item.icon"></MIcon> {{ item.title }}</a
         >
       </div>
+      <ToggleDark class="navbar-item bottom-border"></ToggleDark>
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@ import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore, useAppLayoutEl } from '@/store'
 import appConfig from '@/config'
+import { ToggleDark } from '../index'
 
 defineOptions({
   name: 'BlogHeader'
@@ -133,6 +135,8 @@ watch(
     cursor: pointer;
   }
   .header-container__navbar {
+    display: flex;
+    align-items: center;
     .navbar-item {
       cursor: pointer;
       padding: 0.5rem;

@@ -5,23 +5,23 @@
     <BackTop></BackTop>
     <div class="blogLayout__main">
       <KeepAlive><slot></slot></KeepAlive>
-      <div class="blogLayout__footer">
-        <p>
-          ICP备案号
-          <a href="http://beian.miit.gov.cn/" target="_blank"
-            >苏ICP备19073933号-2</a
-          >
-        </p>
-        <p>
-          备案苏公网安备
-          <a
-            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32031202000595"
-            target="_blank"
-            >32031202000595号</a
-          >
-        </p>
-        <p>Copyright © isdream.cn</p>
-      </div>
+    </div>
+    <div class="blogLayout__footer">
+      <p>
+        ICP备案号
+        <a href="http://beian.miit.gov.cn/" target="_blank"
+          >苏ICP备19073933号-2</a
+        >
+      </p>
+      <p>
+        备案苏公网安备
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32031202000595"
+          target="_blank"
+          >32031202000595号</a
+        >
+      </p>
+      <p>Copyright © isdream.cn</p>
     </div>
   </div>
 </template>
@@ -89,41 +89,47 @@ onMounted(() => {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   overflow-y: auto;
+  background-color: var(--m-bg-color);
   .blogLayout__main {
     flex: 1;
-    .blogLayout__footer {
-      background-color: #000000;
+  }
+  .blogLayout__footer {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 0;
+    a {
       color: #ffffff;
-      text-align: center;
-      padding: 2rem 0;
-      a {
-        color: #ffffff;
-        text-decoration-line: none;
-      }
+      text-decoration-line: none;
     }
   }
 
+  // header
+  :deep(.blogLayout-header) {
+    position: relative;
+    height: 40vh;
+    animation: fadeInDown 0.8s;
+  }
+
   // 响应式
-  :deep(.blogLayout__content) {
-    min-height: 18.75rem;
+  :deep(.blogLayout-card) {
+    box-sizing: border-box;
     margin: 1.5rem auto;
-    border-radius: 1rem;
-    overflow: hidden;
-    cursor: pointer;
+    animation: fadeInUp 0.8s;
     box-shadow: 0 1px 1rem -0.3rem rgba(0, 0, 0, 0.4);
-    transition: box-shadow 0.3s ease;
-    &:hover {
-      box-shadow: 0 0.1rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
-    }
+    background-color: var(--m-card-bg-color);
+    padding: 2rem;
+    border-radius: 0.5rem;
   }
   &.pc {
-    :deep(.blogLayout__content) {
+    :deep(.blogLayout-card) {
       width: 50%;
     }
   }
   &.phone {
-    :deep(.blogLayout__content) {
+    :deep(.blogLayout-card) {
       width: calc(100% - 2rem);
     }
   }

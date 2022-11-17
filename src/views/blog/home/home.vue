@@ -2,19 +2,19 @@
   <div class="home">
     <homeHeader></homeHeader>
     <div class="home__content" ref="homeContentElRef">
-      <!-- <TransitionGroup enter-active-class="animate__animated animate__fadeInUp"> -->
       <div
         v-for="i in dataListCount"
         :key="i"
-        class="blogLayout__content home__content-item"
+        class="blogLayout-card home__content-item"
         ref="blogLayoutContentRefs"
+        @click="showArticle(i)"
       >
         <div class="home__content-cover">
-          <MImg :src="p1Img"></MImg>
+          <MImgDefault></MImgDefault>
         </div>
         <div class="home__content-info">
           <div class="home__content-info-time">
-            <MIcon name="icon-clock"></MIcon>发布于2022-11-13
+            <MIcon name="icon-clock"></MIcon>发布于 2022-11-13
           </div>
           <div class="home__content-info-title">test Title（测试标题）</div>
           <div class="home__content-info-statistics">
@@ -30,7 +30,6 @@
           </div>
         </div>
       </div>
-      <!-- </TransitionGroup> -->
       <div class="home__content-next">
         <div v-show="isLoading" class="loading">
           <MLottie :data="loadingData"></MLottie>
@@ -43,8 +42,8 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import homeHeader from './components/homeHeader/homeHeader.vue'
-import p1Img from '@/assets/img/p1.png'
 import loadingData from '@/assets/lottie/loading.json'
 import { useShowElClassName } from '@/hooks'
 
@@ -80,6 +79,17 @@ const getNextPage = () => {
   }, 1000)
 }
 
+// 查看文章详情
+const router = useRouter()
+const showArticle = (id = 1) => {
+  router.push({
+    name: 'article',
+    params: {
+      id
+    }
+  })
+}
+
 onMounted(() => {
   getItemEls()
 })
@@ -87,21 +97,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .home {
-  @keyframes show-home-content-item {
-    from {
-      opacity: 0;
-      margin-top: 5rem;
-    }
-  }
-
   .home__content {
-    .home__content-item {
-      opacity: 0;
-      &.is-show {
-        animation: show-home-content-item 0.8s;
-        opacity: 1;
-      }
-    }
     .home__content-next {
       margin: 2rem auto;
       display: flex;
@@ -110,7 +106,7 @@ onMounted(() => {
       height: 10rem;
       span {
         padding: 1rem 3rem;
-        border: 1px solid #d6d6d6;
+        border: var(--m-border);
         border-radius: 3rem;
         color: #adadad;
         transition: 0.3s;
@@ -127,12 +123,24 @@ onMounted(() => {
     }
     .home__content-item {
       display: flex;
+      opacity: 0;
+      min-height: 18.75rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+      animation: none;
+      padding: 0;
       &:hover {
+        box-shadow: 0 0.1rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
         .home__content-cover {
           .m-img {
-            transform: rotate(5deg) scale(1.1);
+            transform: rotate(5deg) scale(1.2);
           }
         }
+      }
+      &.is-show {
+        animation: fadeInUp 0.8s;
+        opacity: 1;
       }
       .home__content-cover {
         flex: 6;
@@ -147,7 +155,7 @@ onMounted(() => {
         flex-direction: column;
         box-sizing: border-box;
         padding: 2rem;
-        color: #888888;
+        color: var(--m-font-color);
         .m-icon {
           margin-right: 0.3rem;
         }
@@ -158,7 +166,7 @@ onMounted(() => {
         &-title {
           font-size: 1.3rem;
           font-weight: bold;
-          color: #504e4e;
+          color: var(--m-title-color);
           margin: 1.2rem 0;
           cursor: pointer;
           transition: 0.2s;

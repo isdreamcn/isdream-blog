@@ -46,6 +46,16 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+@keyframes upDownFloat {
+  from {
+    margin-top: 0;
+  }
+
+  to {
+    margin-top: -1vh;
+  }
+}
+
 .layout-back-top {
   position: fixed;
   cursor: pointer;
@@ -54,7 +64,7 @@ watch(
   width: 5rem;
   transition: 0.5s;
   z-index: 90;
-  animation: up-down-float 1s linear alternate infinite;
+  animation: upDownFloat 1s linear alternate infinite;
   img {
     height: 100%;
     width: 100%;
@@ -62,16 +72,6 @@ watch(
   }
   &.is-hidden {
     transform: translateY(-100%);
-  }
-
-  @keyframes up-down-float {
-    from {
-      margin-top: 0;
-    }
-
-    to {
-      margin-top: -1vh;
-    }
   }
 }
 </style>

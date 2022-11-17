@@ -11,3 +11,28 @@
     background-color: var(--el-menu-hover-bg-color) !important;
   }
 }
+
+.m-flex {
+  display: flex;
+  &.wc {
+    justify-content: center;
+  }
+  &.hc {
+    align-items: center;
+  }
+  &.whc {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@keyframes upDownFloat {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0.6;
+    transform: translateY(-1rem);
+  }
+}
