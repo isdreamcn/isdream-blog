@@ -16,7 +16,9 @@
           <div class="home__content-info-time">
             <MIcon name="icon-clock"></MIcon>发布于 2022-11-13
           </div>
-          <div class="home__content-info-title">test Title（测试标题）</div>
+          <div class="m-ellipsis home__content-info-title">
+            test Title（测试标题）
+          </div>
           <div class="home__content-info-statistics">
             <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
             <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
@@ -170,9 +172,6 @@ onMounted(() => {
           margin: 1.2rem 0;
           cursor: pointer;
           transition: 0.2s;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
           &:hover {
             color: var(--el-color-primary);
           }

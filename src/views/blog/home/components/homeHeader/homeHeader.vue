@@ -37,6 +37,7 @@ const showContent = () => {
     font-size: 2.5rem;
     font-weight: bold;
     color: #ffffff;
+    z-index: 5;
   }
   .home__header-tip {
     cursor: pointer;
@@ -45,6 +46,7 @@ const showContent = () => {
     font-size: 2.5rem;
     color: #ffffff;
     animation: upDownFloat 0.8s linear alternate infinite;
+    z-index: 5;
   }
   .m-img {
     &::after {
@@ -55,7 +57,6 @@ const showContent = () => {
       left: 0;
       right: 0;
       background-color: rgba(0, 0, 0, 0.2);
-      z-index: -1;
     }
   }
 }

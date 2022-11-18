@@ -26,6 +26,18 @@
   }
 }
 
+.m-line {
+  border-top: var(--m-border);
+  border-bottom: var(--m-border);
+  height: 0.1rem;
+}
+
+.m-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @keyframes upDownFloat {
   from {
     transform: translateY(0);

@@ -59,7 +59,7 @@ watch(
 .layout-back-top {
   position: fixed;
   cursor: pointer;
-  right: 3rem;
+  right: 1rem;
   height: 90vh;
   width: 5rem;
   transition: 0.5s;

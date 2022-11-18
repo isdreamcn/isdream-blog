@@ -64,7 +64,7 @@ const setHtmlFontSize = () => {
   }
   htmlEl.style.fontSize = fontSize + 'px'
 
-  const media = width > 1000 ? 'pc' : 'phone'
+  const media = width > 768 ? 'pc' : 'phone'
   // 响应式
   appStore.setAppSetting({
     media
@@ -125,12 +125,14 @@ onMounted(() => {
   }
   &.pc {
     :deep(.blogLayout-card) {
+      min-width: 750px;
       width: 50%;
     }
   }
   &.phone {
     :deep(.blogLayout-card) {
       width: calc(100% - 2rem);
+      padding: 1rem;
     }
   }
 }
