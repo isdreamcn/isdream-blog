@@ -77,7 +77,7 @@ onBeforeUnmount(() => {
     height: 100%;
     object-fit: cover;
     user-select: none;
-    transition: 0.3s;
+    transition: var(--animate-duration);
     &.ground-glass {
       filter: blur(15px);
       // 隐藏白边

@@ -53,7 +53,7 @@ defineOptions({
   name: 'Home'
 })
 
-// 上浮动画
+// 下渐入动画
 const homeContentElRef = ref<HTMLElement>()
 const itemEls = ref<Element[]>([])
 useShowElClassName(itemEls, 'is-show', {
@@ -111,7 +111,7 @@ onMounted(() => {
         border: var(--m-border);
         border-radius: 3rem;
         color: #adadad;
-        transition: 0.3s;
+        transition: var(--animate-duration);
         cursor: pointer;
         &:hover {
           color: var(--el-color-primary);
@@ -141,14 +141,14 @@ onMounted(() => {
         }
       }
       &.is-show {
-        animation: fadeInUp 0.8s;
+        animation: fadeInUp var(--animate-duration);
         opacity: 1;
       }
       .home__content-cover {
         flex: 6;
         overflow: hidden;
         .m-img {
-          transition: 0.5s;
+          transition: var(--animate-duration);
         }
       }
       .home__content-info {
@@ -171,7 +171,7 @@ onMounted(() => {
           color: var(--m-title-color);
           margin: 1.2rem 0;
           cursor: pointer;
-          transition: 0.2s;
+          transition: var(--animate-duration);
           &:hover {
             color: var(--el-color-primary);
           }

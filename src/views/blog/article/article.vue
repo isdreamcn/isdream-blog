@@ -99,6 +99,7 @@ const { appMedia } = useAppSetting()
       color: #ffffff;
       background-color: transparent;
       box-shadow: none;
+      z-index: 5;
       .article-title {
         font-size: 2rem;
       }
@@ -175,7 +176,7 @@ const { appMedia } = useAppSetting()
           margin-left: 1rem;
           .m-icon {
             margin-right: 0.25rem;
-            transition: 0.5s;
+            transition: var(--animate-duration);
           }
           &:hover {
             .m-icon {
@@ -197,7 +198,7 @@ const { appMedia } = useAppSetting()
       .m-img {
         &::after {
           content: '';
-          transition: 0.5s;
+          transition: var(--animate-duration);
           position: absolute;
           top: 0;
           bottom: 0;

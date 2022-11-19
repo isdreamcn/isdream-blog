@@ -45,6 +45,6 @@ watch(
   z-index: 98;
   height: 0.25rem;
   background-color: var(--el-color-primary);
-  transition: 0.5s;
+  transition: var(--animate-duration);
 }
 </style>

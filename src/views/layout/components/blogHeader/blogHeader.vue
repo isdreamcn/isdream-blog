@@ -94,7 +94,7 @@ watch(
   justify-content: space-between;
   width: 100%;
   padding: 1rem 2rem 0.8rem 2rem;
-  transition: 0.5s;
+  transition: var(--animate-duration);
   color: #ffffff;
   &.hidden {
     transform: translateY(-100%);
@@ -121,7 +121,7 @@ watch(
       width: 0;
       margin-top: 0.2rem;
       background-color: var(--el-color-primary);
-      transition: 0.3s;
+      transition: var(--animate-duration);
     }
 
     &:hover {

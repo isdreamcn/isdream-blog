@@ -69,7 +69,6 @@ declare module '@vue/runtime-core' {
     MCheckboxGroup: typeof import('./src/components/form/src/components/MCheckboxGroup.vue')['default']
     MColorPicker: typeof import('@/components')['MColorPicker']
     MColorPickerAppTheme: typeof import('@/components')['MColorPickerAppTheme']
-    MEditor: typeof import('@/components')['MEditor']
     MForm: typeof import('@/components')['MForm']
     MIcon: typeof import('@/components')['MIcon']
     MImg: typeof import('@/components')['MImg']

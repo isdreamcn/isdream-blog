@@ -62,9 +62,9 @@ watch(
   right: 1rem;
   height: 90vh;
   width: 5rem;
-  transition: 0.5s;
+  transition: var(--animate-duration);
   z-index: 90;
-  animation: upDownFloat 1s linear alternate infinite;
+  animation: upDownFloat var(--animate-duration) linear alternate infinite;
   img {
     height: 100%;
     width: 100%;

@@ -85,12 +85,13 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .blogLayout {
-  transition: 0.5s;
+  transition: var(--animate-duration);
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--m-bg-color);
   .blogLayout__main {
     flex: 1;
@@ -110,14 +111,33 @@ onMounted(() => {
   :deep(.blogLayout-header) {
     position: relative;
     height: 40vh;
-    animation: fadeInDown 0.8s;
+    animation: fadeInDown var(--animate-duration);
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    .blogLayout-header-title {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
   }
 
   // 响应式
   :deep(.blogLayout-card) {
     box-sizing: border-box;
     margin: 1.5rem auto;
-    animation: fadeInUp 0.8s;
+    animation: fadeInUp var(--animate-duration);
     box-shadow: 0 1px 1rem -0.3rem rgba(0, 0, 0, 0.4);
     background-color: var(--m-card-bg-color);
     padding: 2rem;
