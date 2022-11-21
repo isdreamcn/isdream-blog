@@ -14,6 +14,7 @@
         </div>
         <div class="home__content-info">
           <div class="home__content-info-time">
+            <span v-if="i < 3" class="is-stick">置顶</span>
             <MIcon name="icon-clock"></MIcon>发布于 2022-11-13
           </div>
           <div class="m-ellipsis home__content-info-title">
@@ -164,6 +165,10 @@ onMounted(() => {
         &-time {
           display: flex;
           align-items: center;
+          .is-stick {
+            color: var(--el-color-primary);
+            margin-right: 0.5rem;
+          }
         }
         &-title {
           font-size: 1.3rem;
