@@ -1,7 +1,7 @@
 <template>
   <div class="blogLayout-header home__header">
     <MImgDefault class="m-flex whc">
-      <div class="blogLayout-header-title">ISDREAM</div>
+      <h1 class="blogLayout-header-title">ISDREAM</h1>
       <div class="home__header-tip">
         <MIcon @click="showContent" name="icon-ArrowDownBold"></MIcon>
       </div>

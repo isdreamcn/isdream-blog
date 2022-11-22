@@ -2,7 +2,7 @@
   <div class="home">
     <homeHeader></homeHeader>
     <div class="home__content" ref="homeContentElRef">
-      <div
+      <article
         v-for="i in dataListCount"
         :key="i"
         class="blogLayout-card home__content-item"
@@ -14,30 +14,32 @@
         </div>
         <div class="home__content-info">
           <div class="home__content-info-time">
-            <span v-if="i < 3" class="is-stick">置顶</span>
-            <MIcon name="icon-clock"></MIcon>发布于 2022-11-13
+            <b v-if="i < 3" class="is-stick">置顶</b>
+            <MIcon name="icon-clock"></MIcon>发布于 <time>2022-11-13</time>
           </div>
-          <div class="m-ellipsis home__content-info-title">
+          <h2 class="m-ellipsis home__content-info-title">
             test Title（测试标题）
-          </div>
+          </h2>
           <div class="home__content-info-statistics">
             <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
             <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
             <span><MIcon name="icon-PriceTag"></MIcon>无分类</span>
           </div>
-          <div class="home__content-info-desc">
+          <p class="home__content-info-desc">
             测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
             测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
             测试一下测试一下测试一下测试一下测试一下测试一下
             测试一下测试一下测试一下测试一下测试一下
-          </div>
+          </p>
         </div>
-      </div>
+      </article>
       <div class="home__content-next">
         <div v-show="isLoading" class="loading">
           <MLottie :data="loadingData"></MLottie>
         </div>
-        <span v-show="!isLoading" @click="getNextPage">下一页</span>
+        <button type="button" v-show="!isLoading" @click="getNextPage">
+          下一页
+        </button>
       </div>
     </div>
   </div>
@@ -107,12 +109,13 @@ onMounted(() => {
       justify-content: center;
       align-items: center;
       height: 10rem;
-      span {
+      button {
         padding: 1rem 3rem;
         border: var(--m-border);
         border-radius: 3rem;
         color: #adadad;
         transition: var(--animate-duration);
+        background-color: var(--m-card-bg-color);
         cursor: pointer;
         &:hover {
           color: var(--el-color-primary);

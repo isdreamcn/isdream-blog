@@ -1,20 +1,22 @@
 <template>
   <div :class="`header-container ${className}`">
-    <div class="header-container__logo bottom-border" @click="goHome">
+    <a class="header-container__logo bottom-border" @click="goHome">
       ISDREAM
-    </div>
-    <div class="header-container__navbar">
-      <div
-        class="navbar-item bottom-border"
-        v-for="item in userMenu"
-        :key="item.path"
-      >
-        <a class="m-flex hc" @click="clickMenuItem(item)"
-          ><MIcon :name="item.icon"></MIcon> {{ item.title }}</a
+    </a>
+    <nav class="header-container__navbar">
+      <ul class="m-flex hc">
+        <li
+          class="navbar-item bottom-border"
+          v-for="item in userMenu"
+          :key="item.path"
         >
-      </div>
+          <a class="m-flex hc" @click="clickMenuItem(item)"
+            ><MIcon :name="item.icon"></MIcon> {{ item.title }}</a
+          >
+        </li>
+      </ul>
       <ToggleDark class="navbar-item bottom-border"></ToggleDark>
-    </div>
+    </nav>
   </div>
 </template>
 
@@ -137,6 +139,9 @@ watch(
   .header-container__navbar {
     display: flex;
     align-items: center;
+    ul {
+      margin: 0;
+    }
     .navbar-item {
       cursor: pointer;
       padding: 0.5rem;

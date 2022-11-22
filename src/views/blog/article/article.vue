@@ -3,7 +3,7 @@
     <div class="blogLayout-header article__header">
       <MImgDefault>
         <div class="blogLayout-card">
-          <div class="article-title">这是一个测试标题</div>
+          <h1 class="article-title">这是一个测试标题</h1>
           <div class="article-statistics m-flex hc">
             <div class="article-blogger">
               <MImg :src="blogger" :lazy="false"></MImg>
@@ -17,7 +17,7 @@
     </div>
     <div class="blogLayout-card">
       <!-- 内容 -->
-      <div class="article__content">123</div>
+      <article class="article__content">123</article>
       <!-- 协议、标签、操作 -->
       <div class="article-footer">
         <div class="license">
@@ -35,14 +35,19 @@
             <template v-if="appMedia === 'pc'"
               >知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</template
             >
-            <template v-else>CC BY-NC-SA 4.0</template>
+            <template v-else>
+              <abbr
+                title="知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议"
+                >CC BY-NC-SA 4.0</abbr
+              >
+            </template>
           </a>
         </div>
         <div class="article-actions">
           <div class="article-actions__tags m-flex hc">
             <MIcon name="icon-PriceTag"></MIcon>
-            <span>TEST</span>
-            <span>TEST</span>
+            <a>TEST</a>
+            <a>TEST</a>
           </div>
           <div class="article-actions__btns">
             <div class="btns-item"><MIcon name="icon-star"></MIcon>66</div>
@@ -158,7 +163,7 @@ const { appMedia } = useAppSetting()
       align-items: center;
       margin-top: 1rem;
       &__tags {
-        span {
+        a {
           margin-left: 0.5rem;
           cursor: pointer;
           &:hover {

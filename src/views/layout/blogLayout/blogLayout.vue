@@ -1,12 +1,14 @@
 <template>
   <div class="blogLayout" ref="blogLayoutElRef">
-    <BlogHeader></BlogHeader>
-    <ProgressBar></ProgressBar>
+    <header>
+      <BlogHeader></BlogHeader>
+      <ProgressBar></ProgressBar>
+    </header>
     <BackTop></BackTop>
-    <div class="blogLayout__main">
+    <main class="blogLayout__main">
       <KeepAlive><slot></slot></KeepAlive>
-    </div>
-    <div class="blogLayout__footer">
+    </main>
+    <footer class="blogLayout__footer">
       <p>
         ICP备案号
         <a href="http://beian.miit.gov.cn/" target="_blank"
@@ -22,7 +24,7 @@
         >
       </p>
       <p>Copyright © isdream.cn</p>
-    </div>
+    </footer>
   </div>
 </template>
 

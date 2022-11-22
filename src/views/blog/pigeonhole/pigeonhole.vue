@@ -2,20 +2,22 @@
   <div class="pigeonhole" ref="pigeonholeElRef">
     <div class="blogLayout-header">
       <MImgDefault>
-        <div class="blogLayout-header-title">归档</div>
+        <h1 class="blogLayout-header-title">归档</h1>
       </MImgDefault>
     </div>
     <div class="blogLayout-card">
-      <div class="pigeonhole-content">
-        <div class="pigeonhole-content-item statistics">文章总览 - 92</div>
-        <div class="pigeonhole-content-item">2022</div>
-        <div v-for="i in 30" :key="i" class="pigeonhole-content-item">
-          <div @click="showArticle(1)" class="item-info">
-            <div class="item-info-time">2022-11-19</div>
-            <div class="item-info-title m-ellipsis">这是一个测试标题</div>
+      <ul class="pigeonhole-content">
+        <li class="pigeonhole-content-item statistics">文章总览 - 92</li>
+        <li class="pigeonhole-content-item">2022</li>
+        <li v-for="i in 30" :key="i" class="pigeonhole-content-item">
+          <div class="item-info">
+            <time class="item-info-time">2022-11-19</time>
+            <a @click="showArticle(1)" class="item-info-title m-ellipsis"
+              >这是一个测试标题</a
+            >
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -59,6 +61,7 @@ onMounted(() => {
     height: 100%;
     border-left: var(--m-border);
     border-color: var(--el-color-primary);
+    padding-left: 0;
     &-item {
       margin-left: -0.45rem;
       margin-bottom: 2rem;
@@ -95,15 +98,13 @@ onMounted(() => {
         width: 100%;
         &-time {
           font-size: 1rem;
+          display: block;
         }
         &-title {
           margin-top: 0.5rem;
           font-size: 1.1rem;
           transition: var(--animate-duration);
-        }
-
-        &:hover {
-          .item-info-title {
+          &:hover {
             color: var(--el-color-primary);
             padding-left: 1rem;
           }

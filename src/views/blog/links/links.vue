@@ -2,7 +2,7 @@
   <div class="links">
     <div class="blogLayout-header">
       <MImgDefault>
-        <div class="blogLayout-header-title">友链</div>
+        <h1 class="blogLayout-header-title">友链</h1>
       </MImgDefault>
     </div>
     <div class="blogLayout-card">
@@ -10,17 +10,21 @@
         <p>欢迎交换友链 ꉂ(ˊᗜˋ)</p>
         <div>
           <p>友链要求：</p>
-          <p>1、原创文章数目大于10篇</p>
-          <p>2、博客拥有独立的域名</p>
-          <p>3、博客内无违法违规内容</p>
+          <ol>
+            <li>原创文章数目大于10篇</li>
+            <li>博客拥有独立的域名</li>
+            <li>博客内无违法违规内容</li>
+          </ol>
           <p>如果您的网站满足上述要求，请留言告诉我。</p>
         </div>
         <div>
           <p>格式(本站信息)：</p>
-          <p>名称：isdream</p>
-          <p>简介：你总是一副不开心的样子(#`O′)</p>
-          <p>链接：https://isdream.cn/</p>
-          <p>头像：https://api.isdream.cn/img/favicon.ico/</p>
+          <ul>
+            <li>名称：isdream</li>
+            <li>简介：你总是一副不开心的样子(#`O′)</li>
+            <li>链接：https://isdream.cn/</li>
+            <li>头像：https://api.isdream.cn/img/favicon.ico/</li>
+          </ul>
         </div>
         <p class="links-explain__tip">
           ※
@@ -29,12 +33,12 @@
       </div>
 
       <div class="links-box">
-        <div class="links-box__title">1. 个人项目</div>
+        <h4 class="links-box__title">1. 个人项目</h4>
         <div class="links-box__desc">
           充分说明这家伙是条咸鱼 {{ `< (￣︶￣)>` }}
         </div>
-        <div class="links-box__content">
-          <div v-for="i in 4" :key="i" class="link-item">
+        <ul class="links-box__content">
+          <li v-for="i in 4" :key="i" class="link-item">
             <div class="link-item__info">
               <div class="link-item__name">testName</div>
               <div class="m-ellipsis link-item__descript">
@@ -44,15 +48,15 @@
             <div class="link-item__avatar">
               <MImg :src="avatar"></MImg>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
 
       <div class="links-box">
-        <div class="links-box__title">2. 私人服务</div>
+        <h4 class="links-box__title">2. 私人服务</h4>
         <div class="links-box__desc">稳定性？不存在的 ∠( ᐛ 」∠)＿</div>
-        <div class="links-box__content">
-          <div v-for="i in 1" :key="i" class="link-item">
+        <ul class="links-box__content">
+          <li v-for="i in 1" :key="i" class="link-item">
             <div class="link-item__info">
               <div class="link-item__name">testName</div>
               <div class="m-ellipsis link-item__descript">
@@ -62,8 +66,8 @@
             <div class="link-item__avatar">
               <MImg :src="avatar"></MImg>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -105,6 +109,12 @@ const links = ref<
           font-weight: bold;
         }
       }
+      ol,
+      ul {
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
     }
   }
 
@@ -126,6 +136,7 @@ const links = ref<
       );
       grid-row-gap: 0.6rem;
       grid-column-gap: 0.6rem;
+      padding: 0;
       .link-item {
         position: relative;
         display: flex;
