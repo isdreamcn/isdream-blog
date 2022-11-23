@@ -140,7 +140,7 @@ onMounted(() => {
     box-sizing: border-box;
     margin: 1.5rem auto;
     animation: fadeInUp var(--animate-duration);
-    box-shadow: 0 1px 1rem -0.3rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.1rem 1rem -0.3rem rgba(0, 0, 0, 0.4);
     background-color: var(--m-card-bg-color);
     padding: 2rem;
     border-radius: 0.5rem;

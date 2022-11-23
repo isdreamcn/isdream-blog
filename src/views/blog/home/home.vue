@@ -86,7 +86,7 @@ const getNextPage = () => {
 
 // 查看文章详情
 const router = useRouter()
-const showArticle = (id = 1) => {
+const showArticle = (id: number) => {
   router.push({
     name: 'article',
     params: {

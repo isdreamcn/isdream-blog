@@ -5,6 +5,9 @@
     </a>
     <nav class="header-container__navbar">
       <ul class="m-flex hc">
+        <li class="navbar-item bottom-border">
+          <Search></Search>
+        </li>
         <li
           class="navbar-item bottom-border"
           v-for="item in userMenu"
@@ -14,8 +17,10 @@
             ><MIcon :name="item.icon"></MIcon> {{ item.title }}</a
           >
         </li>
+        <li class="navbar-item bottom-border">
+          <ToggleDark></ToggleDark>
+        </li>
       </ul>
-      <ToggleDark class="navbar-item bottom-border"></ToggleDark>
     </nav>
   </div>
 </template>
@@ -26,7 +31,7 @@ import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore, useAppLayoutEl } from '@/store'
 import appConfig from '@/config'
-import { ToggleDark } from '../index'
+import { ToggleDark, Search } from '../index'
 
 defineOptions({
   name: 'BlogHeader'
