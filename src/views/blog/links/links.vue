@@ -111,6 +111,7 @@ const links = ref<
       }
       ol,
       ul {
+        padding-left: 3rem;
         li {
           margin-bottom: 0.5rem;
         }

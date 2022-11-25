@@ -72,7 +72,6 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   img {
-    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
