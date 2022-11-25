@@ -15,6 +15,7 @@ import BlogHeader from './blogHeader/blogHeader.vue'
 import BackTop from './backTop/backTop.vue'
 import ProgressBar from './progressBar/progressBar.vue'
 import Search from './search/search.vue'
+import AsideMenu from './asideMenu/asideMenu.vue'
 
 export {
   Menu,
@@ -29,5 +30,6 @@ export {
   BlogHeader,
   BackTop,
   ProgressBar,
-  Search
+  Search,
+  AsideMenu
 }

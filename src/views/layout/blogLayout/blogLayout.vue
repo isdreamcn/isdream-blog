@@ -1,4 +1,5 @@
 <template>
+  <AsideMenu></AsideMenu>
   <div class="blogLayout" ref="blogLayoutElRef">
     <header>
       <BlogHeader></BlogHeader>
@@ -32,7 +33,12 @@
 import type { Media } from '@/store'
 import { ref, onMounted } from 'vue'
 import { useAppStore } from '@/store'
-import { BlogHeader, BackTop, ProgressBar } from '../components/index'
+import {
+  BlogHeader,
+  BackTop,
+  ProgressBar,
+  AsideMenu
+} from '../components/index'
 
 defineOptions({
   name: 'BlogLayout'

@@ -126,6 +126,7 @@ const goPage = (query = {}) => {
     right: 0;
     background-color: var(--m-card-bg-color);
     color: var(--m-font-color);
+    z-index: 95;
     &-close {
       position: fixed;
       right: 1rem;
@@ -136,7 +137,7 @@ const goPage = (query = {}) => {
     .m-search__content {
       border: none;
       box-shadow: none;
-      padding-bottom: 0;
+      padding: 3rem 1rem 1rem 1rem;
       margin-bottom: 0;
       .m-search-form {
         width: min(35rem, 100%);

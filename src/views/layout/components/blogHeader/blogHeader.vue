@@ -1,5 +1,5 @@
 <template>
-  <div :class="`header-container ${className}`">
+  <div v-if="appMedia === 'pc'" :class="`header-container ${className}`">
     <a class="header-container__logo bottom-border" @click="goHome">
       ISDREAM
     </a>
@@ -29,13 +29,15 @@
 import type { UserMenu } from '@/store'
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore, useAppLayoutEl } from '@/store'
+import { useUserStore, useAppLayoutEl, useAppSetting } from '@/store'
 import appConfig from '@/config'
 import { ToggleDark, Search } from '../index'
 
 defineOptions({
   name: 'BlogHeader'
 })
+
+const { appMedia } = useAppSetting()
 
 // navbar
 const userStore = useUserStore()
