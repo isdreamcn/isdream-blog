@@ -21,9 +21,9 @@
               type="search"
               placeholder="Search"
               @keyup.enter="
-                (e) =>
+                (e: any) =>
                   goPage({
-                    q: e.target.value
+                    q: e?.target?.value
                   })
               "
             />

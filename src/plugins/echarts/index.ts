@@ -5,7 +5,9 @@ import {
   // 系列类型的定义后缀都为 SeriesOption
   BarSeriesOption,
   LineChart,
-  LineSeriesOption
+  LineSeriesOption,
+  PieChart,
+  PieSeriesOption
 } from 'echarts/charts'
 
 import {
@@ -19,6 +21,7 @@ import {
   // 数据集组件
   DatasetComponent,
   DatasetComponentOption,
+  LegendComponent,
   // 内置数据转换器组件 (filter, sort)
   TransformComponent
 } from 'echarts/components'
@@ -32,6 +35,7 @@ import { SVGRenderer } from 'echarts/renderers'
 export type ECOption = echarts.ComposeOption<
   | BarSeriesOption
   | LineSeriesOption
+  | PieSeriesOption
   | TitleComponentOption
   | TooltipComponentOption
   | GridComponentOption
@@ -51,9 +55,11 @@ export const useECharts = () => {
     TooltipComponent,
     GridComponent,
     DatasetComponent,
+    LegendComponent,
     TransformComponent,
     BarChart,
     LineChart,
+    PieChart,
     LabelLayout,
     UniversalTransition,
     SVGRenderer

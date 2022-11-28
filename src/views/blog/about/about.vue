@@ -31,7 +31,7 @@
       <h2>关于本站</h2>
       <ol>
         <li>
-          前端框架：
+          前端模版：
           <a href="https://vue3.isdream.cn/" target="_blank"
             >isdream-vue-admin</a
           >

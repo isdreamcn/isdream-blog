@@ -66,6 +66,7 @@ declare module '@vue/runtime-core' {
     Lottie: typeof import('./src/components/lottie/src/lottie.vue')['default']
     Markdown: typeof import('./src/components/markdown/src/markdown.vue')['default']
     MarkdownView: typeof import('./src/components/markdown/src/markdownView.vue')['default']
+    MChart: typeof import('@/components')['MChart']
     MCheckboxGroup: typeof import('./src/components/form/src/components/MCheckboxGroup.vue')['default']
     MColorPicker: typeof import('@/components')['MColorPicker']
     MColorPickerAppTheme: typeof import('@/components')['MColorPickerAppTheme']
