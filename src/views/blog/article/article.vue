@@ -73,6 +73,7 @@
           </MImg>
         </div>
       </div>
+      <MComment></MComment>
     </div>
   </div>
 </template>

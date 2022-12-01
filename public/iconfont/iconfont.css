@@ -1,10 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 2248652 */
-  /* Color fonts */
-  src: 
-       url('iconfont.woff2?t=1663420836074') format('woff2'),
-       url('iconfont.woff?t=1663420836074') format('woff'),
-       url('iconfont.ttf?t=1663420836074') format('truetype');
+  font-family: "iconfont"; /* Project id 3797955 */
+  src: url('iconfont.woff2?t=1669691561648') format('woff2'),
+       url('iconfont.woff?t=1669691561648') format('woff'),
+       url('iconfont.ttf?t=1669691561648') format('truetype');
 }
 
 .iconfont {
@@ -15,19 +13,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-dianzan:before {
-  content: "\e608";
+.icon-ic_userlevel_:before {
+  content: "\e6cb";
 }
 
-.icon-pinglun:before {
-  content: "\e609";
+.icon-ic_userlevel_1:before {
+  content: "\e6cc";
 }
 
-.icon-gengduo:before {
-  content: "\e60a";
+.icon-ic_userlevel_2:before {
+  content: "\e6cd";
 }
 
-.icon-shoucang:before {
-  content: "\e60b";
+.icon-ic_userlevel_3:before {
+  content: "\e6ce";
+}
+
+.icon-ic_userlevel_4:before {
+  content: "\e6cf";
+}
+
+.icon-ic_userlevel_5:before {
+  content: "\e6d0";
+}
+
+.icon-ic_userlevel_6:before {
+  content: "\e6d1";
+}
+
+.icon-dislike:before {
+  content: "\e726";
+}
+
+.icon-like:before {
+  content: "\e73b";
 }
 
