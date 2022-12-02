@@ -11,7 +11,7 @@ export interface LayoutFunctionItem {
 }
 
 export interface LayoutMapItem {
-  componnet: Component
+  component: Component
   label: string
   appSetting: AppSettingPartial
   functions: LayoutFunctionItem[]
@@ -28,7 +28,7 @@ export const layoutMap = new Map<LayoutKeys, LayoutMapItem>([
   [
     'blogLayout',
     {
-      componnet: blogLayout,
+      component: blogLayout,
       label: '博客布局',
       appSetting: {},
       functions: []
@@ -37,7 +37,7 @@ export const layoutMap = new Map<LayoutKeys, LayoutMapItem>([
   [
     'mainLayout',
     {
-      componnet: mainLayout,
+      component: mainLayout,
       label: '左侧菜单',
       appSetting: {
         menu: {
@@ -79,7 +79,7 @@ export const layoutMap = new Map<LayoutKeys, LayoutMapItem>([
   [
     'topMenuLayout',
     {
-      componnet: topMenuLayout,
+      component: topMenuLayout,
       label: '顶部菜单',
       appSetting: {
         menu: {
