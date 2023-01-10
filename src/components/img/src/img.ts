@@ -12,7 +12,7 @@ export const imgProps = buildProps({
   },
   lazy: {
     type: Boolean,
-    default: true
+    default: false
   }
 } as const)
 

@@ -3,37 +3,46 @@
     <homeHeader></homeHeader>
     <div class="home__content" ref="homeContentElRef">
       <article
-        v-for="i in dataListCount"
-        :key="i"
+        v-for="article in articleList"
+        :key="article.id"
         class="blogLayout-card home__content-item"
         ref="blogLayoutContentRefs"
-        @click="showArticle(i)"
+        @click="showArticle(article.id)"
       >
         <div class="home__content-cover">
-          <MImgDefault></MImgDefault>
+          <MImgDefault
+            :src="article.cover?.url"
+            :thumb="article.cover?.thumbUrl"
+            lazy
+          ></MImgDefault>
         </div>
         <div class="home__content-info">
           <div class="home__content-info-time">
-            <b v-if="i < 3" class="is-stick">置顶</b>
-            <MIcon name="icon-clock"></MIcon>发布于 <time>2022-11-13</time>
+            <b v-if="article.isTop" class="is-stick">置顶</b>
+            <MIcon name="icon-clock"></MIcon>发布于
+            <time v-dateFormat:YYYY-MM-DD>{{ article.createdAt }}</time>
           </div>
           <h2 class="m-ellipsis home__content-info-title">
-            test Title（测试标题）
+            {{ article.title }}
           </h2>
           <div class="home__content-info-statistics">
-            <span><MIcon name="icon-view"></MIcon>2222浏览量</span>
-            <span><MIcon name="icon-ChatDotRound"></MIcon>20条评论</span>
-            <span><MIcon name="icon-PriceTag"></MIcon>无分类</span>
+            <span
+              ><MIcon name="icon-view"></MIcon>{{ article.views }}浏览量</span
+            >
+            <span
+              ><MIcon name="icon-ChatDotRound"></MIcon
+              >{{ article.comments }}条评论</span
+            >
+            <span v-for="tag in article.tags" :key="tag.id"
+              ><MIcon name="icon-PriceTag"></MIcon>{{ tag.title }}</span
+            >
           </div>
           <p class="home__content-info-desc">
-            测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
-            测试一下测试一下测试一下测试一下测试一下测试一下测试一下测试一下
-            测试一下测试一下测试一下测试一下测试一下测试一下
-            测试一下测试一下测试一下测试一下测试一下
+            {{ article.content }}
           </p>
         </div>
       </article>
-      <div class="home__content-next">
+      <div v-if="articleList.length < dataListCount" class="home__content-next">
         <div v-show="isLoading" class="loading">
           <MLottie :data="loadingData"></MLottie>
         </div>
@@ -51,6 +60,9 @@ import { useRouter } from 'vue-router'
 import homeHeader from './components/homeHeader/homeHeader.vue'
 import loadingData from '@/assets/lottie/loading.json'
 import { useShowElClassName } from '@/hooks'
+import { htmlToText } from '@/utils'
+
+import { getArticleList, IArticle } from '@/api/blog/article'
 
 defineOptions({
   name: 'Home'
@@ -71,17 +83,32 @@ const getItemEls = () => {
   })
 }
 
-// 数据
-const dataListCount = ref(3)
+// 获取文章列表
+const dataListCount = ref(0)
+const articleList = ref<IArticle[]>([])
 const isLoading = ref(false)
+const params = {
+  page: 1,
+  pageSize: 5
+}
+
+const getDataList = () => {
+  return getArticleList(params).then(({ data, count }) => {
+    dataListCount.value = count
+    articleList.value = articleList.value.concat(
+      data.map((item) => ({
+        ...item,
+        content: htmlToText(item.content)
+      }))
+    )
+    getItemEls()
+  })
+}
 
 const getNextPage = () => {
   isLoading.value = true
-  setTimeout(() => {
-    dataListCount.value += 3
-    isLoading.value = false
-    getItemEls()
-  }, 1000)
+  params.page++
+  getDataList().finally(() => (isLoading.value = false))
 }
 
 // 查看文章详情
@@ -96,7 +123,7 @@ const showArticle = (id: number) => {
 }
 
 onMounted(() => {
-  getItemEls()
+  getDataList()
 })
 </script>
 
@@ -157,6 +184,7 @@ onMounted(() => {
       }
       .home__content-info {
         flex: 4;
+        min-width: 0;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -191,6 +219,7 @@ onMounted(() => {
           span {
             display: flex;
             align-items: center;
+            padding: 0.2rem 0;
           }
         }
         &-desc {
