@@ -18,6 +18,7 @@ export interface IArticle {
   tags: Tag[]
   cover?: Cover
   comments: number
+  commends: number
 }
 
 interface Cover {

@@ -1,23 +1,29 @@
 <template>
-  <div :class="`article ${appMedia}`">
+  <div v-if="articleInfo" :class="`article ${appMedia}`">
     <div class="blogLayout-header article__header">
       <MImgDefault>
         <div class="blogLayout-card">
-          <h1 class="article-title">这是一个测试标题</h1>
+          <h1 class="article-title">{{ articleInfo.title }}</h1>
           <div class="article-statistics m-flex hc">
             <div class="article-blogger">
               <MImg :src="blogger" :lazy="false"></MImg>
             </div>
             <span>isdream</span>
-            <span>2022-11-17</span>
-            <span>100次阅读</span>
+            <span v-dateFormat:YYYY-MM-DD>{{ articleInfo.createdAt }}</span>
+            <span>{{ articleInfo.views }}次阅读</span>
           </div>
         </div>
       </MImgDefault>
     </div>
     <div class="blogLayout-card">
       <!-- 内容 -->
-      <article class="article__content">123</article>
+      <article class="article__content">
+        <MMarkdownView
+          v-if="articleInfo.render === 1"
+          :value="articleInfo.content"
+        ></MMarkdownView>
+        <div v-if="articleInfo.render === 2" v-html="articleInfo.content"></div>
+      </article>
       <!-- 协议、标签、操作 -->
       <div class="article-footer">
         <div class="license">
@@ -46,31 +52,39 @@
         <div class="article-actions">
           <div class="article-actions__tags m-flex hc">
             <MIcon name="icon-PriceTag"></MIcon>
-            <a>TEST</a>
+            <a v-for="tag in articleInfo.tags" :key="tag.id">{{ tag.title }}</a>
             <a>TEST</a>
           </div>
           <div class="article-actions__btns">
-            <div class="btns-item"><MIcon name="icon-star"></MIcon>66</div>
+            <div class="btns-item" @click="commend">
+              <MIcon name="icon-star"></MIcon>{{ articleInfo.commends }}
+            </div>
           </div>
         </div>
       </div>
       <!-- 上一篇/下一篇 -->
       <div class="article-pre-next">
-        <div class="article-pre">
-          <MImg :src="img1">
-            <div class="article-pre-next__info">
+        <div v-if="preArticleInfo" class="article-pre">
+          <MImgDefault
+            :src="preArticleInfo.cover?.url"
+            :thumb="preArticleInfo.cover?.thumbUrl"
+          >
+            <div class="article-pre-next__articleInfo">
               <div>上一篇</div>
-              <div class="m-ellipsis">test标题</div>
+              <div class="m-ellipsis">{{ preArticleInfo.title }}</div>
             </div>
-          </MImg>
+          </MImgDefault>
         </div>
-        <div class="article-next">
-          <MImg :src="img2">
-            <div class="article-pre-next__info">
+        <div v-if="nextArticleInfo" class="article-next">
+          <MImgDefault
+            :src="nextArticleInfo.cover?.url"
+            :thumb="nextArticleInfo.cover?.thumbUrl"
+          >
+            <div class="article-pre-next__articleInfo">
               <div>下一篇</div>
-              <div class="m-ellipsis">test标题</div>
+              <div class="m-ellipsis">{{ nextArticleInfo.title }}</div>
             </div>
-          </MImg>
+          </MImgDefault>
         </div>
       </div>
       <MComment></MComment>
@@ -79,16 +93,23 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import { useAppSetting } from '@/store'
 import blogger from '@/assets/img/blogger.png'
 import img1 from '@/assets/img/1.jpg'
 import img2 from '@/assets/img/2.jpg'
+import { useArticle } from './hooks/useArticle'
 
 defineOptions({
   name: 'Article'
 })
 
 const { appMedia } = useAppSetting()
+
+const route = useRoute()
+const id = Number(route.params.id)
+
+const { articleInfo, preArticleInfo, nextArticleInfo, commend } = useArticle(id)
 </script>
 
 <style lang="scss" scoped>
@@ -138,6 +159,9 @@ const { appMedia } = useAppSetting()
   }
 
   .article__content {
+    :deep(img) {
+      max-width: 100% !important;
+    }
   }
 
   .article-footer {
@@ -222,7 +246,7 @@ const { appMedia } = useAppSetting()
       }
     }
 
-    .article-pre-next__info {
+    .article-pre-next__articleInfo {
       position: absolute;
       z-index: 5;
       color: #ffffff;
@@ -239,7 +263,7 @@ const { appMedia } = useAppSetting()
     }
 
     .article-next {
-      .article-pre-next__info {
+      .article-pre-next__articleInfo {
         text-align: right;
       }
     }
@@ -248,7 +272,7 @@ const { appMedia } = useAppSetting()
   &.phone {
     .article-pre-next {
       display: block;
-      .article-pre-next__info {
+      .article-pre-next__articleInfo {
         text-align: left;
       }
     }

@@ -6,10 +6,6 @@ export const markdownViewProps = buildProps({
   value: {
     type: String,
     default: ''
-  },
-  height: {
-    type: Number,
-    default: 360
   }
 } as const)
 
