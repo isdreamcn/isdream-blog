@@ -1,10 +1,10 @@
 import type {
   UserMenu,
   UserLoginParams,
-  UserLoginResult,
+  UserInfo,
   UserSigninParams
-} from './types/loginTypes'
-import service from '@/service'
+} from './types/login.type'
+import service, { serviceNotMessage } from '@/service'
 
 enum Api {
   Login = '/api/user/login',
@@ -13,8 +13,9 @@ enum Api {
   Permissions = '/api/user/permissions'
 }
 
-export const userLogin = (data: UserLoginParams) => {
-  return service.request<Service.Result<UserLoginResult>>({
+export const userLogin = (data: UserLoginParams, showMessage = true) => {
+  const http = showMessage ? service : serviceNotMessage
+  return http.request<Service.Result<UserInfo> & { token: string }>({
     url: Api.Login,
     method: 'POST',
     data
@@ -44,3 +45,5 @@ export const getUserPermissions = () => {
     method: 'GET'
   })
 }
+
+export * from './types/login.type'

@@ -3,7 +3,7 @@ import type { RequestParams } from '../_types'
 import type {
   UserLoginParams,
   UserSigninParams
-} from '@/api/user/types/loginTypes'
+} from '@/api/user/types/login.type'
 import {
   useUserList
   /* rawResponseHandler */

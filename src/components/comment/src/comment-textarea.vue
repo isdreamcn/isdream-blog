@@ -1,23 +1,43 @@
 <template>
-  <div class="m-comment-textarea">
+  <div :class="['m-comment-textarea', appMedia]">
     <div class="replyer-avatar">
       <MImg :src="avatar" />
     </div>
     <div class="replyer-container">
       <div class="basic-info">
-        <input type="text" placeholder="昵称*" />
-        <input type="text" placeholder="邮箱*" />
-        <input type="text" placeholder="网址" />
+        <div>
+          <input type="text" placeholder="昵称*" v-model="userInfo.username" />
+          <input
+            type="text"
+            placeholder="邮箱*"
+            v-model="userInfo.email"
+            @input="getUserInfoByEmail"
+          />
+          <input type="text" placeholder="网址" v-model="userInfo.website" />
+        </div>
+        <input
+          type="text"
+          placeholder="头像 https://"
+          v-model="userInfo.avatar"
+        />
       </div>
+
       <div :class="{ 'replyer-info': true, textareaFocus: textareaFocus }">
         <div class="replyer-info-content">
           <textarea
             :placeholder="props.placeholder"
+            v-model="content"
             @focus="focusHandler(true)"
             @blur="focusHandler(false)"
           ></textarea>
         </div>
-        <button type="button">发布</button>
+        <button
+          type="button"
+          :disabled="!content || replyLoading"
+          @click="reply"
+        >
+          发布
+        </button>
       </div>
     </div>
   </div>
@@ -25,18 +45,42 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { commentTextAreaProps } from './comment-textarea'
+import { commentTextAreaProps, commentTextAreaEmits } from './comment-textarea'
 import avatar from '@/assets/img/1.jpg'
+import { useAppSetting } from '@/store'
+import { useUser } from './hooks/useUser'
 
 defineOptions({
   name: 'MCommentTextarea'
 })
 
 const props = defineProps(commentTextAreaProps)
+const emit = defineEmits(commentTextAreaEmits)
 
 const textareaFocus = ref(false)
 const focusHandler = (focus: boolean) => {
   textareaFocus.value = focus
+}
+
+const { appMedia } = useAppSetting()
+const { userInfo, getUserInfoByEmail, login } = useUser()
+
+// 回复
+const content = ref('')
+const replyLoading = ref(false)
+const reply = () => {
+  if (!content.value) {
+    return
+  }
+  replyLoading.value = true
+  login()
+    .then(() => {
+      content.value = ''
+      emit('reply')
+    })
+    .finally(() => {
+      replyLoading.value = false
+    })
 }
 </script>
 
@@ -55,21 +99,26 @@ const focusHandler = (focus: boolean) => {
     flex: 1;
   }
   .basic-info {
-    display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    div {
+      display: flex;
+      input {
+        margin-left: 1rem;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
     input {
       flex: 1;
       width: 100%;
-      margin-left: 1rem;
       border: var(--m-border);
       border-radius: 0.3rem;
       box-sizing: border-box;
       padding: 0.3rem 0.55rem;
       outline: none;
       font-size: 0.8rem;
-      &:first-child {
-        margin-left: 0;
-      }
+      margin-bottom: 0.5rem;
     }
   }
   .replyer-info {
@@ -120,6 +169,16 @@ const focusHandler = (focus: boolean) => {
       opacity: 0.5;
       &:hover {
         opacity: 1;
+      }
+    }
+  }
+  &.phone {
+    .basic-info {
+      div {
+        display: block;
+        input {
+          margin-left: 0;
+        }
       }
     }
   }

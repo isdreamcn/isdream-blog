@@ -1,11 +1,10 @@
-export interface IArticleListParams {
-  page?: number
-  pageSize?: number
-  q?: string
+import { CommonListParams } from '../../commonTypes'
+
+export interface ArticleListParams extends CommonListParams {
   tag?: number
 }
 
-export interface IArticle {
+export interface Article {
   id: number
   title: string
   content: string

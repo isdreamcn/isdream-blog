@@ -87,7 +87,7 @@
           </MImgDefault>
         </div>
       </div>
-      <MComment></MComment>
+      <MComment :article="articleInfo.id"></MComment>
     </div>
   </div>
 </template>
@@ -96,8 +96,6 @@
 import { useRoute } from 'vue-router'
 import { useAppSetting } from '@/store'
 import blogger from '@/assets/img/blogger.png'
-import img1 from '@/assets/img/1.jpg'
-import img2 from '@/assets/img/2.jpg'
 import { useArticle } from './hooks/useArticle'
 
 defineOptions({

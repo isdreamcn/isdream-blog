@@ -1,5 +1,5 @@
-import type { IArticle, IArticleListParams } from './types/article.type'
-import service from '@/service'
+import type { Article, ArticleListParams } from './types/article.type'
+import service, { serviceNotMessage } from '@/service'
 
 enum Api {
   List = '/api/article/main',
@@ -7,23 +7,24 @@ enum Api {
   Commend = '/api/article/commend'
 }
 
-export const getArticleList = (params?: IArticleListParams) => {
-  return service.request<Service.ResultPagination<IArticle[]>>({
+export const getArticleList = (params?: ArticleListParams) => {
+  return service.request<Service.ResultPagination<Article[]>>({
     url: Api.List,
     method: 'GET',
     params
   })
 }
 
-export const getArticleById = (id: number) => {
-  return service.request<Service.Result<IArticle>>({
+export const getArticleById = (id: number, showMessage = true) => {
+  const http = showMessage ? service : serviceNotMessage
+  return http.request<Service.Result<Article>>({
     url: `${Api.Details}/${id}`,
     method: 'GET'
   })
 }
 
 export const commendArticle = (id: number) => {
-  return service.request<Service.Result<IArticle>>({
+  return service.request<Service.Result<Article>>({
     url: `${Api.Commend}/${id}`,
     method: 'POST'
   })

@@ -62,12 +62,17 @@ const commentList: CommentHttp = () =>
   })
 
 export const commentProps = buildProps({
-  // 评论列表
+  // 文章id
+  article: {
+    type: Number,
+    require: false
+  },
+  // 一级评论
   commentHttp: {
     type: definePropType<CommentHttp>(Function),
     default: commentList
   },
-  // 点击查看
+  // 二级评论
   commentChildHttp: {
     type: definePropType<CommentChildHttp>(Function)
   }

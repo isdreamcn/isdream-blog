@@ -22,6 +22,12 @@ export const service = new BasicRequest({
   ])
 })
 
+// 没有错误提示
+export const serviceNotMessage = new BasicRequest({
+  baseURL: serviceBaseURL,
+  interceptors: mergeInterceptors([useHandleUrl(config.useMock), useLoading()])
+})
+
 export default service
 
 export * from './types'

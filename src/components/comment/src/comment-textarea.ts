@@ -8,7 +8,9 @@ export const commentTextAreaProps = buildProps({
     default: '发一条友善的评论'
   }
 } as const)
-export const commentTextAreaEmits = {}
+export const commentTextAreaEmits = {
+  reply: () => true
+}
 
 export type CommentTextAreaProps = ExtractPropTypes<typeof commentTextAreaProps>
 export type CommentTextAreaEmits = typeof commentTextAreaEmits

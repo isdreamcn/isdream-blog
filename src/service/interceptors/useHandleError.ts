@@ -2,17 +2,17 @@ import type { RequestInterceptors } from '../types'
 import { ElMessage } from 'element-plus'
 import { HttpStatusCode } from '@/constants'
 
-import db from '@/storage'
-import appConfig from '@/config'
-import router from '@/router'
+// import db from '@/storage'
+// import appConfig from '@/config'
+// import router from '@/router'
 
 // 身份验证失败
-const failAuth = () => {
-  db.clear()
-  router.push({
-    name: appConfig.routeLoginName
-  })
-}
+// const failAuth = () => {
+//   db.clear()
+//   router.push({
+//     name: appConfig.routeLoginName
+//   })
+// }
 interface FailHandler {
   message?: string
   handler?: () => void
@@ -20,8 +20,8 @@ interface FailHandler {
 
 // 需要错误处理的状态码
 const failCodeMap = new Map<HttpStatusCode, FailHandler>([
-  [HttpStatusCode.Unauthorized, { handler: failAuth }],
-  [HttpStatusCode.Forbidden, { handler: failAuth }],
+  // [HttpStatusCode.Unauthorized, { handler: failAuth }],
+  // [HttpStatusCode.Forbidden, { handler: failAuth }],
   [HttpStatusCode.Not_Found, {}]
 ])
 

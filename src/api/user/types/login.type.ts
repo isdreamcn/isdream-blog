@@ -1,6 +1,8 @@
 export interface UserLoginParams {
-  username: string
-  password: string
+  email: string
+  username?: string
+  avatar?: string
+  website?: string
 }
 
 export interface UserMenu {
@@ -14,18 +16,10 @@ export interface UserMenu {
 
 export interface UserInfo {
   id: number
-  username: string
-  realname?: string
   email: string
+  username?: string
   avatar?: string
-}
-
-export interface UserLoginResult {
-  id: number
-  token: string
-  menu: UserMenu[]
-  permissions: string[]
-  user: UserInfo
+  website?: string
 }
 
 export interface UserSigninParams {

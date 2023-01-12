@@ -62,7 +62,7 @@ import loadingData from '@/assets/lottie/loading.json'
 import { useShowElClassName } from '@/hooks'
 import { htmlToText } from '@/utils'
 
-import { getArticleList, IArticle } from '@/api/blog/article'
+import { getArticleList, Article } from '@/api/blog/article'
 
 defineOptions({
   name: 'Home'
@@ -85,7 +85,7 @@ const getItemEls = () => {
 
 // 获取文章列表
 const dataListCount = ref(0)
-const articleList = ref<IArticle[]>([])
+const articleList = ref<Article[]>([])
 const isLoading = ref(false)
 const params = {
   page: 1,
