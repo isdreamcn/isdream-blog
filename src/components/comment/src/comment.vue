@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, onBeforeUnmount } from 'vue'
 import { commentProps } from './comment'
 import MCommentItem from './comment-item.vue'
 import MCommentTextarea from './comment-textarea.vue'
@@ -129,6 +129,11 @@ watch(
   {
     immediate: true
   }
+)
+
+// 移除滚动加载
+onBeforeUnmount(() =>
+  appLayoutEl.value?.removeEventListener('scroll', scrollFn)
 )
 </script>
 
