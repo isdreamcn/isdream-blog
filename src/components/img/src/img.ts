@@ -4,7 +4,8 @@ import { buildProps } from '@/utils'
 
 export const imgProps = buildProps({
   src: {
-    type: String
+    type: String,
+    required: false
   },
   // 缩略图
   thumb: {
@@ -16,7 +17,10 @@ export const imgProps = buildProps({
   }
 } as const)
 
-export const imgEmits = {}
+export const imgEmits = {
+  error: () => true,
+  load: () => true
+}
 
 export type ImgProps = ExtractPropTypes<typeof imgProps>
 export type ImgEmits = typeof imgEmits

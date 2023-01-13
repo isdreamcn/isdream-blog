@@ -1,74 +1,83 @@
 <template>
   <div class="m-comment-item reply-item">
     <div class="reply-avatar root-reply-avatar">
-      <MImg :src="avatar"></MImg>
+      <MImgAvatar
+        :src="data.user.avatar"
+        :username="data.user.username"
+      ></MImgAvatar>
     </div>
     <div class="reply-container root-reply-container">
       <div class="user-info">
-        <div class="user-info-name">{{ data.username }}</div>
-        <div class="user-info-level">
+        <div class="user-info-name">{{ data.user.username }}</div>
+        <!-- <div class="user-info-level">
           <MIcon name="iconfont-ic_userlevel_5"></MIcon>
-        </div>
+        </div> -->
       </div>
       <div class="user-content">{{ data.content }}</div>
       <div class="user-footer">
-        <time>2022-11-19</time>
-        <span :class="{ 'is-checked': data.isLike }"
+        <time v-dateFormat:YYYY-MM-DD>{{ data.createdAt }}</time>
+        <span :class="{ 'is-checked': data.liked }"
           ><MIcon name="iconfont-like" @click="like(data)"></MIcon>
-          <span>{{ data.likeCount || '' }}</span>
+          <span>{{ data.likedCount || '' }}</span>
         </span>
-        <span :class="{ 'is-checked': data.isDislike }"
+        <span :class="{ 'is-checked': data.disliked }"
           ><MIcon name="iconfont-dislike" @click="disLike(data)"> </MIcon
         ></span>
-        <span class="user-footer-btn" @click="replyHandler(data)">回复</span>
+        <span class="user-footer-btn" @click="replyHandler(data.user)"
+          >回复</span
+        >
       </div>
 
       <!-- child -->
       <div class="reply-child">
         <div
-          v-for="item in data.children"
+          v-for="item in data.replys.data"
           :key="item.id"
           class="m-comment-item"
         >
           <div class="reply-avatar">
-            <MImg :src="avatar"></MImg>
+            <MImgAvatar
+              :src="item.user.avatar"
+              :username="item.user.username"
+            ></MImgAvatar>
           </div>
           <div class="reply-container">
             <div class="user-container">
               <div class="user-info">
-                <div class="user-info-name">{{ item.username }}</div>
-                <div class="user-info-level">
+                <div class="user-info-name">{{ item.user.username }}</div>
+                <!-- <div class="user-info-level">
                   <MIcon name="iconfont-ic_userlevel_5"></MIcon>
-                </div>
+                </div> -->
               </div>
               <span class="user-content">
-                <span v-if="item.reply" class="reply-user">
+                <span v-if="item.replyUser" class="reply-user">
                   回复
-                  <span>@{{ item.reply.username }}</span
+                  <span>@{{ item.replyUser.username }}</span
                   >:
                 </span>
                 {{ item.content }}</span
               >
             </div>
             <div class="user-footer">
-              <time>2022-11-19</time>
-              <span :class="{ 'is-checked': item.isLike }"
+              <time v-dateFormat:YYYY-MM-DD>{{ item.createdAt }}</time>
+              <span :class="{ 'is-checked': item.liked }"
                 ><MIcon name="iconfont-like" @click="like(item)"></MIcon>
-                <span>{{ item.likeCount || '' }}</span>
+                <span>{{ item.likedCount || '' }}</span>
               </span>
-              <span :class="{ 'is-checked': item.isDislike }"
+              <span :class="{ 'is-checked': item.disliked }"
                 ><MIcon name="iconfont-dislike" @click="disLike(item)"></MIcon
               ></span>
-              <span class="user-footer-btn" @click="replyHandler(item)"
+              <span class="user-footer-btn" @click="replyHandler(item.user)"
                 >回复</span
               >
             </div>
           </div>
         </div>
-        <div v-if="data.replyCount > 2 && !showMoreReply" class="reply-count">
-          共{{ data.replyCount }}条回复, <span @click="showMore">点击查看</span>
+        <div v-if="data.replys.count > 2 && !showMoreReply" class="reply-count">
+          共{{ data.replys.count }}条回复,
+          <span @click="showMore">点击查看</span>
         </div>
-        <div v-if="data.replyCount > 2 && showMoreReply" class="pagination">
+        <div v-if="data.replys.count > 2 && showMoreReply" class="pagination">
           <span class="pagination-total">共{{ totalPage }}页</span>
           <span
             class="pagination-btn"
@@ -95,7 +104,10 @@
         </div>
         <MCommentTextarea
           v-if="showCommentTextarea"
-          :placeholder="`回复 @${replyer?.username}: `"
+          :article="props.article"
+          :reply-comment="data.id"
+          :reply-user="replyUser?.id"
+          :placeholder="`回复 @${replyUser?.username}: `"
         ></MCommentTextarea>
       </div>
     </div>
@@ -103,12 +115,19 @@
 </template>
 
 <script setup lang="ts">
-import type { CommentItemChild } from './comment-item'
 import { ref, reactive, computed } from 'vue'
+import { ElMessage } from 'element-plus'
 import { commentItemProps, commentItemEmits } from './comment-item'
 import { cloneDeep } from '@/utils'
-import avatar from '@/assets/img/1.jpg'
 import MCommentTextarea from './comment-textarea.vue'
+import { useUserStore } from '@/store'
+import {
+  User,
+  ReplyComment,
+  getReplyCommentList,
+  likeComment,
+  dislikeComment
+} from '@/api/blog/comment'
 
 defineOptions({
   name: 'MCommentItem'
@@ -122,42 +141,64 @@ const params = reactive({
   page: 1,
   pageSize: 10
 })
-const totalPage = computed(() => Math.ceil(data.replyCount / params.pageSize))
+const totalPage = computed(() => Math.ceil(data.replys.count / params.pageSize))
+
+// 获取更多回复
+const _getReplyCommentList = () => {
+  return getReplyCommentList({
+    ...params,
+    parentComment: data.id,
+    sort: props.sort
+  }).then((res) => {
+    data.replys.data = res.data
+  })
+}
 
 // 搜索
 const setParamsPage = (page: number) => {
   params.page = page
+  _getReplyCommentList()
 }
 
 // 点击查看更多回复
-const showMoreReply = ref(true)
+const showMoreReply = ref(false)
 const showMore = () => {
-  showMoreReply.value = true
+  _getReplyCommentList().then(() => {
+    showMoreReply.value = true
+  })
 }
 
 // footer 赞、踩
-const like = (comment: CommentItemChild) => {
-  const isLike = !comment.isLike
-  comment.isLike = isLike
-  comment.likeCount += isLike ? 1 : -1
+const userStore = useUserStore()
+const like = (comment: ReplyComment) => {
+  if (!userStore.token) {
+    ElMessage.warning('请先发一条友善的评论')
+    return
+  }
+  likeComment(comment.id).then(() => {
+    comment.liked = !comment.liked
+    comment.likedCount += comment.liked ? 1 : -1
+  })
 }
 
-const disLike = (comment: CommentItemChild) => {
-  const isDisLike = !comment.isDislike
-  comment.isDislike = isDisLike
+const disLike = (comment: ReplyComment) => {
+  if (!userStore.token) {
+    ElMessage.warning('请先发一条友善的评论')
+    return
+  }
+  dislikeComment(comment.id).then(() => {
+    comment.disliked = !comment.disliked
+  })
 }
 
 // 回复
 const showCommentTextarea = computed(() => {
-  return (
-    data.id === props.replyerId ||
-    data.children?.find((v) => v.id === props.replyerId)
-  )
+  return data.id === props.replyerId
 })
-const replyer = ref<CommentItemChild>()
-const replyHandler = (item: CommentItemChild) => {
-  replyer.value = item
-  emit('reply', item.id)
+const replyUser = ref<User>()
+const replyHandler = (item: User) => {
+  replyUser.value = item
+  emit('reply', data.id)
 }
 </script>
 

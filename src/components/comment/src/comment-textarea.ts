@@ -6,6 +6,16 @@ export const commentTextAreaProps = buildProps({
   placeholder: {
     type: String,
     default: '发一条友善的评论'
+  },
+  article: {
+    type: Number,
+    required: true
+  },
+  replyComment: {
+    type: Number
+  },
+  replyUser: {
+    type: Number
   }
 } as const)
 export const commentTextAreaEmits = {

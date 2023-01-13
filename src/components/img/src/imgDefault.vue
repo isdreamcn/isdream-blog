@@ -1,14 +1,16 @@
 <template>
   <MImg
-    :src="joinBaseUrlFile(props.src) ?? mainImg"
+    :src="src"
     :thumb="joinBaseUrlFile(props.thumb) ?? mainImgThumb"
     :lazy="props.lazy"
+    @error="errorHandler"
   >
     <slot></slot>
   </MImg>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import mainImg from '@/assets/img/main.png'
 import mainImgThumb from '@/assets/img/main-thumb.png'
 import { imgProps } from './img'
@@ -25,6 +27,11 @@ const joinBaseUrlFile = (url?: string) => {
     return url
   }
   return app.baseUrlFile + url
+}
+
+const src = ref<string>(joinBaseUrlFile(props.src) ?? mainImg)
+const errorHandler = () => {
+  src.value = mainImg
 }
 </script>
 

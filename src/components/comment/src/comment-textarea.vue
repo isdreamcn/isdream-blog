@@ -1,7 +1,10 @@
 <template>
   <div :class="['m-comment-textarea', appMedia]">
     <div class="replyer-avatar">
-      <MImg :src="avatar" />
+      <MImgAvatar
+        :src="userInfo.avatar"
+        :username="userInfo.username"
+      ></MImgAvatar>
     </div>
     <div class="replyer-container">
       <div class="basic-info">
@@ -45,10 +48,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
 import { commentTextAreaProps, commentTextAreaEmits } from './comment-textarea'
-import avatar from '@/assets/img/1.jpg'
 import { useAppSetting } from '@/store'
 import { useUser } from './hooks/useUser'
+import { comment } from '@/api/blog/comment'
 
 defineOptions({
   name: 'MCommentTextarea'
@@ -75,8 +79,16 @@ const reply = () => {
   replyLoading.value = true
   login()
     .then(() => {
-      content.value = ''
-      emit('reply')
+      comment({
+        article: props.article,
+        content: content.value,
+        parentComment: props.replyComment,
+        replyUser: props.replyUser
+      }).then(() => {
+        content.value = ''
+        emit('reply')
+        ElMessage.success('评论发布成功< (￣︶￣)>')
+      })
     })
     .finally(() => {
       replyLoading.value = false

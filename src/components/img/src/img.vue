@@ -6,6 +6,7 @@
         :src="props.src"
         v-bind="$attrs"
         @load="onLoad"
+        @error="onError"
       />
       <!-- thumb -->
       <img
@@ -13,6 +14,7 @@
         class="ground-glass"
         :src="props.thumb"
         v-bind="$attrs"
+        @error="onThumbError"
       />
     </template>
     <slot></slot>
@@ -21,17 +23,27 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { imgProps } from './img'
+import { imgProps, imgEmits } from './img'
 
 defineOptions({
   name: 'MImg'
 })
 
 const props = defineProps(imgProps)
+const emit = defineEmits(imgEmits)
 
 const showThumb = ref(!!props.thumb)
 const onLoad = () => {
   showThumb.value = false
+  emit('load')
+}
+
+const onThumbError = () => {
+  showThumb.value = false
+}
+
+const onError = () => {
+  emit('error')
 }
 
 // lazy loading

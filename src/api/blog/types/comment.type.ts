@@ -1,11 +1,21 @@
 import { CommonListParams } from '../../commonTypes'
 
+// 发布评论
+export interface CommentData {
+  content: string
+  article: number
+  parentComment?: number
+  replyUser?: number
+  emojis?: number[]
+}
+
 export interface CommentListParams extends Omit<CommonListParams, 'q'> {
   article: number
   sort: number
 }
 
-export interface ReplyCommentListParams extends CommentListParams {
+export interface ReplyCommentListParams
+  extends Omit<CommentListParams, 'article'> {
   parentComment: number
 }
 
@@ -16,6 +26,7 @@ export interface ReplyComment {
   createdAt: string
   updatedAt: string
   user: User
+  replyUser?: User
   emojis: Emoji[]
   likedCount: number
   liked?: boolean
@@ -50,7 +61,7 @@ interface File {
   updatedAt: string
 }
 
-interface User {
+export interface User {
   id: number
   username: string
   avatar: string

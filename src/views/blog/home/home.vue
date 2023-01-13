@@ -92,7 +92,7 @@ const params = {
   pageSize: 5
 }
 
-const getDataList = () => {
+const _getArticleList = () => {
   return getArticleList(params).then(({ data, count }) => {
     dataListCount.value = count
     articleList.value = articleList.value.concat(
@@ -108,7 +108,7 @@ const getDataList = () => {
 const getNextPage = () => {
   isLoading.value = true
   params.page++
-  getDataList().finally(() => (isLoading.value = false))
+  _getArticleList().finally(() => (isLoading.value = false))
 }
 
 // 查看文章详情
@@ -123,7 +123,7 @@ const showArticle = (id: number) => {
 }
 
 onMounted(() => {
-  getDataList()
+  _getArticleList()
 })
 </script>
 

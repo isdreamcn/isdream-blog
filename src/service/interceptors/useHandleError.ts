@@ -22,6 +22,11 @@ interface FailHandler {
 const failCodeMap = new Map<HttpStatusCode, FailHandler>([
   // [HttpStatusCode.Unauthorized, { handler: failAuth }],
   // [HttpStatusCode.Forbidden, { handler: failAuth }],
+  [HttpStatusCode.Unauthorized, {}],
+  [
+    HttpStatusCode.Internal_Server_Error,
+    { message: '服务器内部错误∠( ᐛ 」∠)＿' }
+  ],
   [HttpStatusCode.Not_Found, {}]
 ])
 
@@ -36,6 +41,7 @@ const handleError = (code: number, message?: string) => {
     }
     return true
   }
+
   return false
 }
 

@@ -39,7 +39,9 @@ export const useUser = () => {
     if (userInfo.email) {
       return userStore.login({
         ...userInfo,
-        email: userInfo.email
+        email: userInfo.email,
+        website: userInfo.website || undefined,
+        avatar: userInfo.avatar || undefined
       })
     }
 

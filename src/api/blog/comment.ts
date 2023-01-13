@@ -1,4 +1,5 @@
 import type {
+  CommentData,
   Comment,
   CommentListParams,
   ReplyComment,
@@ -7,10 +8,11 @@ import type {
 import service from '@/service'
 
 enum Api {
+  Reply = '/api/comment',
   List = '/api/comment/main',
-  Reply = '/api/comment/reply',
+  ReplyList = '/api/comment/reply',
   Like = '/api/comment/like',
-  disLike = '/api/comment/disLike'
+  Dislike = '/api/comment/dislike'
 }
 
 // 一级评论
@@ -25,9 +27,34 @@ export const getCommentList = (params: CommentListParams) => {
 // 二级评论
 export const getReplyCommentList = (params: ReplyCommentListParams) => {
   return service.request<Service.ResultPagination<ReplyComment[]>>({
-    url: Api.Reply,
+    url: Api.ReplyList,
     method: 'GET',
     params
+  })
+}
+
+// 评论
+export const comment = (data: CommentData) => {
+  return service.request({
+    url: Api.Reply,
+    method: 'POST',
+    data
+  })
+}
+
+// 喜欢
+export const likeComment = (id: number) => {
+  return service.request({
+    url: `${Api.Like}/${id}`,
+    method: 'POST'
+  })
+}
+
+// 不喜欢
+export const dislikeComment = (id: number) => {
+  return service.request({
+    url: `${Api.Dislike}/${id}`,
+    method: 'POST'
   })
 }
 

@@ -24,6 +24,8 @@ export const useShowElClassName = (
       for (const el of els.value) {
         if (!el.className.includes(className)) {
           observer.observe(el)
+        } else {
+          observer.unobserve(el)
         }
       }
     },
