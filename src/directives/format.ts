@@ -8,7 +8,7 @@ export const dateFormat: Directive<HTMLElement, any> = {
       return
     }
 
-    let template = arg ?? 'YYYY-MM-DD HH:mm:ss'
+    let template = arg ?? 'YYYY-MM-DD'
     if (modifiers.space) {
       template = template.replaceAll('__', ' ')
     }

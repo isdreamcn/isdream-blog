@@ -20,7 +20,7 @@
           <div class="home__content-info-time">
             <b v-if="article.isTop" class="is-stick">置顶</b>
             <MIcon name="icon-clock"></MIcon>发布于
-            <time v-dateFormat:YYYY-MM-DD>{{ article.createdAt }}</time>
+            <time v-dateFormat>{{ article.createdAt }}</time>
           </div>
           <h2 class="m-ellipsis home__content-info-title">
             {{ article.title }}

@@ -58,7 +58,7 @@ const config: Readonly<AppConfig> = {
     keepAlive: true,
     hiddenInMenu: false,
     hiddenInBread: false,
-    needLoading: false,
+    needLoading: true,
     needToken: false,
     needRouteHistory: true
   },

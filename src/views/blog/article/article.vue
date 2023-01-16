@@ -9,7 +9,7 @@
               <MImg :src="blogger" :lazy="false"></MImg>
             </div>
             <span>isdream</span>
-            <span v-dateFormat:YYYY-MM-DD>{{ articleInfo.createdAt }}</span>
+            <span v-dateFormat>{{ articleInfo.createdAt }}</span>
             <span>{{ articleInfo.views }}次阅读</span>
           </div>
         </div>

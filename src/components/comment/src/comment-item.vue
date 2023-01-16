@@ -15,7 +15,7 @@
       </div>
       <div class="user-content">{{ data.content }}</div>
       <div class="user-footer">
-        <time v-dateFormat:YYYY-MM-DD>{{ data.createdAt }}</time>
+        <time v-dateFormat>{{ data.createdAt }}</time>
         <span :class="{ 'is-checked': data.liked }"
           ><MIcon name="iconfont-like" @click="like(data)"></MIcon>
           <span>{{ data.likedCount || '' }}</span>
@@ -59,7 +59,7 @@
               >
             </div>
             <div class="user-footer">
-              <time v-dateFormat:YYYY-MM-DD>{{ item.createdAt }}</time>
+              <time v-dateFormat>{{ item.createdAt }}</time>
               <span :class="{ 'is-checked': item.liked }"
                 ><MIcon name="iconfont-like" @click="like(item)"></MIcon>
                 <span>{{ item.likedCount || '' }}</span>

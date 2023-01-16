@@ -13,7 +13,7 @@
       v-model:selectKeys="selectKeys"
     >
       <template #createAt="{ value }">
-        <span v-dateFormat:YYYY-MM-DD="value"></span>
+        <span v-dateFormat="value"></span>
       </template>
       <template #extra>
         <el-button v-auth="searchBtnPermission" @click="isReload = true"

@@ -7,25 +7,38 @@
     </div>
     <div class="blogLayout-card">
       <ul class="pigeonhole-content">
-        <li class="pigeonhole-content-item statistics">文章总览 - 92</li>
-        <li class="pigeonhole-content-item">2022</li>
-        <li v-for="i in 30" :key="i" class="pigeonhole-content-item">
-          <div class="item-info">
-            <time class="item-info-time">2022-11-19</time>
-            <a @click="showArticle(1)" class="item-info-title m-ellipsis"
-              >这是一个测试标题</a
-            >
-          </div>
+        <li class="pigeonhole-content-item statistics">
+          文章总览 - {{ pigeonholeCount }}
         </li>
+        <template v-for="item in pigeonholes" :key="item.year">
+          <li class="pigeonhole-content-item">{{ item.year }}</li>
+          <li
+            v-for="article in item.articles"
+            :key="article.id"
+            class="pigeonhole-content-item"
+          >
+            <div class="item-info">
+              <time class="item-info-time" v-dateFormat>{{
+                article.createdAt
+              }}</time>
+              <a
+                @click="showArticle(article.id)"
+                class="item-info-title m-ellipsis"
+                >{{ article.title }}</a
+              >
+            </div>
+          </li>
+        </template>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useShowElClassName } from '@/hooks'
+import { Pigeonhole, getPigeonhole } from '@/api/blog/pigeonhole'
 
 defineOptions({
   name: 'Pigeonhole'
@@ -48,10 +61,17 @@ useShowElClassName(itemEls, 'is-show', {
   threshold: 0.1
 })
 
-onMounted(() => {
-  itemEls.value = Array.from(
-    pigeonholeElRef.value!.querySelectorAll('.pigeonhole-content-item')
-  )
+// 获取数据
+const pigeonholes = ref<Pigeonhole[]>([])
+const pigeonholeCount = ref(0)
+getPigeonhole().then((res) => {
+  pigeonholes.value = res.data
+  pigeonholeCount.value = res.count
+  nextTick(() => {
+    itemEls.value = Array.from(
+      pigeonholeElRef.value!.querySelectorAll('.pigeonhole-content-item')
+    )
+  })
 })
 </script>
 

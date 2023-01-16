@@ -7,7 +7,7 @@
     </header>
     <BackTop></BackTop>
     <main class="blogLayout__main">
-      <KeepAlive><slot></slot></KeepAlive>
+      <slot></slot>
     </main>
     <footer class="blogLayout__footer">
       <p>
