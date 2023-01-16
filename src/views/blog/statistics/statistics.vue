@@ -4,26 +4,33 @@
       <MImgDefault>
         <div class="blogLayout-header-title">
           <h1>统计</h1>
-          <p>最后更新于 2022 年 11 月 25 日</p>
+          <p>
+            最后更新于
+            <span
+              v-if="totalData?.lastTime"
+              v-dateFormat:YYYY__年__MM__月__DD__日.space
+              >{{ totalData?.lastTime }}</span
+            >
+          </p>
         </div>
       </MImgDefault>
     </div>
     <div class="blogLayout-card">
       <ul class="statistics__types">
         <li>
-          <p>100+</p>
+          <p>{{ totalData?.views }}+</p>
           <p>浏览</p>
         </li>
         <li>
-          <p>100+</p>
+          <p>{{ totalData?.comments }}+</p>
           <p>评论</p>
         </li>
         <li>
-          <p>100+</p>
+          <p>{{ totalData?.articles }}+</p>
           <p>文章</p>
         </li>
         <li>
-          <p>100+</p>
+          <p>{{ totalData?.articleTags }}+</p>
           <p>标签</p>
         </li>
       </ul>
@@ -40,11 +47,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import ArticleMonthly from './components/ArticleMonthly.vue'
 import TagProportion from './components/TagProportion.vue'
+import { getTotal, TotalData } from '@/api/blog/statistics'
 
 defineOptions({
   name: 'Statistics'
+})
+
+const totalData = ref<TotalData>()
+getTotal().then((res) => {
+  totalData.value = res.data
 })
 </script>
 
