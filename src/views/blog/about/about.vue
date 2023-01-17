@@ -11,7 +11,7 @@
         <MImg :src="blogger" :lazy="false"></MImg>
         <div class="blogger-info-desc">
           <h3>isdream</h3>
-          <p>1.《英雄联盟》万年青铜玩家 {{ '< (￣︶￣)>' }}</p>
+          <p>1.《英雄联盟》大乱斗爱好者 {{ '< (￣︶￣)>' }}</p>
           <p>2.轻度懒癌患者 (￣o￣)</p>
         </div>
       </div>

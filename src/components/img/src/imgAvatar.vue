@@ -46,4 +46,11 @@ watch(
 )
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.m-img {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+</style>

@@ -32,40 +32,27 @@
         </p>
       </div>
 
-      <div class="links-box">
-        <h4 class="links-box__title">1. 个人项目</h4>
+      <div v-for="(item, index) in links" :key="item.id" class="links-box">
+        <h4 class="links-box__title">{{ index + 1 }}. {{ item.title }}</h4>
         <div class="links-box__desc">
-          充分说明这家伙是条咸鱼 {{ `< (￣︶￣)>` }}
+          {{ item.description }}
         </div>
         <ul class="links-box__content">
-          <li v-for="i in 4" :key="i" class="link-item">
-            <div class="link-item__info">
-              <div class="link-item__name">testName</div>
-              <div class="m-ellipsis link-item__descript">
-                测测试描测试描述述试描述测试描述测试描述
+          <li v-for="link in item.links" :key="link.id" class="link-item">
+            <a :href="link.link" target="_blank" :title="link.title">
+              <div class="link-item__info">
+                <div class="link-item__name">{{ link.title }}</div>
+                <div class="m-ellipsis link-item__descript">
+                  {{ link.description }}
+                </div>
               </div>
-            </div>
-            <div class="link-item__avatar">
-              <MImg :src="avatar"></MImg>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="links-box">
-        <h4 class="links-box__title">2. 私人服务</h4>
-        <div class="links-box__desc">稳定性？不存在的 ∠( ᐛ 」∠)＿</div>
-        <ul class="links-box__content">
-          <li v-for="i in 1" :key="i" class="link-item">
-            <div class="link-item__info">
-              <div class="link-item__name">testName</div>
-              <div class="m-ellipsis link-item__descript">
-                测测试描测试描述述试描述测试描述测试描述
+              <div class="link-item__avatar">
+                <MImgAvatar
+                  :src="link.icon"
+                  :username="link.title"
+                ></MImgAvatar>
               </div>
-            </div>
-            <div class="link-item__avatar">
-              <MImg :src="avatar"></MImg>
-            </div>
+            </a>
           </li>
         </ul>
       </div>
@@ -75,25 +62,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import avatar from '@/assets/img/1.jpg'
+import { getLinks, LinkType } from '@/api/blog/links'
 
 defineOptions({
   name: 'Links'
 })
 
-type Link = {
-  name: string
-  avatar: string
-  url?: string
-  descript?: string
-}
-
-const links = ref<
-  {
-    type: string
-    links: Link[]
-  }[]
->([])
+const links = ref<LinkType[]>([])
+getLinks().then((res) => {
+  links.value = res.data
+})
 </script>
 
 <style lang="scss" scoped>
@@ -140,14 +118,18 @@ const links = ref<
       padding: 0;
       .link-item {
         position: relative;
-        display: flex;
-        align-items: center;
         box-sizing: border-box;
         cursor: pointer;
         padding: 1rem 1.5rem;
         border: var(--m-border);
         border-radius: 0.5rem;
         overflow: hidden;
+        a {
+          position: relative;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+        }
         &::before {
           content: '';
           position: absolute;
@@ -183,6 +165,7 @@ const links = ref<
           color: var(--m-font-color);
         }
         &__avatar {
+          position: relative;
           flex-shrink: 0;
           width: 4rem;
           height: 4rem;

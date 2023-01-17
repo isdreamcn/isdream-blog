@@ -12,3 +12,5 @@ export const getArticleTags = () => {
     method: 'GET'
   })
 }
+
+export * from './types/articleTag.type'
