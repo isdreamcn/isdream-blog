@@ -1,13 +1,9 @@
-export type Tag = {
-  label: string
-  value: number
+export type Item = {
   count: number
-  color?: string
-  fontSize: number
 }
 
-export const useTagFontSize = (
-  data: Omit<Tag, 'fontSize'>[],
+export const useTagFontSize = <T extends Item = any>(
+  data: T[],
   max: number,
   min: number
 ) => {

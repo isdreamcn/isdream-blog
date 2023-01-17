@@ -34,17 +34,17 @@
         <ul class="m-search__tags">
           <li
             v-for="tag in tags"
-            :key="tag.value"
+            :key="tag.id"
             :style="{ fontSize: `${tag.fontSize}rem`, color: tag.color }"
           >
             <a
               @click="
                 goPage({
-                  tag: tag.value,
-                  tagName: tag.label
+                  tag: tag.id,
+                  tagName: tag.title
                 })
               "
-              >{{ tag.label }}</a
+              >{{ tag.title }}</a
             >
           </li>
         </ul>
@@ -54,39 +54,26 @@
 </template>
 
 <script setup lang="ts">
-import type { Tag } from './hooks/useTagFontSize'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTagFontSize } from './hooks/useTagFontSize'
+import { getArticleTags, ArticleTag } from '@/api/blog/articleTag'
 
 defineOptions({
   name: 'LayoutCpnSearch'
 })
 
-const tags = ref<Tag[]>([])
-
-const data = [
-  {
-    label: 'vue',
-    value: 1,
-    count: 14,
-    color: '#1abc9c'
-  },
-  {
-    label: 'javaScript',
-    value: 2,
-    count: 15,
-    color: '#e67e22'
-  },
-  {
-    label: '算法',
-    value: 3,
-    count: 10,
-    color: '#9b59b6'
-  }
-]
-
-tags.value = useTagFontSize(data, 1.5, 0.9)
+const tags = ref<(ArticleTag & { fontSize: number })[]>([])
+getArticleTags().then((res) => {
+  tags.value = useTagFontSize(
+    res.data.map((v) => ({
+      ...v,
+      count: v.articleCount
+    })),
+    1.5,
+    0.9
+  )
+})
 
 // 弹框
 const visible = ref(false)

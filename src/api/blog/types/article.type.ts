@@ -1,7 +1,7 @@
 import { CommonListParams } from '../../commonTypes'
 
 export interface ArticleListParams extends CommonListParams {
-  tag?: number
+  tag?: number | null
 }
 
 export interface Article {
