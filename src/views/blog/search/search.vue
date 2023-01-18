@@ -143,6 +143,7 @@ function emphasizeQ(str: string, q: string, len: number) {
       position: absolute;
     }
     .item-cover {
+      flex-shrink: 0;
       width: 5.5rem;
       height: 5.5rem;
       margin-right: 1rem;
@@ -156,6 +157,7 @@ function emphasizeQ(str: string, q: string, len: number) {
     }
     .item-info {
       flex: 1;
+      min-width: 0;
       &__header {
         display: flex;
         align-items: center;

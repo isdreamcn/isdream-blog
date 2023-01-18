@@ -52,8 +52,12 @@
         <div class="article-actions">
           <div class="article-actions__tags m-flex hc">
             <MIcon name="icon-PriceTag"></MIcon>
-            <a v-for="tag in articleInfo.tags" :key="tag.id">{{ tag.title }}</a>
-            <a>TEST</a>
+            <a
+              v-for="tag in articleInfo.tags"
+              :key="tag.id"
+              @click="goSearch(tag.id, tag.title)"
+              >{{ tag.title }}</a
+            >
           </div>
           <div class="article-actions__btns">
             <div class="btns-item" @click="commend">
@@ -93,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useAppSetting } from '@/store'
 import blogger from '@/assets/img/blogger.png'
 import { useArticle } from './hooks/useArticle'
@@ -108,6 +112,18 @@ const route = useRoute()
 const id = Number(route.params.id)
 
 const { articleInfo, preArticleInfo, nextArticleInfo, commend } = useArticle(id)
+
+// 查看相同标签的文章
+const router = useRouter()
+const goSearch = (id: number, name: string) => {
+  router.push({
+    name: 'search',
+    query: {
+      tag: id,
+      tagName: name
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -157,6 +173,11 @@ const { articleInfo, preArticleInfo, nextArticleInfo, commend } = useArticle(id)
   }
 
   .article__content {
+    :deep(*) {
+      max-width: 100%;
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
     :deep(img) {
       max-width: 100% !important;
     }

@@ -97,7 +97,9 @@ const setParamsSort = (sort: 1 | 2) => {
   params.sort = sort
   params.page = 1
   commentList.value = []
-  _getCommentList()
+  _getCommentList()?.then(() => {
+    params.page++
+  })
 }
 
 // 滚动加载

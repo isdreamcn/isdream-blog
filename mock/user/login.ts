@@ -1,9 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import type { RequestParams } from '../_types'
-import type {
-  UserLoginParams,
-  UserSigninParams
-} from '@/api/user/types/login.type'
 import {
   useUserList
   /* rawResponseHandler */
@@ -15,7 +11,7 @@ export default [
     url: '/api/user/login',
     method: 'post',
     timeout: 200,
-    response: ({ body }: RequestParams<UserLoginParams>) => {
+    response: ({ body }: RequestParams) => {
       const userInfo = useUserList().find(
         ({ username, password }) =>
           username === body.username && password === body.password
@@ -38,7 +34,7 @@ export default [
     method: 'post',
     timeout: 200,
     statusCode: HttpStatusCode.Not_Found,
-    response: ({ body }: RequestParams<UserSigninParams>) => {
+    response: ({ body }: RequestParams) => {
       return {
         data: body,
         code: HttpStatusCode.Not_Found,

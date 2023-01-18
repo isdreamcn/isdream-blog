@@ -1,9 +1,9 @@
 import { reactive } from 'vue'
 import { verifyObj } from '@/utils'
-import { useUserStore } from '@/store'
+// import { useUserStore } from '@/store'
 
 export const useLogin = () => {
-  const useStore = useUserStore()
+  // const useStore = useUserStore()
 
   const loginForm = reactive({
     username: 'admin',
@@ -21,7 +21,8 @@ export const useLogin = () => {
         (val) => val || val === 0
       )
     ) {
-      useStore.login(loginForm)
+      console.log('校验通过')
+      // useStore.login(loginForm)
     }
   }
 

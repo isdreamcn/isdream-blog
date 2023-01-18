@@ -4,7 +4,7 @@ import { buildProps } from '@/utils'
 export const imgAvatarProps = buildProps({
   username: {
     type: String,
-    required: true
+    default: ''
   },
   src: String
 } as const)
