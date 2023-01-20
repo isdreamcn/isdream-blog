@@ -51,7 +51,7 @@
         </div>
         <div class="article-actions">
           <div class="article-actions__tags m-flex hc">
-            <MIcon name="icon-PriceTag"></MIcon>
+            <MIcon v-if="articleInfo.tags.length" name="icon-PriceTag"></MIcon>
             <a
               v-for="tag in articleInfo.tags"
               :key="tag.id"
@@ -68,7 +68,11 @@
       </div>
       <!-- 上一篇/下一篇 -->
       <div class="article-pre-next">
-        <div v-if="preArticleInfo" class="article-pre">
+        <div
+          v-if="preArticleInfo"
+          class="article-pre"
+          @click="showArticle(preArticleInfo!.id)"
+        >
           <MImgDefault
             :src="preArticleInfo.cover?.url"
             :thumb="preArticleInfo.cover?.thumbUrl"
@@ -79,7 +83,11 @@
             </div>
           </MImgDefault>
         </div>
-        <div v-if="nextArticleInfo" class="article-next">
+        <div
+          v-if="nextArticleInfo"
+          class="article-next"
+          @click="showArticle(nextArticleInfo!.id)"
+        >
           <MImgDefault
             :src="nextArticleInfo.cover?.url"
             :thumb="nextArticleInfo.cover?.thumbUrl"
@@ -91,7 +99,10 @@
           </MImgDefault>
         </div>
       </div>
-      <MComment :article="articleInfo.id"></MComment>
+      <MComment
+        v-if="articleInfo.isCommented"
+        :article="articleInfo.id"
+      ></MComment>
     </div>
   </div>
 </template>
@@ -121,6 +132,15 @@ const goSearch = (id: number, name: string) => {
     query: {
       tag: id,
       tagName: name
+    }
+  })
+}
+
+const showArticle = (id: number) => {
+  router.push({
+    name: 'article',
+    params: {
+      id
     }
   })
 }

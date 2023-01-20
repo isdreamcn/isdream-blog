@@ -7,7 +7,7 @@ export interface ArticleListParams extends CommonListParams {
 export interface Article {
   id: number
   title: string
-  content: string
+  text: string
   render: number
   views: number
   isCommented: boolean
@@ -18,6 +18,10 @@ export interface Article {
   cover?: Cover
   comments: number
   commends: number
+}
+
+export interface ArticleDetails extends Omit<Article, 'text'> {
+  content: string
 }
 
 interface Cover {

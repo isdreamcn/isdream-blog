@@ -38,7 +38,7 @@
             >
           </div>
           <p class="home__content-info-desc">
-            {{ article.content }}
+            {{ article.text }}
           </p>
         </div>
       </article>
@@ -60,7 +60,6 @@ import { useRouter } from 'vue-router'
 import homeHeader from './components/homeHeader/homeHeader.vue'
 import loadingData from '@/assets/lottie/loading.json'
 import { useShowElClassName } from '@/hooks'
-import { htmlToText } from '@/utils'
 
 import { getArticleList, Article } from '@/api/blog/article'
 
@@ -95,12 +94,7 @@ const params = {
 const _getArticleList = () => {
   return getArticleList(params).then(({ data, count }) => {
     dataListCount.value = count
-    articleList.value = articleList.value.concat(
-      data.map((item) => ({
-        ...item,
-        content: htmlToText(item.content)
-      }))
-    )
+    articleList.value = articleList.value.concat(data)
     getItemEls()
   })
 }

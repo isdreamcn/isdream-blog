@@ -1,10 +1,14 @@
 import { ref } from 'vue'
-import { Article, getArticleById, commendArticle } from '@/api/blog/article'
+import {
+  ArticleDetails,
+  getArticleById,
+  commendArticle
+} from '@/api/blog/article'
 
 export const useArticle = (id: number) => {
-  const articleInfo = ref<Article>()
-  const preArticleInfo = ref<Article>()
-  const nextArticleInfo = ref<Article>()
+  const articleInfo = ref<ArticleDetails>()
+  const preArticleInfo = ref<ArticleDetails>()
+  const nextArticleInfo = ref<ArticleDetails>()
 
   // 获取文章信息
   getArticleById(id).then((res) => {

@@ -27,7 +27,7 @@
             </h2>
             <time v-dateFormat>{{ item.createdAt }}</time>
           </div>
-          <div class="item-info__desc" v-html="item.content"></div>
+          <div class="item-info__desc" v-html="item.text"></div>
         </div>
       </article>
     </div>
@@ -38,7 +38,6 @@
 import { useRoute, useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import { getArticleList, Article } from '@/api/blog/article'
-import { htmlToText } from '@/utils'
 
 defineOptions({
   name: 'Search'
@@ -58,7 +57,7 @@ getArticleList({
   artilces.value = res.data.map((v) => ({
     ...v,
     title: emphasizeQ(v.title, String(q), 100),
-    content: emphasizeQ(htmlToText(v.content), String(q), 100)
+    text: emphasizeQ(v.text, String(q), 100)
   }))
 })
 

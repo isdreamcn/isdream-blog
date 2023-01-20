@@ -1,4 +1,8 @@
-import type { Article, ArticleListParams } from './types/article.type'
+import type {
+  Article,
+  ArticleDetails,
+  ArticleListParams
+} from './types/article.type'
 import service, { serviceNotMessage } from '@/service'
 
 enum Api {
@@ -17,7 +21,7 @@ export const getArticleList = (params?: ArticleListParams) => {
 
 export const getArticleById = (id: number, showMessage = true) => {
   const http = showMessage ? service : serviceNotMessage
-  return http.request<Service.Result<Article>>({
+  return http.request<Service.Result<ArticleDetails>>({
     url: `${Api.Details}/${id}`,
     method: 'GET'
   })
