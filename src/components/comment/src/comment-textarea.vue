@@ -34,11 +34,7 @@
             @blur="focusHandler(false)"
           ></textarea>
         </div>
-        <button
-          type="button"
-          :disabled="!content || replyLoading"
-          @click="reply"
-        >
+        <button type="button" :disabled="replyLoading" @click="reply">
           发布
         </button>
       </div>
@@ -73,12 +69,12 @@ const { userInfo, getUserInfoByEmail, login } = useUser()
 const content = ref('')
 const replyLoading = ref(false)
 const reply = () => {
-  if (!content.value) {
-    return
-  }
   replyLoading.value = true
   login()
     .then(() => {
+      if (!content.value) {
+        return ElMessage.warning('请填写评论内容')
+      }
       comment({
         article: props.article,
         content: content.value,
@@ -89,6 +85,11 @@ const reply = () => {
         emit('reply')
         ElMessage.success('评论发布成功< (￣︶￣)>')
       })
+    })
+    .catch((message?: string) => {
+      if (message) {
+        ElMessage.warning(message)
+      }
     })
     .finally(() => {
       replyLoading.value = false
