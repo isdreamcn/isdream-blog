@@ -1,5 +1,5 @@
 import type {
-  UserMenu,
+  UserLoginMenu,
   UserLoginParams,
   UserLoginResult,
   UserSigninParams
@@ -32,7 +32,7 @@ export const userSignin = (data: UserSigninParams) => {
 
 // 用户菜单
 export const getUserMenu = () => {
-  return service.request<Service.Result<UserMenu[]>>({
+  return service.request<Service.Result<UserLoginMenu[]>>({
     url: Api.Menu,
     method: 'GET'
   })

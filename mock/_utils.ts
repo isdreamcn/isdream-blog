@@ -1,18 +1,29 @@
-export const useUserList = () => {
+import type {
+  UserLoginResult,
+  UserLoginMenu
+} from '@/api/user/types/login.type'
+
+interface MockUserLoginList extends UserLoginResult {
+  username: string
+  password: string
+  menus: UserLoginMenu[]
+  permissions: string[]
+}
+
+export const useUserList = (): MockUserLoginList[] => {
   return [
     {
-      id: 1,
       username: 'admin',
       password: '123456',
       token: '123456789',
       user: {
         id: 1,
         username: 'admin',
-        email: '123456@mock.com'
+        email: '123456@qq.com'
       },
       permissions: ['tableSearch'],
       // 路由
-      menu: [
+      menus: [
         {
           id: 1,
           title: '首页MockRole',
@@ -72,19 +83,18 @@ interface ResultPaginationOptions {
   count?: number
 }
 
-type DataItemFn = (index: number) => any
-
-export const resultPagination = (
-  dataItemFn: DataItemFn,
+// 生成分页数据
+export const generateResultPagination = <T = any>(
+  generater: (index: number) => T,
   options?: ResultPaginationOptions
-): Service.ResultPagination => {
+): Service.ResultPagination<T[]> => {
   const { page = 1, pageSize = 10, count = 100 } = options || {}
   const data: any[] = []
   const start = (page - 1) * pageSize
   const end = page * pageSize > count ? count : page * pageSize
 
   for (let i = start + 1; i <= end; i++) {
-    data.push(dataItemFn(i))
+    data.push(generater(i))
   }
   return {
     data,

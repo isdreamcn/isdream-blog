@@ -5,13 +5,13 @@ export interface UserLoginParams {
   website?: string
 }
 
-export interface UserMenu {
+export interface UserLoginMenu {
   id?: number
   title?: string
   path: string
   icon?: string
   link?: string
-  children?: UserMenu[]
+  children?: UserLoginMenu[]
 }
 
 export interface UserLoginResult {
