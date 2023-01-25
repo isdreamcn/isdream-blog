@@ -1,11 +1,11 @@
 import { reactive, watch } from 'vue'
 import { debounce } from 'lodash-unified'
-import { UserInfo } from '@/api/user/login'
+import { UserLoginInfo } from '@/api/user/login'
 import { useUserStore } from '@/store'
 
 export const useUser = () => {
   const userStore = useUserStore()
-  const userInfo = reactive<Partial<UserInfo>>({
+  const userInfo = reactive<Partial<UserLoginInfo>>({
     email: '',
     username: '',
     website: '',

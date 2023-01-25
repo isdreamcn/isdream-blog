@@ -1,15 +1,16 @@
 import type { StorageSetOptions } from '@/storage'
-import type {
-  UserLoginParams,
-  UserInfo,
-  UserMenu as LoginUserMenu
-} from '@/api/user/types/login.type'
 import { defineStore } from 'pinia'
 import db from '@/storage'
 import appConfig from '@/config'
 import router, { routesHandler } from '@/router'
-import { userLogin, getUserMenu, getUserPermissions } from '@/api/user/login'
 import { useRouterStore } from './router'
+import {
+  UserLoginParams,
+  UserLoginInfo,
+  userLogin,
+  getUserMenu,
+  getUserPermissions
+} from '@/api/user/login'
 
 export interface UserMenu {
   title: string
@@ -20,26 +21,27 @@ export interface UserMenu {
   children?: UserMenu[]
 }
 
-export interface StoreUserInfo {
-  id?: number
-  username?: string
+export interface UserInfo extends UserLoginInfo {
+  id: number
+  username: string
+  avatar?: string
 }
 
 interface UserState {
   token: string
-  userInfo: Nullable<StoreUserInfo & UserInfo>
+  userInfo: Nullable<UserInfo>
   userMenu: Nullable<UserMenu[]>
   userPermissions: Nullable<string[]>
   userPermissionMap: Map<string, boolean>
 }
 
+const $generatorMenu = appConfig.routesHandlerOptions.generatorMenu
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: '',
     userInfo: null,
-    // 从（router/index）useRoleMenu 设置
     userMenu: null,
-    userPermissions: [],
+    userPermissions: null,
     // 用于O(1)判断权限
     userPermissionMap: new Map()
   }),
@@ -48,80 +50,63 @@ export const useUserStore = defineStore('user', {
     setupState() {
       this.token = db.get<string>('token') ?? this.token
       this.userInfo = db.get<UserInfo>('userInfo')
-      // 重新获取用户菜单及权限
-      // setTimeout(() => {
-      //   this.setUserMenu()
-      //   this.setUserPermissions()
-      // })
-    },
-    // 用户菜单
-    setUserMenu() {
-      const routerStore = useRouterStore()
-      routerStore.setState({
-        loading: true,
-        closeLoading: false
-      })
 
-      let http = getUserMenu
-      const userMenu = db.get<LoginUserMenu[]>('userMenu')
-      if (appConfig.storeConfig.userStorage && userMenu) {
-        http = () =>
-          Promise.resolve({
-            data: userMenu
-          })
+      if (!this.token) return
+
+      const promises: Promise<any>[] = [this.setUserPermissions()]
+      if (!$generatorMenu) {
+        promises.push(this.setUserMenu())
       }
-      // 菜单
-      return http()
-        .then((res) => {
-          if (appConfig.storeConfig.userStorage && !userMenu) {
-            db.set('userMenu', res.data)
-          }
-          // 注册路由
-          routesHandler.useRoleMenu(res.data)
-          this.generaterPermissionMap()
-          // 重载当前页
-          router.push(
-            location.hash ? location.hash.slice(1) : location.pathname
-          )
-          return res
-        })
-        .finally(() => {
-          routerStore.setState({
-            loading: false,
-            closeLoading: true
-          })
-        })
+
+      this.reloadCurrentPage(promises)
     },
-    // 权限
+    // 设置用户菜单
+    setUserMenu() {
+      let http = getUserMenu
+      const userMenu = db.get<UserMenu[]>('userMenu')
+      if (appConfig.storeConfig.userMenuStorage && userMenu) {
+        http = () => Promise.resolve({ data: userMenu })
+      }
+
+      return http().then((res) => {
+        if (appConfig.storeConfig.userMenuStorage && !userMenu) {
+          db.set('userMenu', res.data)
+        }
+        // 注册路由
+        routesHandler.useRoleMenu(res.data)
+        return res
+      })
+    },
+    // 设置用户权限
     setUserPermissions() {
       let http = getUserPermissions
       const userPermissions = db.get<string[]>('userPermissions')
-      if (appConfig.storeConfig.userStorage && userPermissions) {
-        http = () =>
-          Promise.resolve({
-            data: userPermissions
-          })
+      if (appConfig.storeConfig.userPermissionsStorage && userPermissions) {
+        http = () => Promise.resolve({ data: userPermissions })
       }
+
       return http().then((res) => {
-        if (appConfig.storeConfig.userStorage && !userPermissions) {
-          db.set('userPermissions', userPermissions)
+        if (appConfig.storeConfig.userPermissionsStorage && !userPermissions) {
+          db.set('userPermissions', res.data)
         }
         this.userPermissions = res.data
         this.generaterPermissionMap()
-
         return res
       })
     },
     // 登录
     login(params: UserLoginParams, ...payload: any[]) {
       return userLogin(params, ...payload).then(async (res) => {
-        const { data, token } = res
+        const { data } = res
+        this.setToken(data.token, {
+          expires: appConfig.serviceTokenConfig.expires
+        })
+        this.setUserInfo(data.user)
 
-        this.setToken(token)
-        this.setUserInfo(data)
-
-        // await this.setUserMenu()
-        // await this.setUserPermissions()
+        await this.setUserPermissions()
+        if (!$generatorMenu) {
+          await this.setUserMenu()
+        }
 
         // router.push({
         //   name: appConfig.routeMainName
@@ -132,16 +117,25 @@ export const useUserStore = defineStore('user', {
     },
     // 退出登录
     layout() {
-      db.removeKeys('token', 'userInfo', 'userMenu', 'userPermissions')
+      db.removeKeys('token', 'userInfo', 'userPermissions')
       this.$patch({
         token: '',
         userInfo: null,
-        userMenu: null,
         userPermissions: null
       })
+
+      if (!$generatorMenu) {
+        db.removeKeys('userMenu')
+        this.$patch({
+          userMenu: null
+        })
+      }
     },
-    setState(state: Partial<UserState>) {
+    setState(state: Partial<UserState>, dbOptions?: StorageSetOptions) {
       this.$patch(state)
+      if (dbOptions) {
+        db.setData(state, dbOptions)
+      }
     },
     setToken(token: string, dbOptions?: StorageSetOptions) {
       this.token = token
@@ -164,6 +158,26 @@ export const useUserStore = defineStore('user', {
     // 校验权限
     permissionAuth(permission: string) {
       return !!this.userPermissionMap.get(permission)
+    },
+    // 重载当前页
+    reloadCurrentPage(promises: Promise<any>[]) {
+      setTimeout(() => {
+        const routerStore = useRouterStore()
+        routerStore.setState({
+          loading: true,
+          closeLoading: false
+        })
+        Promise.all(promises).then(() => {
+          router
+            .replace(location.hash ? location.hash.slice(1) : location.pathname)
+            .then(() => {
+              routerStore.setState({
+                loading: false,
+                closeLoading: true
+              })
+            })
+        })
+      })
     }
   }
 })

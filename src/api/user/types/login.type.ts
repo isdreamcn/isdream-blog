@@ -6,7 +6,7 @@ export interface UserLoginParams {
 }
 
 export interface UserMenu {
-  id: number
+  id?: number
   title?: string
   path: string
   icon?: string
@@ -14,10 +14,15 @@ export interface UserMenu {
   children?: UserMenu[]
 }
 
-export interface UserInfo {
+export interface UserLoginResult {
+  token: string
+  user: UserLoginInfo
+}
+
+export interface UserLoginInfo {
   id: number
   email: string
-  username?: string
+  username: string
   avatar?: string
   website?: string
 }
