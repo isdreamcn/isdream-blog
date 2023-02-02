@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { setDocumentTitle } from '@/utils'
 import {
   ArticleDetails,
   getArticleById,
@@ -13,6 +14,7 @@ export const useArticle = (id: number) => {
   // 获取文章信息
   getArticleById(id).then((res) => {
     articleInfo.value = res.data
+    setDocumentTitle(res.data.title)
   })
 
   getArticleById(id - 1, false)

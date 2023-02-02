@@ -6,6 +6,7 @@ import { useRouteHistory } from './useRouteHistory'
 import { useLoading } from './useLoading'
 import { useRedirect } from './useRedirect'
 import { useKeepAliveRollPosition } from './useKeepAliveRollPosition'
+import { useDocumentTitle } from './useDocumentTitle'
 
 const useGuards = [
   useRedirect,
@@ -13,7 +14,8 @@ const useGuards = [
   useHasToken,
   useKeepAlive,
   useRouteHistory,
-  useKeepAliveRollPosition
+  useKeepAliveRollPosition,
+  useDocumentTitle
 ]
 
 const useGuard = (router: Router) => {
