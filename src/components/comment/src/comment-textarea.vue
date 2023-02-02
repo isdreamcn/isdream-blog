@@ -101,10 +101,9 @@ const reply = () => {
 .m-comment-textarea {
   display: flex;
   .replyer-avatar {
-    .m-img {
+    .m-img-avatar {
       width: 3rem;
       height: 3rem;
-      border-radius: 50%;
     }
   }
   .replyer-container {

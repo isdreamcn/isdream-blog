@@ -212,10 +212,9 @@ const replyHandler = (item: User) => {
   .reply-avatar {
     flex-shrink: 0;
     margin-right: 1rem;
-    .m-img {
+    .m-img-avatar {
       width: 3rem;
       height: 3rem;
-      border-radius: 50%;
     }
   }
   .reply-container {
@@ -275,7 +274,7 @@ const replyHandler = (item: User) => {
     }
     .reply-avatar {
       margin-right: 0.5rem;
-      .m-img {
+      .m-img-avatar {
         width: 2rem;
         height: 2rem;
       }
