@@ -7,6 +7,7 @@
         v-bind="$attrs"
         @load="onLoad"
         @error="onError"
+        @mousedown="(e) => e.preventDefault()"
       />
       <!-- thumb -->
       <img
@@ -15,6 +16,7 @@
         :src="props.thumb"
         v-bind="$attrs"
         @error="onThumbError"
+        @mousedown="(e) => e.preventDefault()"
       />
     </template>
     <slot></slot>
