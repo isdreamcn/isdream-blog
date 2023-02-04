@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { setDocumentTitle } from '@/utils'
+import { setDocumentTitle, setBaseUrlFile } from '@/utils'
 import {
   ArticleDetails,
   getArticleById,
@@ -13,7 +13,10 @@ export const useArticle = (id: number) => {
 
   // 获取文章信息
   getArticleById(id).then((res) => {
-    articleInfo.value = res.data
+    articleInfo.value = {
+      ...res.data,
+      content: setBaseUrlFile(res.data.content)
+    }
     setDocumentTitle(res.data.title)
   })
 
