@@ -28,6 +28,7 @@
       <div :class="{ 'replyer-info': true, textareaFocus: textareaFocus }">
         <div class="replyer-info-content">
           <textarea
+            ref="textareaRef"
             :placeholder="props.placeholder"
             v-model="content"
             @focus="focusHandler(true)"
@@ -38,17 +39,25 @@
           发布
         </button>
       </div>
+      <CommentEmoji
+        v-show="textareaFocus"
+        :visible="textareaFocus"
+        @mousedown="focusHandler(true, false)"
+        @mouseup="focusHandler(true, true)"
+        @select="addEmoji"
+      ></CommentEmoji>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { commentTextAreaProps, commentTextAreaEmits } from './comment-textarea'
 import { useAppSetting } from '@/store'
 import { useUser } from './hooks/useUser'
 import { comment } from '@/api/blog/comment'
+import CommentEmoji from './comment-emoji.vue'
 
 defineOptions({
   name: 'MCommentTextarea'
@@ -58,8 +67,17 @@ const props = defineProps(commentTextAreaProps)
 const emit = defineEmits(commentTextAreaEmits)
 
 const textareaFocus = ref(false)
-const focusHandler = (focus: boolean) => {
+const textareaRef = ref<HTMLTextAreaElement>()
+// textarea保持聚焦
+let canBlur = true
+const focusHandler = (focus: boolean, _canBlur?: boolean) => {
+  if (_canBlur !== undefined) {
+    canBlur = _canBlur
+  }
   textareaFocus.value = focus
+  if (!canBlur || focus) {
+    textareaRef.value?.focus()
+  }
 }
 
 const { appMedia } = useAppSetting()
@@ -67,6 +85,23 @@ const { userInfo, getUserInfoByEmail, login } = useUser()
 
 // 回复
 const content = ref('')
+// 选择表情
+const addEmoji = (placeholder: string) => {
+  const start = textareaRef.value?.selectionStart || 0
+  content.value =
+    content.value.substring(0, start) +
+    placeholder +
+    content.value.substring(start)
+
+  nextTick(() => {
+    if (textareaRef.value) {
+      const index = start + placeholder.length
+      textareaRef.value.selectionStart = index
+      textareaRef.value.selectionEnd = index
+    }
+  })
+}
+
 const replyLoading = ref(false)
 const reply = () => {
   replyLoading.value = true

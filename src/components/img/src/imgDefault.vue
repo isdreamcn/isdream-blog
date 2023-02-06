@@ -14,20 +14,13 @@ import { ref } from 'vue'
 import mainImg from '@/assets/img/main.png'
 import mainImgThumb from '@/assets/img/main-thumb.png'
 import { imgProps } from './img'
-import app from '@/config'
+import { joinBaseUrlFile } from '@/utils'
 
 defineOptions({
   name: 'MImgDefault'
 })
 
 const props = defineProps(imgProps)
-
-const joinBaseUrlFile = (url?: string) => {
-  if (!url || /^http/.test(url)) {
-    return url
-  }
-  return app.baseUrlFile + url
-}
 
 const src = ref<string>(joinBaseUrlFile(props.src) ?? mainImg)
 const errorHandler = () => {

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3525707",
+      "name": "emoji_line (47)",
+      "font_class": "emoji_line",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
       "icon_id": "2462068",
       "name": "ic_user level_0",
       "font_class": "ic_userlevel_",
