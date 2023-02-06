@@ -151,7 +151,7 @@ watch(
     }
     .navbar-item {
       cursor: pointer;
-      padding: 0.5rem;
+      padding: 0 0.5rem;
       .m-icon {
         margin-right: 0.3rem;
       }
