@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import 'vditor/dist/index.css'
 import { markdownViewProps } from './markdownView'
 import Vditor from 'vditor'
 import { ref, watch, onMounted } from 'vue'
