@@ -1,6 +1,8 @@
 export interface EmojiType {
   id: number
   title: string
+  width: string
+  height: string
   createdAt: string
   updatedAt: string
   emojis: Emoji[]
@@ -10,7 +12,6 @@ interface Emoji {
   id: number
   placeholder: string
   description: string
-  width?: string
   createdAt: string
   updatedAt: string
   file?: File | File

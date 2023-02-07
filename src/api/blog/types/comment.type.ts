@@ -6,7 +6,6 @@ export interface CommentData {
   article: number
   parentComment?: number
   replyUser?: number
-  emojis?: number[]
 }
 
 export interface CommentListParams extends Omit<CommonListParams, 'q'> {
@@ -42,13 +41,23 @@ interface Replys {
   count: number
 }
 
-interface Emoji {
+export interface Emoji {
   id: number
   placeholder: string
   description: string
   createdAt: string
   updatedAt: string
   file: File
+  type: Type
+}
+
+interface Type {
+  id: number
+  title: string
+  width: string
+  height: string
+  createdAt: string
+  updatedAt: string
 }
 
 interface File {

@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue'
 import type CommentItem from './comment-item.vue'
-import type { Comment } from '@/api/blog/comment'
-import { buildProps, definePropType } from '@/utils'
+import type { Comment, Emoji } from '@/api/blog/comment'
+import { buildProps, definePropType, joinBaseUrlFile } from '@/utils'
 
 export const commentItemProps = buildProps({
   data: {
@@ -31,3 +31,20 @@ export type CommentItemProps = ExtractPropTypes<typeof commentItemProps>
 export type CommentItemEmits = typeof commentItemEmits
 
 export type CommentItemInstance = InstanceType<typeof CommentItem>
+
+export const emojiHandler = (content: string, emojis: Emoji[]) => {
+  // xss
+  let _content = content.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+  emojis
+    .filter((emoji) => emoji.file)
+    .forEach((emoji) => {
+      _content = _content.replaceAll(
+        emoji.placeholder,
+        `<img src="${joinBaseUrlFile(emoji.file.url)}" style="width: ${
+          emoji.type.width
+        }; height: ${emoji.type.height};" alt="${emoji.placeholder}" />`
+      )
+    })
+
+  return _content
+}

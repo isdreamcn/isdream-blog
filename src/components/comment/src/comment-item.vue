@@ -13,7 +13,10 @@
           <MIcon name="iconfont-ic_userlevel_5"></MIcon>
         </div> -->
       </div>
-      <div class="user-content">{{ data.content }}</div>
+      <div
+        class="user-content"
+        v-html="emojiHandler(data.content, data.emojis)"
+      ></div>
       <div class="user-footer">
         <time v-dateFormat>{{ data.createdAt }}</time>
         <span :class="{ 'is-checked': data.liked }"
@@ -55,8 +58,8 @@
                   <span>@{{ item.replyUser.username }}</span
                   >:
                 </span>
-                {{ item.content }}</span
-              >
+                <span v-html="emojiHandler(item.content, item.emojis)"></span
+              ></span>
             </div>
             <div class="user-footer">
               <time v-dateFormat>{{ item.createdAt }}</time>
@@ -117,7 +120,11 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { commentItemProps, commentItemEmits } from './comment-item'
+import {
+  commentItemProps,
+  commentItemEmits,
+  emojiHandler
+} from './comment-item'
 import { cloneDeep } from '@/utils'
 import MCommentTextarea from './comment-textarea.vue'
 import { useUserStore } from '@/store'

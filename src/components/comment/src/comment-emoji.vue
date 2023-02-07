@@ -20,8 +20,12 @@
             >
               <MImg
                 v-if="emoji.file"
+                :alt="emoji.placeholder"
                 :src="joinBaseUrlFile(emoji.file.url)"
-                :style="emoji.width ? {} : emojiStyle"
+                :style="{
+                  width: item.width,
+                  height: item.height
+                }"
               ></MImg>
               <template v-else>
                 {{ emoji.placeholder }}
@@ -51,11 +55,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import {
-  commentEmojiEmits,
-  commentEmojiProps,
-  emojiStyle
-} from './comment-emoji'
+import { commentEmojiEmits, commentEmojiProps } from './comment-emoji'
 import { getEmojiType, EmojiType } from '@/api/blog/emoji'
 import { joinBaseUrlFile } from '@/utils'
 
