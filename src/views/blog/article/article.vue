@@ -1,7 +1,10 @@
 <template>
   <div v-if="articleInfo" :class="`article ${appMedia}`">
     <div class="blogLayout-header article__header">
-      <MImgDefault>
+      <MImgDefault
+        :src="articleInfo.cover?.url"
+        :thumb="articleInfo.cover?.thumbUrl"
+      >
         <div class="blogLayout-card">
           <h1 class="article-title">{{ articleInfo.title }}</h1>
           <div class="article-statistics m-flex hc">

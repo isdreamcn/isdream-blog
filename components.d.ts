@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     ColorPicker: typeof import('./src/components/colorPicker/src/colorPicker.vue')['default']
     ColorPickerAppTheme: typeof import('./src/components/colorPicker/src/colorPickerAppTheme.vue')['default']
     Comment: typeof import('./src/components/comment/src/comment.vue')['default']
+    CommentEmoji: typeof import('./src/components/comment/src/comment-emoji.vue')['default']
     CommentItem: typeof import('./src/components/comment/src/comment-item.vue')['default']
     CommentTextarea: typeof import('./src/components/comment/src/comment-textarea.vue')['default']
     DeleteButton: typeof import('./src/components/deleteButton/src/deleteButton.vue')['default']
