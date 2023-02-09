@@ -223,6 +223,7 @@ onMounted(() => {
           -webkit-line-clamp: 3;
           overflow: hidden;
           line-height: 1.5rem;
+          word-break: break-all;
         }
       }
       &:nth-child(2n - 1) {
