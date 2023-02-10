@@ -96,6 +96,7 @@ getPigeonhole().then((res) => {
 
       &::before {
         content: '';
+        flex-shrink: 0;
         display: block;
         width: 0.4rem;
         height: 0.4rem;
@@ -121,6 +122,9 @@ getPigeonhole().then((res) => {
           display: block;
         }
         &-title {
+          display: inline-block;
+          box-sizing: border-box;
+          width: calc(100% - 1rem);
           margin-top: 0.5rem;
           font-size: 1.1rem;
           transition: var(--animate-duration);
