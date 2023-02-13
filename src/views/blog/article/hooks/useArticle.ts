@@ -7,27 +7,21 @@ import {
 } from '@/api/blog/article'
 
 export const useArticle = (id: number) => {
-  const articleInfo = ref<ArticleDetails>()
-  const preArticleInfo = ref<ArticleDetails>()
-  const nextArticleInfo = ref<ArticleDetails>()
+  const articleInfo = ref<ArticleDetails['data']>()
+  const preArticleInfo = ref<ArticleDetails['prev']>()
+  const nextArticleInfo = ref<ArticleDetails['next']>()
 
   // 获取文章信息
   getArticleById(id).then((res) => {
+    const { data, prev, next } = res.data
     articleInfo.value = {
-      ...res.data,
-      content: setBaseUrlFile(res.data.content)
+      ...data,
+      content: setBaseUrlFile(data.content)
     }
-    setDocumentTitle(res.data.title)
-  })
+    setDocumentTitle(data.title)
 
-  getArticleById(id - 1, false)
-    .then((res) => {
-      preArticleInfo.value = res.data
-    })
-    .catch(() => {})
-
-  getArticleById(id + 1, false).then((res) => {
-    nextArticleInfo.value = res.data
+    preArticleInfo.value = prev
+    nextArticleInfo.value = next
   })
 
   // 点赞

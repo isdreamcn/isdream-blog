@@ -20,8 +20,10 @@ export interface Article {
   commends: number
 }
 
-export interface ArticleDetails extends Omit<Article, 'text'> {
-  content: string
+export interface ArticleDetails {
+  data: Omit<Article, 'text'> & { content: string }
+  prev: Pick<Article, 'id' | 'title' | 'cover'>
+  next: Pick<Article, 'id' | 'title' | 'cover'>
 }
 
 interface Cover {
