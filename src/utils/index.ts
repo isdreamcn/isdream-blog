@@ -9,7 +9,7 @@ export * from './document'
 export * from './format'
 
 export { hasOwn } from '@vue/shared'
-export { cloneDeep, clone } from 'lodash-unified'
+export { cloneDeep, clone, uniqueId } from 'lodash-unified'
 export {
   isArray,
   isFunction,

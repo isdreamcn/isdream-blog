@@ -10,7 +10,7 @@
           v-if="item.render"
           v-show="item.id === currEmojiType"
         >
-          <div>{{ item.title }}</div>
+          <div class="emoji-container__content-title">{{ item.title }}</div>
           <ul>
             <li
               v-for="emoji in item.emojis"
@@ -45,7 +45,7 @@
         >
           <MImg v-if="item.imgUrl" :src="joinBaseUrlFile(item.imgUrl)"></MImg>
           <template v-else>
-            {{ item.title }}
+            {{ item.typeTitle }}
           </template>
         </li>
       </ul>
@@ -85,6 +85,7 @@ const selectEmoji = (placeholder: string) => {
 
 interface CommentEmojiType extends EmojiType {
   render: boolean
+  typeTitle: string
   imgUrl?: string
 }
 
@@ -94,6 +95,7 @@ getEmojiType().then((res) => {
   emojiType.value = res.data.map((item) => ({
     ...item,
     render: false,
+    typeTitle: item.emojis[0]?.placeholder ?? item.title,
     imgUrl: item.emojis.find((emoji) => emoji.file)?.file?.url
   }))
 
@@ -141,8 +143,8 @@ const selectEmojiType = (id: number) => {
     border-radius: 0.2rem;
     &__content {
       box-sizing: border-box;
-      padding: 0.5rem 0.5rem 0 0.5rem;
-      div {
+      padding: 0.5rem;
+      &-title {
         margin-bottom: 0.5rem;
       }
       ul {

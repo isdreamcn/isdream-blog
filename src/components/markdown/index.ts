@@ -10,8 +10,9 @@ export const MMarkdownView = withInstall(
 export const MMarkdown = withInstall(
   defineAsyncComponent(() => import('./src/markdown.vue')),
   {},
-  'MMarkdownView'
+  'MMarkdown'
 )
+
 export default MMarkdown
 
 export * from './src/markdown'
