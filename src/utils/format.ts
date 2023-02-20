@@ -11,9 +11,6 @@ export const removeBaseUrlFile = (str: string) => {
   return str.replaceAll(appConfig.baseUrlFile, '')
 }
 
-export const joinBaseUrlFile = (url?: string) => {
-  if (!url) {
-    return url
-  }
+export const joinBaseUrlFile = (url: string) => {
   return /^https?:\/\//.test(url) ? url : appConfig.baseUrlFile + url
 }

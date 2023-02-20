@@ -1,7 +1,7 @@
 <template>
   <MImg
     :src="src"
-    :thumb="joinBaseUrlFile(props.thumb) ?? mainImgThumb"
+    :thumb="props.thumb ? joinBaseUrlFile(props.thumb) : mainImgThumb"
     :lazy="props.lazy"
     @error="errorHandler"
   >
@@ -22,7 +22,7 @@ defineOptions({
 
 const props = defineProps(imgProps)
 
-const src = ref<string>(joinBaseUrlFile(props.src) ?? mainImg)
+const src = ref<string>(props.src ? joinBaseUrlFile(props.src) : mainImg)
 const errorHandler = () => {
   src.value = mainImg
 }
