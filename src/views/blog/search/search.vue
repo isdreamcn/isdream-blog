@@ -177,6 +177,7 @@ function emphasizeQ(str: string, q: string, len: number) {
       }
       &__desc {
         color: var(--m-font-color);
+        word-break: break-all;
       }
     }
   }

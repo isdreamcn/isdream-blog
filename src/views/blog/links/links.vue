@@ -23,7 +23,7 @@
             <li>名称：isdream</li>
             <li>简介：你总是一副不开心的样子(#`O′)</li>
             <li>链接：https://isdream.cn/</li>
-            <li>头像：https://api.isdream.cn/img/favicon.ico/</li>
+            <li>头像：https://isdream.cn/favicon.ico/</li>
           </ul>
         </div>
         <p class="links-explain__tip">
