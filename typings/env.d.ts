@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 type DefineEnv = Readonly<{
+  BASE_URL: string
   VITE_APP_TITLE: string
   VITE_USE_MOCK: boolean
   VITE_BASE_URL_API: string
