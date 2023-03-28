@@ -171,6 +171,7 @@ onMounted(() => {
       }
       .home__content-cover {
         flex: 6;
+        height: 18.75rem;
         overflow: hidden;
         .m-img {
           transition: var(--animate-duration);
