@@ -54,10 +54,11 @@ getArticleList({
   tag: tag ? Number(tag) : undefined,
   q: q && String(q)
 }).then((res) => {
+  const _q = q ? String(q) : ''
   artilces.value = res.data.map((v) => ({
     ...v,
-    title: emphasizeQ(v.title, String(q), 100),
-    text: emphasizeQ(v.text, String(q), 100)
+    title: emphasizeQ(v.title, _q, 100),
+    text: emphasizeQ(v.text, _q, 100)
   }))
 })
 
