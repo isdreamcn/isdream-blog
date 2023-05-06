@@ -196,12 +196,10 @@ const showArticle = (id: number) => {
   }
 
   .article__content {
-    :deep(*) {
-      max-width: 100%;
-      word-break: break-all;
-      white-space: pre-wrap;
+    .m-markdown-view {
+      font-size: 1rem;
     }
-    :deep(img) {
+    :deep(*) {
       max-width: 100% !important;
     }
   }
