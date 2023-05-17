@@ -32,8 +32,32 @@
       <ol>
         <li>
           前端模版：
-          <a href="https://vue3.isdream.cn/" target="_blank"
+          <a
+            href="https://github.com/isdreamcn/isdream-vue-admin"
+            target="_blank"
             >isdream-vue-admin</a
+          >
+        </li>
+        <li>
+          前台仓库：
+          <a href="https://github.com/isdreamcn/isdream-blog" target="_blank"
+            >isdream-blog</a
+          >
+        </li>
+        <li>
+          后台仓库：
+          <a
+            href="https://github.com/isdreamcn/isdream-blog-admin"
+            target="_blank"
+            >isdream-blog-admin</a
+          >
+        </li>
+        <li>
+          后端仓库：
+          <a
+            href="https://github.com/isdreamcn/isdream-blog-api"
+            target="_blank"
+            >isdream-blog-api</a
           >
         </li>
       </ol>
