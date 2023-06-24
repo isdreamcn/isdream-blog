@@ -2,7 +2,9 @@
   <div class="m-comment-item reply-item">
     <div class="reply-avatar root-reply-avatar">
       <MImgAvatar
-        :src="data.user.avatar"
+        :src="
+          (userId === data.user.id && data.user.tempAvatar) || data.user.avatar
+        "
         :username="data.user.username"
       ></MImgAvatar>
     </div>

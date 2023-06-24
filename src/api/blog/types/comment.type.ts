@@ -73,7 +73,8 @@ interface File {
 export interface User {
   id: number
   username: string
-  avatar: string
+  avatar?: string
+  tempAvatar?: string
   website: string
   createdAt: string
   updatedAt: string

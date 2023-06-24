@@ -16,6 +16,9 @@ export const commentItemProps = buildProps({
     type: Number,
     required: true
   },
+  userId: {
+    type: Number
+  },
   sort: {
     type: Number,
     required: true

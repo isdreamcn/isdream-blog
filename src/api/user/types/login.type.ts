@@ -24,6 +24,7 @@ export interface UserLoginInfo {
   email: string
   username: string
   avatar?: string
+  tempAvatar?: string
   website?: string
 }
 

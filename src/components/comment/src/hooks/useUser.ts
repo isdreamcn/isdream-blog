@@ -1,10 +1,12 @@
-import { reactive, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { debounce } from 'lodash-unified'
 import { UserLoginInfo } from '@/api/user/login'
 import { useUserStore } from '@/store'
+import { joinBaseUrlFile } from '@/utils'
 
 export const useUser = () => {
   const userStore = useUserStore()
+  const userId = ref<number>()
   const userInfo = reactive<Partial<UserLoginInfo>>({
     email: '',
     username: '',
@@ -20,10 +22,13 @@ export const useUser = () => {
     () => userStore.userInfo,
     (val) => {
       if (val) {
+        userId.value = val.id
+
+        const avatar = val.tempAvatar || val.avatar
         userInfo.email ||= val.email
         userInfo.username ||= val.username
         userInfo.website ||= val.website
-        userInfo.avatar ||= val.avatar
+        userInfo.avatar ||= avatar && joinBaseUrlFile(avatar)
       }
     },
     {
@@ -55,7 +60,7 @@ export const useUser = () => {
 
       userStore
         .login({
-          ...userInfo,
+          username: userInfo.username,
           email: userInfo.email,
           website: userInfo.website || undefined,
           avatar: userInfo.avatar || undefined
@@ -80,6 +85,7 @@ export const useUser = () => {
   }
 
   return {
+    userId,
     userInfo,
     login,
     getUserInfoByEmail: debounce(getUserInfoByEmail, 500)

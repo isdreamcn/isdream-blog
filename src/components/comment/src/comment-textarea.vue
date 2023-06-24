@@ -12,7 +12,7 @@
           <input type="text" placeholder="昵称*" v-model="userInfo.username" />
           <input
             type="text"
-            placeholder="邮箱*"
+            placeholder="邮箱(输入后可快速填写)*"
             v-model="userInfo.email"
             @input="getUserInfoByEmail"
           />

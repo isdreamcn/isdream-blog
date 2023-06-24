@@ -3,11 +3,11 @@
     <MImg
       v-if="props.src"
       v-show="showImg"
-      :src="props.src"
+      :src="joinBaseUrlFile(props.src)"
       @error="errorHandler"
       @load="loadHandler"
     ></MImg>
-    <svg v-show="!showImg" width="100%" height="100%">
+    <svg v-show="!showImg || !props.src" width="100%" height="100%">
       <circle cx="50%" cy="50%" r="50%" :fill="hashColor(props.username)" />
       <text
         x="50%"
@@ -23,9 +23,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { debounce } from 'lodash-unified'
+import { ref } from 'vue'
 import { imgAvatarProps, hashColor } from './imgAvatar'
+import { joinBaseUrlFile } from '@/utils'
 
 defineOptions({
   name: 'MImgAvatar'
@@ -40,15 +40,6 @@ const errorHandler = () => {
 const loadHandler = () => {
   showImg.value = true
 }
-
-watch(
-  () => props.src,
-  debounce((val) => {
-    if (val) {
-      showImg.value = false
-    }
-  }, 500)
-)
 </script>
 
 <style lang="scss" scoped>

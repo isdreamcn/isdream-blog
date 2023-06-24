@@ -30,6 +30,7 @@
         :key="item.id"
         :data="item"
         :replyerId="replyerId"
+        :userId="userId"
         :article="props.article"
         :sort="params.sort"
         @reply="replyHandler"
@@ -45,10 +46,13 @@ import MCommentItem from './comment-item.vue'
 import MCommentTextarea from './comment-textarea.vue'
 import { useAppLayoutEl } from '@/store'
 import { getCommentList, Comment } from '@/api/blog/comment'
+import { useUser } from './hooks/useUser'
 
 defineOptions({
   name: 'MComment'
 })
+
+const { userId } = useUser()
 
 // 点击回复按钮
 const replyerId = ref<number>()
