@@ -36,8 +36,7 @@ export type CommentItemEmits = typeof commentItemEmits
 export type CommentItemInstance = InstanceType<typeof CommentItem>
 
 export const emojiHandler = (content: string, emojis: Emoji[]) => {
-  // xss
-  let _content = content.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+  let _content = content
   emojis
     .filter((emoji) => emoji.file)
     .forEach((emoji) => {
