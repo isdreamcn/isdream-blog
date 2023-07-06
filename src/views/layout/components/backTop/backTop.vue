@@ -1,10 +1,10 @@
 <template>
-  <div
-    v-if="appMedia === 'pc'"
-    :class="`layout-back-top ${className}`"
-    @click="goBackTop"
-  >
-    <img src="@/assets/img/scroll.png" />
+  <div v-if="appMedia === 'pc'" :class="`layout-back-top ${className}`">
+    <img
+      src="@/assets/img/scroll_icon.svg"
+      @mousedown="(e) => e.preventDefault()"
+      @click="goBackTop"
+    />
   </div>
 </template>
 
@@ -58,17 +58,25 @@ watch(
 
 .layout-back-top {
   position: fixed;
-  cursor: pointer;
   right: 1rem;
   height: 90vh;
   width: 5rem;
   transition: var(--animate-duration);
   z-index: 90;
   animation: upDownFloat var(--animate-duration) linear alternate infinite;
+  display: flex;
+  flex-direction: column;
+  &::before {
+    content: '';
+    width: 100%;
+    flex: 1;
+    background-image: url('@/assets/img/scroll_line.svg');
+    background-position: center;
+  }
   img {
-    height: 100%;
     width: 100%;
     object-fit: contain;
+    cursor: pointer;
   }
   &.is-hidden {
     transform: translateY(-100%);
