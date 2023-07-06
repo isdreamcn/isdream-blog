@@ -82,4 +82,10 @@ watch(
     transform: translateY(-100%);
   }
 }
+
+@media (max-width: 1000px) {
+  .layout-back-top {
+    transform: translateY(-100%);
+  }
+}
 </style>
