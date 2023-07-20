@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import { MLottie, MLoading } from '@/components'
 import { loadingLottieProps } from './loading-lottie'
 import loadingData from '@/assets/lottie/loading.json'
 

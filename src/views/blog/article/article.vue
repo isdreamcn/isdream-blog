@@ -19,8 +19,9 @@
       </MImgDefault>
     </div>
     <div class="blogLayout-card">
+      <MMenu :containerEl="containerElRef"></MMenu>
       <!-- 内容 -->
-      <article class="article__content">
+      <article class="article__content" ref="containerElRef">
         <MMarkdownView
           v-if="articleInfo.render === 1"
           :value="articleInfo.content"
@@ -111,6 +112,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAppSetting } from '@/store'
 import blogger from '@/assets/img/blogger.png'
@@ -119,6 +121,8 @@ import { useArticle } from './hooks/useArticle'
 defineOptions({
   name: 'Article'
 })
+
+const containerElRef = ref<HTMLElement>()
 
 const { appMedia } = useAppSetting()
 
@@ -198,6 +202,7 @@ const showArticle = (id: number) => {
   .article__content {
     .m-markdown-view {
       font-size: 1rem;
+      overflow: hidden;
     }
     :deep(*) {
       max-width: 100% !important;
