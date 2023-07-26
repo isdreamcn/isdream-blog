@@ -27,6 +27,7 @@ getArticleTags().then(({ data }) => {
       }
     },
     legend: {
+      type: 'scroll',
       bottom: '0%',
       left: 'center',
       textStyle: {
