@@ -119,14 +119,14 @@ function emphasizeQ(str: string, q: string, len: number) {
       font-size: 100%;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 0.24rem;
     }
   }
 
   .search-article-item {
     position: relative;
     display: flex;
-    padding: 2.5rem 0;
+    padding: 0.4rem 0;
     &::after {
       position: absolute;
       bottom: 0;
@@ -144,11 +144,11 @@ function emphasizeQ(str: string, q: string, len: number) {
     }
     .item-cover {
       flex-shrink: 0;
-      width: 5.5rem;
-      height: 5.5rem;
-      margin-right: 1rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-right: 0.16rem;
       border-radius: 50%;
-      padding: 0.1rem;
+      padding: 0.02rem;
       border: var(--m-border);
       .m-img {
         border-radius: 50%;

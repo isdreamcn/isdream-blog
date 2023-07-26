@@ -65,6 +65,6 @@ getTrend().then(({ data }) => {
 
 <style lang="scss" scoped>
 .article-monthly {
-  height: 30rem;
+  height: 4.8rem;
 }
 </style>

@@ -36,8 +36,8 @@ const showContent = () => {
   .home__header-tip {
     cursor: pointer;
     position: absolute;
-    bottom: 3rem;
-    font-size: 2.5rem;
+    bottom: 0.5rem;
+    font-size: 0.4rem;
     color: #ffffff;
     animation: upDownFloat var(--animate-duration) linear alternate infinite;
     z-index: 5;

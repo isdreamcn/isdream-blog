@@ -1,5 +1,5 @@
 <template>
-  <AsideMenu></AsideMenu>
+  <AsideMenu style="font-size: 0.16rem"></AsideMenu>
   <div class="blogLayout" ref="blogLayoutElRef">
     <header>
       <BlogHeader></BlogHeader>
@@ -66,7 +66,7 @@ const appStore = useAppStore()
 const setHtmlFontSize = () => {
   const width = document.body.clientWidth
   const scale = width / 1920
-  let fontSize = 16
+  let fontSize = 100
   if (scale > 1) {
     fontSize *= scale
   }
@@ -93,6 +93,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .blogLayout {
+  font-size: 0.16rem;
   transition: var(--animate-duration);
   height: 100vh;
   display: flex;
@@ -108,7 +109,7 @@ onMounted(() => {
     background-color: #000000;
     color: #ffffff;
     text-align: center;
-    padding: 2rem 0;
+    padding: 0.32rem 0;
     a {
       color: #ffffff;
       text-decoration-line: none;
@@ -135,7 +136,7 @@ onMounted(() => {
       top: 50%;
       transform: translate(-50%, -50%);
       z-index: 5;
-      font-size: 2.5rem;
+      font-size: 0.4rem;
       font-weight: bold;
       color: #ffffff;
     }
@@ -144,12 +145,12 @@ onMounted(() => {
   // 响应式
   :deep(.blogLayout-card) {
     box-sizing: border-box;
-    margin: 1.5rem auto;
+    margin: 0.24rem auto;
     animation: fadeInUp var(--animate-duration);
-    box-shadow: 0 0.1rem 1rem -0.3rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.02rem 0.16rem -0.05rem rgba(0, 0, 0, 0.4);
     background-color: var(--m-card-bg-color);
-    padding: 2rem;
-    border-radius: 0.5rem;
+    padding: 0.32rem;
+    border-radius: 0.08rem;
   }
   &.pc {
     :deep(.blogLayout-card) {
@@ -159,8 +160,8 @@ onMounted(() => {
   }
   &.phone {
     :deep(.blogLayout-card) {
-      width: calc(100% - 2rem);
-      padding: 1rem;
+      width: calc(100% - 0.32rem);
+      padding: 0.16rem;
     }
   }
 }

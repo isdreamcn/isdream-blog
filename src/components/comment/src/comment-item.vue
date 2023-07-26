@@ -214,21 +214,21 @@ const replyHandler = (item: User) => {
 <style lang="scss" scoped>
 .m-comment-item {
   display: flex;
-  padding-top: 1rem;
+  padding-top: 0.16rem;
   .m-comment-textarea {
-    margin-top: 1rem;
+    margin-top: 0.16rem;
   }
   .reply-avatar {
     flex-shrink: 0;
-    margin-right: 1rem;
+    margin-right: 0.16rem;
     .m-img-avatar {
-      width: 3rem;
-      height: 3rem;
+      width: 0.5rem;
+      height: 0.5rem;
     }
   }
   .reply-container {
     flex: 1;
-    padding-bottom: 1rem;
+    padding-bottom: 0.16rem;
     border-bottom: var(--m-border);
     .user-info {
       display: inline-flex;
@@ -238,19 +238,19 @@ const replyHandler = (item: User) => {
         color: var(--el-color-primary);
       }
       &-level {
-        margin: 0 0.5rem;
+        margin: 0 0.08rem;
         .m-icon {
-          font-size: 1.5rem;
+          font-size: 0.24rem;
         }
       }
     }
     .user-content {
-      margin: 0.6rem 0 0.5rem 0;
-      line-height: 1.5rem;
+      margin: 0.1rem 0 0.08rem 0;
+      line-height: 0.24rem;
     }
     .user-footer {
       color: var(--m-font-color);
-      font-size: 0.8rem;
+      font-size: 0.13rem;
       &-btn,
       .m-icon {
         cursor: pointer;
@@ -259,9 +259,9 @@ const replyHandler = (item: User) => {
         }
       }
       span {
-        margin-left: 1.5rem;
+        margin-left: 0.24rem;
         span {
-          margin-left: 0.3rem;
+          margin-left: 0.05rem;
         }
         &.is-checked {
           .m-icon {
@@ -282,19 +282,19 @@ const replyHandler = (item: User) => {
       }
     }
     .reply-avatar {
-      margin-right: 0.5rem;
+      margin-right: 0.08rem;
       .m-img-avatar {
-        width: 2rem;
-        height: 2rem;
+        width: 0.32rem;
+        height: 0.32rem;
       }
     }
     .reply-container {
       border-bottom: none;
       padding-bottom: 0;
       .user-container {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.08rem;
         .user-content {
-          margin-left: 0.5rem;
+          margin-left: 0.08rem;
           .reply-user {
             span {
               color: var(--el-color-primary);
@@ -305,9 +305,9 @@ const replyHandler = (item: User) => {
     }
     // 点击查看
     .reply-count {
-      font-size: 0.8rem;
+      font-size: 0.13rem;
       color: var(--m-font-color);
-      margin-top: 1rem;
+      margin-top: 0.16rem;
       span {
         cursor: pointer;
         &:hover {
@@ -317,15 +317,15 @@ const replyHandler = (item: User) => {
     }
     // 分页
     .pagination {
-      font-size: 0.8rem;
-      margin-top: 1rem;
+      font-size: 0.13rem;
+      margin-top: 0.16rem;
       &-total {
-        margin-right: 0.6rem;
+        margin-right: 0.1rem;
       }
       &-btn,
       &-page {
         cursor: pointer;
-        margin-left: 0.5rem;
+        margin-left: 0.08rem;
         &:hover {
           color: var(--el-color-primary);
         }

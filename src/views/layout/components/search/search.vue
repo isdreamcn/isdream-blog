@@ -70,8 +70,8 @@ getArticleTags().then((res) => {
       ...v,
       count: v.articleCount
     })),
-    1.5,
-    0.9
+    0.24,
+    0.16
   )
 })
 
@@ -103,7 +103,7 @@ const goPage = (query = {}) => {
   }
 
   .m-icon {
-    margin-right: 0.3rem;
+    margin-right: 0.05rem;
   }
   .m-search-dialog {
     position: fixed;
@@ -116,38 +116,38 @@ const goPage = (query = {}) => {
     z-index: 95;
     &-close {
       position: fixed;
-      right: 1rem;
-      top: 1rem;
+      right: 0.16rem;
+      top: 0.16rem;
       z-index: 5;
-      font-size: 2rem;
+      font-size: 0.32rem;
     }
     .m-search__content {
       border: none;
       box-shadow: none;
-      padding: 3rem 1rem 1rem 1rem;
+      padding: 0.5rem 0.16rem 0.16rem 0.16rem;
       margin-bottom: 0;
       .m-search-form {
-        width: min(35rem, 100%);
+        width: min(5.6rem, 100%);
         margin: 0 auto;
         p {
-          padding-left: 1rem;
+          padding-left: 0.16rem;
         }
       }
       .m-search-input {
         position: relative;
         .m-icon {
           position: absolute;
-          font-size: 2rem;
+          font-size: 0.32rem;
           top: 50%;
-          left: 1rem;
+          left: 0.16rem;
           transform: translateY(-50%);
         }
         input {
           width: 100%;
-          font-size: 1.5rem;
+          font-size: 0.24rem;
           border: var(--m-border);
-          border-radius: 1.5rem;
-          padding: 0.5rem 1rem 0.5rem 3.5rem;
+          border-radius: 0.24rem;
+          padding: 0.08rem 0.16rem 0.08rem 0.55rem;
           transition: var(--animate-duration);
           &:focus {
             outline: none;
@@ -164,7 +164,7 @@ const goPage = (query = {}) => {
       align-items: center;
       li {
         list-style: none;
-        margin: 0.5rem;
+        margin: 0.08rem;
         transition: var(--animate-duration);
         &:hover {
           transform: scale(1.2);

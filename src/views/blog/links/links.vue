@@ -78,7 +78,7 @@ getLinks().then((res) => {
 .links {
   .links-explain {
     &__tip {
-      font-size: 0.8rem;
+      font-size: 0.13rem;
     }
 
     div {
@@ -89,40 +89,40 @@ getLinks().then((res) => {
       }
       ol,
       ul {
-        padding-left: 3rem;
+        padding-left: 0.48rem;
         li {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.08rem;
         }
       }
     }
   }
 
   .links-box {
-    margin-top: 2.5rem;
+    margin-top: 0.4rem;
     &__title {
-      margin-bottom: 1rem;
-      padding: 0.2rem 0 0.2rem 1rem;
-      border-left: 0.2rem solid var(--el-color-primary);
+      margin-bottom: 0.16rem;
+      padding: 0.03rem 0 0.03rem 0.16rem;
+      border-left: 0.03rem solid var(--el-color-primary);
     }
     &__desc {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.08rem;
     }
     &__content {
       display: grid;
       grid-template-columns: repeat(
         auto-fill,
-        minmax(max(260px, calc(100% / 3 - 0.4rem)), 1fr)
+        minmax(max(260px, calc(100% / 3 - 0.06rem)), 1fr)
       );
-      grid-row-gap: 0.6rem;
-      grid-column-gap: 0.6rem;
+      grid-row-gap: 0.1rem;
+      grid-column-gap: 0.1rem;
       padding: 0;
       .link-item {
         position: relative;
         box-sizing: border-box;
         cursor: pointer;
-        padding: 1rem 1.5rem;
+        padding: 0.16rem 0.24rem;
         border: var(--m-border);
-        border-radius: 0.5rem;
+        border-radius: 0.08rem;
         overflow: hidden;
         a {
           position: relative;
@@ -154,9 +154,9 @@ getLinks().then((res) => {
         }
         &__name {
           color: var(--el-color-primary);
-          font-size: 1.2rem;
-          margin-bottom: 0.5rem;
-          padding-bottom: 0.5rem;
+          font-size: 0.2rem;
+          margin-bottom: 0.08rem;
+          padding-bottom: 0.08rem;
           border-bottom: var(--m-border);
           border-bottom-style: dashed;
         }
@@ -167,12 +167,12 @@ getLinks().then((res) => {
         &__avatar {
           position: relative;
           flex-shrink: 0;
-          width: 4rem;
-          height: 4rem;
+          width: 0.6rem;
+          height: 0.6rem;
           border-radius: 50%;
           overflow: hidden;
           border: var(--m-border);
-          border-width: 0.2rem;
+          border-width: 0.03rem;
         }
       }
     }

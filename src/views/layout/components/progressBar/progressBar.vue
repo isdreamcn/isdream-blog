@@ -43,7 +43,7 @@ watch(
   position: fixed;
   top: 0;
   z-index: 98;
-  height: 0.25rem;
+  height: 0.04rem;
   background-color: var(--el-color-primary);
   transition: var(--animate-duration);
 }

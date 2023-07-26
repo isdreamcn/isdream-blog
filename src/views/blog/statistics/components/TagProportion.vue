@@ -30,7 +30,7 @@ getArticleTags().then(({ data }) => {
       bottom: '0%',
       left: 'center',
       textStyle: {
-        fontSize: '0.8rem'
+        fontSize: '0.13rem'
       }
     },
     series: [
@@ -51,7 +51,7 @@ getArticleTags().then(({ data }) => {
         emphasis: {
           label: {
             show: true,
-            fontSize: '1rem',
+            fontSize: '0.16rem',
             fontWeight: 'bold'
           }
         },
@@ -71,6 +71,6 @@ getArticleTags().then(({ data }) => {
 
 <style lang="scss" scoped>
 .tag-proportion {
-  height: 20rem;
+  height: 3.2rem;
 }
 </style>

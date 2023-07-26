@@ -109,11 +109,11 @@ watch(
   height: 0;
   .menu__btn {
     position: relative;
-    margin-top: 1rem;
-    margin-left: 1.2rem;
-    padding: 0.5rem 1rem;
+    margin-top: 0.16rem;
+    margin-left: 0.2rem;
+    padding: 0.08rem 0.16rem;
     border: var(--m-border);
-    border-radius: 2rem;
+    border-radius: 0.32rem;
     cursor: pointer;
     background-color: var(--m-card-bg-color);
     color: var(--m-title-color);
@@ -122,7 +122,7 @@ watch(
       border-color: var(--el-color-primary);
     }
     &.is-hidden {
-      transform: translateX(calc(-100% - 1.2rem));
+      transform: translateX(calc(-100% - 0.2rem));
     }
   }
   .menu__content {
@@ -137,12 +137,12 @@ watch(
     overflow-y: auto;
     overflow-x: hidden;
     background-color: var(--m-card-bg-color);
-    box-shadow: 0 0.1rem 1rem -0.3rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.02rem 0.16rem -0.05rem rgba(0, 0, 0, 0.4);
     .avatar {
-      width: 5rem;
-      height: 5rem;
+      width: 0.8rem;
+      height: 0.8rem;
       border-radius: 50%;
-      margin: 2rem 0 1rem 0;
+      margin: 0.32rem 0 0.16rem 0;
     }
     .blogger-name {
       font-weight: bold;
@@ -153,15 +153,15 @@ watch(
       padding-left: 0;
       li {
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.08rem;
         white-space: nowrap;
         transition: var(--animate-duration);
-        font-size: 1.2rem;
+        font-size: 0.2rem;
         &:hover {
           color: var(--el-color-primary);
         }
         .m-icon {
-          margin-right: 0.3rem;
+          margin-right: 0.05rem;
         }
       }
     }
@@ -175,7 +175,7 @@ watch(
     }
     .menu__btn {
       border-color: var(--el-color-primary);
-      transform: translateX(calc(-50% - 1.2rem));
+      transform: translateX(calc(-50% - 0.2rem));
     }
   }
 }

@@ -83,11 +83,11 @@ getPigeonhole().then((res) => {
     border-color: var(--el-color-primary);
     padding-left: 0;
     &-item {
-      margin-left: -0.45rem;
-      margin-bottom: 2rem;
+      margin-left: -0.065rem;
+      margin-bottom: 0.32rem;
       display: flex;
       align-items: center;
-      font-size: 1.5rem;
+      font-size: 0.24rem;
       opacity: 0;
       &.is-show {
         opacity: 1;
@@ -98,18 +98,18 @@ getPigeonhole().then((res) => {
         content: '';
         flex-shrink: 0;
         display: block;
-        width: 0.4rem;
-        height: 0.4rem;
+        width: 0.06rem;
+        height: 0.06rem;
         border-radius: 50%;
-        border: 0.2rem solid var(--el-color-primary);
-        margin-right: 1rem;
+        border: 0.03rem solid var(--el-color-primary);
+        margin-right: 0.16rem;
         background-color: var(--m-card-bg-color);
       }
 
       &.statistics {
         &::before {
           transform: scale(1.5);
-          margin-top: -0.5rem;
+          margin-top: -0.12rem;
         }
       }
 
@@ -118,19 +118,19 @@ getPigeonhole().then((res) => {
         cursor: pointer;
         width: 100%;
         &-time {
-          font-size: 1rem;
+          font-size: 0.16rem;
           display: block;
         }
         &-title {
           display: inline-block;
           box-sizing: border-box;
-          width: calc(100% - 1rem);
-          margin-top: 0.5rem;
-          font-size: 1.1rem;
+          width: calc(100% - 0.16rem);
+          margin-top: 0.08rem;
+          font-size: 0.18rem;
           transition: var(--animate-duration);
           &:hover {
             color: var(--el-color-primary);
-            padding-left: 1rem;
+            padding-left: 0.16rem;
           }
         }
       }

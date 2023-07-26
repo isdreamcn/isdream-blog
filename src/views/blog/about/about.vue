@@ -79,13 +79,13 @@ defineOptions({
     .blogger-info {
       display: flex;
       .m-img {
-        width: 6rem;
-        height: 6rem;
+        width: 1rem;
+        height: 1rem;
         border-radius: 50%;
         overflow: hidden;
       }
       .blogger-info-desc {
-        margin-left: 2rem;
+        margin-left: 0.32rem;
         h3 {
           margin-top: 0;
         }
@@ -93,18 +93,18 @@ defineOptions({
     }
     ul,
     ol {
-      padding-left: 3rem;
+      padding-left: 0.5rem;
       li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.08rem;
         a {
           cursor: pointer;
           text-decoration: none;
           color: var(--el-font-color);
           transition: var(--animate-duration);
           color: var(--el-color-primary);
-          font-size: 1.2rem;
+          font-size: 0.2rem;
           &:hover {
-            margin-left: 0.5rem;
+            margin-left: 0.08rem;
           }
         }
       }

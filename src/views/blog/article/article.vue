@@ -169,25 +169,25 @@ const showArticle = (id: number) => {
       box-shadow: none;
       z-index: 5;
       .article-title {
-        font-size: 2rem;
+        font-size: 0.32rem;
       }
       .article-statistics {
-        margin-top: 1rem;
+        margin-top: 0.16rem;
         .article-blogger {
-          height: 2.5rem;
-          width: 2.5rem;
+          height: 0.4rem;
+          width: 0.4rem;
           border-radius: 50%;
           overflow: hidden;
-          margin-right: 0.5rem;
+          margin-right: 0.08rem;
         }
         span {
-          margin-right: 0.25rem;
+          margin-right: 0.04rem;
           display: flex;
           align-items: center;
           &::after {
             content: '·';
-            padding-left: 0.25rem;
-            font-size: 2rem;
+            padding-left: 0.04rem;
+            font-size: 0.32rem;
           }
           &:last-child {
             &::after {
@@ -201,7 +201,7 @@ const showArticle = (id: number) => {
 
   .article__content {
     .m-markdown-view {
-      font-size: 1rem;
+      font-size: 0.16rem;
       overflow: hidden;
     }
     :deep(*) {
@@ -210,8 +210,8 @@ const showArticle = (id: number) => {
   }
 
   .article-footer {
-    margin: 3.5rem 0;
-    padding: 1rem 0;
+    margin: 0.56rem 0;
+    padding: 0.16rem 0;
     color: var(--m-font-color);
     border-top: var(--m-border);
     border-bottom: var(--m-border);
@@ -223,7 +223,7 @@ const showArticle = (id: number) => {
         text-decoration-line: none;
       }
       img {
-        margin-right: 0.5rem;
+        margin-right: 0.08rem;
       }
     }
 
@@ -231,10 +231,10 @@ const showArticle = (id: number) => {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1rem;
+      margin-top: 0.16rem;
       &__tags {
         a {
-          margin-left: 0.5rem;
+          margin-left: 0.08rem;
           cursor: pointer;
           &:hover {
             color: var(--el-color-primary);
@@ -248,9 +248,9 @@ const showArticle = (id: number) => {
           align-items: center;
           cursor: pointer;
           color: var(--el-color-primary);
-          margin-left: 1rem;
+          margin-left: 0.16rem;
           .m-icon {
-            margin-right: 0.25rem;
+            margin-right: 0.04rem;
             transition: var(--animate-duration);
           }
           &:hover {
@@ -267,7 +267,7 @@ const showArticle = (id: number) => {
     display: flex;
     .article-pre,
     .article-next {
-      height: 10rem;
+      height: 1.6rem;
       flex: 1;
       cursor: pointer;
       .m-img {
@@ -301,7 +301,7 @@ const showArticle = (id: number) => {
       transform: translateY(-50%);
       div {
         &:first-child {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.08rem;
           color: rgba(255, 255, 255, 0.7);
         }
       }

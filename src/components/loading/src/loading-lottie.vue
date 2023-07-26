@@ -1,6 +1,6 @@
 <template>
   <MLoading :loading="props.loading">
-    <MLottie :data="loadingData" style="width: 20rem"></MLottie>
+    <MLottie :data="loadingData" style="width: 3.5rem"></MLottie>
   </MLoading>
 </template>
 

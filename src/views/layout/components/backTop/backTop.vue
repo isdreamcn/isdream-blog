@@ -58,9 +58,9 @@ watch(
 
 .layout-back-top {
   position: fixed;
-  right: 1rem;
+  right: 0.16rem;
   height: 90vh;
-  width: 5rem;
+  width: 0.8rem;
   transition: var(--animate-duration);
   z-index: 90;
   animation: upDownFloat var(--animate-duration) linear alternate infinite;

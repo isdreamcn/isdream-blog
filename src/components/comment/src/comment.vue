@@ -145,20 +145,20 @@ onBeforeUnmount(() =>
 
 <style lang="scss" scoped>
 .m-comment {
-  margin-top: 3rem;
+  margin-top: 0.5rem;
   .m-comment-statistics {
-    margin-bottom: 2rem;
+    margin-bottom: 0.32rem;
     display: flex;
     align-items: center;
     span {
-      margin-right: 1rem;
+      margin-right: 0.16rem;
     }
     .statistics-title {
-      font-size: 1.5rem;
+      font-size: 0.24rem;
       font-weight: bold;
     }
     .statistics-total {
-      margin-right: 2rem;
+      margin-right: 0.32rem;
       color: var(--m-font-color);
     }
     .statistics-type {
@@ -176,7 +176,7 @@ onBeforeUnmount(() =>
   }
 
   .m-textarea {
-    margin-bottom: 2rem;
+    margin-bottom: 0.32rem;
   }
 }
 </style>

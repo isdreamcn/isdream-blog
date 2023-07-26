@@ -39,9 +39,9 @@ const menuStyle = computed(() => {
 
   const offsetTop = containerEl.value?.offsetTop || 0
   if (scrollElScrollTop.value >= offsetTop) {
-    styles.top = '5rem'
+    styles.top = '0.8rem'
   } else {
-    styles.top = `max(${offsetTop - scrollElScrollTop.value}px, 5rem)`
+    styles.top = `max(${offsetTop - scrollElScrollTop.value}px, 0.8rem)`
   }
 
   return styles
@@ -55,12 +55,12 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .m-menu {
   position: fixed;
-  top: calc(40vh + 3.5rem);
-  left: calc(max(750px, 50%) + 25% + 1rem);
+  top: calc(40vh + 0.6rem);
+  left: calc(max(750px, 50%) + 25% + 0.16rem);
   box-sizing: border-box;
-  width: 17rem;
+  width: 2.7rem;
   opacity: 1;
-  border-radius: 0.5rem;
+  border-radius: 0.08rem;
   // transition: var(--animate-duration);
 }
 

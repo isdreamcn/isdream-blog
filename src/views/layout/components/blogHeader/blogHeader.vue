@@ -102,7 +102,7 @@ watch(
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem 2rem 0.8rem 2rem;
+  padding: 0.16rem 0.32rem 0.13rem 0.32rem;
   transition: var(--animate-duration);
   color: #ffffff;
   &.hidden {
@@ -111,7 +111,7 @@ watch(
   &.has-bg {
     background-color: rgba(255, 255, 255, 0.7);
     color: #000000;
-    box-shadow: 0 1px 2.5rem -0.3rem rgb(0 0 0 / 50%);
+    box-shadow: 0 0.01rem 0.4rem -0.05rem rgb(0 0 0 / 50%);
     .bottom-border {
       &:hover {
         color: var(--el-color-primary);
@@ -126,9 +126,9 @@ watch(
     &::after {
       content: '';
       display: block;
-      height: 0.2rem;
+      height: 0.03rem;
       width: 0;
-      margin-top: 0.2rem;
+      margin-top: 0.03rem;
       background-color: var(--el-color-primary);
       transition: var(--animate-duration);
     }
@@ -151,9 +151,9 @@ watch(
     }
     .navbar-item {
       cursor: pointer;
-      padding: 0 0.5rem;
+      padding: 0 0.08rem;
       .m-icon {
-        margin-right: 0.3rem;
+        margin-right: 0.05rem;
       }
     }
   }

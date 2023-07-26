@@ -137,20 +137,20 @@ const reply = () => {
   display: flex;
   .replyer-avatar {
     .m-img-avatar {
-      width: 3rem;
-      height: 3rem;
+      width: 0.5rem;
+      height: 0.5rem;
     }
   }
   .replyer-container {
-    margin-left: 1rem;
+    margin-left: 0.16rem;
     flex: 1;
   }
   .basic-info {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.08rem;
     div {
       display: flex;
       input {
-        margin-left: 1rem;
+        margin-left: 0.16rem;
         &:first-child {
           margin-left: 0;
         }
@@ -160,21 +160,21 @@ const reply = () => {
       flex: 1;
       width: 100%;
       border: var(--m-border);
-      border-radius: 0.3rem;
+      border-radius: 0.05rem;
       box-sizing: border-box;
-      padding: 0.3rem 0.55rem;
+      padding: 0.05rem 0.09rem;
       outline: none;
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.13rem;
+      margin-bottom: 0.08rem;
     }
   }
   .replyer-info {
     display: flex;
     justify-content: space-between;
-    height: 3rem;
+    height: 0.5rem;
     transition: var(--animate-duration);
     &.textareaFocus {
-      height: 5rem;
+      height: 0.8rem;
       .replyer-info-content {
         textarea {
           background-color: var(--m-card-bg-color);
@@ -183,16 +183,16 @@ const reply = () => {
     }
     &-content {
       flex: 1;
-      margin-right: 1rem;
+      margin-right: 0.16rem;
       textarea {
         width: 100%;
         height: 100%;
         resize: none;
         outline: none;
         box-sizing: border-box;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.8rem;
-        border-radius: 0.3rem;
+        padding: 0.08rem 0.13rem;
+        font-size: 0.13rem;
+        border-radius: 0.05rem;
         border: var(--m-border);
         background-color: var(--el-border-color);
         transition: var(--animate-duration);
@@ -210,9 +210,9 @@ const reply = () => {
       background-color: var(--el-color-primary);
       color: #ffffff;
       border: none;
-      border-radius: 0.3rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      border-radius: 0.05rem;
+      padding-left: 0.16rem;
+      padding-right: 0.16rem;
       opacity: 0.5;
       &:hover {
         opacity: 1;

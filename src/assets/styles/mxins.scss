@@ -29,7 +29,7 @@
 .m-line {
   border-top: var(--m-border);
   border-bottom: var(--m-border);
-  height: 0.1rem;
+  height: 0.02rem;
 }
 
 .m-ellipsis {
@@ -47,6 +47,6 @@
 
   to {
     opacity: 0.6;
-    transform: translateY(-1rem);
+    transform: translateY(-0.16rem);
   }
 }

@@ -116,14 +116,14 @@ const selectEmojiType = (id: number) => {
   position: relative;
   z-index: 99;
   width: 100%;
-  max-width: 20rem;
+  max-width: 3.2rem;
   .emoji-btn {
     display: inline-flex;
     cursor: pointer;
-    margin-top: 0.2rem;
-    padding: 0.25rem 0.3rem;
+    margin-top: 0.03rem;
+    padding: 0.04rem 0.05rem;
     border: var(--m-border);
-    border-radius: 0.3rem;
+    border-radius: 0.05rem;
   }
   ul {
     list-style: none;
@@ -136,27 +136,27 @@ const selectEmojiType = (id: number) => {
   }
   .emoji-container {
     position: absolute;
-    margin-top: 0.2rem;
+    margin-top: 0.03rem;
     width: 100%;
     border: var(--m-border);
     background-color: var(--m-card-bg-color);
-    border-radius: 0.2rem;
+    border-radius: 0.03rem;
     &__content {
       box-sizing: border-box;
-      padding: 0.5rem;
+      padding: 0.08rem;
       &-title {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.08rem;
       }
       ul {
-        height: 10rem;
+        height: 1.6rem;
         overflow-y: auto;
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
         li {
           flex-shrink: 0;
-          padding: 0.5rem;
-          border-radius: 0.3rem;
+          padding: 0.08rem;
+          border-radius: 0.05rem;
           cursor: pointer;
           &:hover {
             background-color: var(--el-border-color);
@@ -169,10 +169,10 @@ const selectEmojiType = (id: number) => {
       background-color: var(--el-border-color);
       li {
         cursor: pointer;
-        padding: 0.4rem 0.6rem;
+        padding: 0.06rem 0.1rem;
         .m-img {
-          width: 1.4rem;
-          height: 1.4rem;
+          width: 0.22rem;
+          height: 0.22rem;
         }
         &.selected {
           background-color: var(--m-card-bg-color);

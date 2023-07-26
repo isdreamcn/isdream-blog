@@ -29,7 +29,7 @@ const props = defineProps(subMenuProps)
 const emit = defineEmits(subMenuEmits)
 
 const spanStyle = {
-  paddingLeft: `${props.level}rem`
+  paddingLeft: `${props.level * 0.16}rem`
 }
 
 const clickItem = (item: any) => {
@@ -47,8 +47,8 @@ ul {
     color: var(--m-font-color);
     transition: var(--animate-duration);
     cursor: pointer;
-    padding: 0.25rem 0;
-    border-left: 0.2rem solid #eeeeee;
+    padding: 0.04rem 0;
+    border-left: 0.03rem solid #eeeeee;
     &:hover {
       color: var(--el-color-primary);
     }

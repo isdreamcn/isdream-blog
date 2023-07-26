@@ -70,7 +70,7 @@ getTotal().then((res) => {
       text-align: center;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 0.24rem;
     }
   }
   .statistics__types {
@@ -82,9 +82,9 @@ getTotal().then((res) => {
       flex: 1;
       text-align: center;
       p {
-        font-size: 1.3rem;
+        font-size: 0.2rem;
         margin-top: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 0.16rem;
       }
     }
   }

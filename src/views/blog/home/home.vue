@@ -125,15 +125,15 @@ onMounted(() => {
 .home {
   .home__content {
     .home__content-next {
-      margin: 2rem auto;
+      margin: 0.32rem auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 10rem;
+      height: 1.6rem;
       button {
-        padding: 1rem 3rem;
+        padding: 0.16rem 0.5rem;
         border: var(--m-border);
-        border-radius: 3rem;
+        border-radius: 0.5rem;
         color: #adadad;
         transition: var(--animate-duration);
         background-color: var(--m-card-bg-color);
@@ -141,24 +141,24 @@ onMounted(() => {
         &:hover {
           color: var(--el-color-primary);
           border-color: var(--el-color-primary);
-          box-shadow: 0 0 0.5rem var(--el-color-primary);
+          box-shadow: 0 0 0.08rem var(--el-color-primary);
         }
       }
       .loading {
-        width: 10rem;
+        width: 1.6rem;
       }
     }
     .home__content-item {
       display: flex;
       opacity: 0;
-      min-height: 18.75rem;
+      min-height: 3rem;
       overflow: hidden;
       cursor: pointer;
       transition: box-shadow 0.3s ease;
       animation: none;
       padding: 0;
       &:hover {
-        box-shadow: 0 0.1rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0.02rem 0.16rem 0.02rem rgba(0, 0, 0, 0.5);
         .home__content-cover {
           .m-img {
             transform: rotate(5deg) scale(1.2);
@@ -171,7 +171,7 @@ onMounted(() => {
       }
       .home__content-cover {
         flex: 6;
-        height: 18.75rem;
+        height: 3rem;
         overflow: hidden;
         .m-img {
           transition: var(--animate-duration);
@@ -183,24 +183,24 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        padding: 2rem;
+        padding: 0.32rem;
         color: var(--m-font-color);
         .m-icon {
-          margin-right: 0.3rem;
+          margin-right: 0.05rem;
         }
         &-time {
           display: flex;
           align-items: center;
           .is-stick {
             color: var(--el-color-primary);
-            margin-right: 0.5rem;
+            margin-right: 0.08rem;
           }
         }
         &-title {
-          font-size: 1.3rem;
+          font-size: 0.2rem;
           font-weight: bold;
           color: var(--m-title-color);
-          margin: 1.2rem 0;
+          margin: 0.2rem 0;
           cursor: pointer;
           transition: var(--animate-duration);
           &:hover {
@@ -214,16 +214,16 @@ onMounted(() => {
           span {
             display: flex;
             align-items: center;
-            padding: 0.2rem 0;
+            padding: 0.03rem 0;
           }
         }
         &-desc {
-          margin: 1rem 0;
+          margin: 0.16rem 0;
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 3;
           overflow: hidden;
-          line-height: 1.5rem;
+          line-height: 0.24rem;
           word-break: break-all;
         }
       }
@@ -234,7 +234,7 @@ onMounted(() => {
           &-statistics {
             justify-content: flex-end;
             span {
-              margin-left: 1rem;
+              margin-left: 0.16rem;
             }
           }
         }
@@ -244,7 +244,7 @@ onMounted(() => {
         .home__content-info {
           &-statistics {
             span {
-              margin-right: 1rem;
+              margin-right: 0.16rem;
             }
           }
         }
@@ -257,7 +257,7 @@ onMounted(() => {
       .home__content-item {
         display: block;
         .home__content-cover {
-          height: 13rem;
+          height: 2.1rem;
         }
         &:nth-child(2n - 1) {
           flex-direction: row-reverse;
@@ -267,7 +267,7 @@ onMounted(() => {
               justify-content: flex-start;
               span {
                 margin-left: 0;
-                margin-right: 1rem;
+                margin-right: 0.16rem;
               }
             }
           }
