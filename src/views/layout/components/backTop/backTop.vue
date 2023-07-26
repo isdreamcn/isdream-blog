@@ -71,6 +71,7 @@ watch(
     width: 100%;
     flex: 1;
     background-image: url('@/assets/img/scroll_line.svg');
+    background-repeat: repeat-y;
     background-position: center;
   }
   img {
