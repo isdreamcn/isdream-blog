@@ -16,8 +16,8 @@
       >
         <div class="item-cover">
           <MImgDefault
-            :src="item.cover?.url"
-            :thumb="item.cover?.thumbUrl"
+            :src="filePathQuery(item.cover?.url, { w: 750, f: 'webp' })"
+            :thumb="filePathQuery(item.cover?.url, { w: 100, f: 'webp' })"
           ></MImgDefault>
         </div>
         <div class="item-info">
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
+import { filePathQuery } from '@/utils'
 import { getArticleList, Article } from '@/api/blog/article'
 
 defineOptions({

@@ -18,7 +18,7 @@ defineOptions({
 
 <style lang="scss" scoped>
 .toggleDark-container {
-  font-size: 30px;
+  font-size: 0.25rem;
   cursor: pointer;
   display: flex;
   align-items: center;

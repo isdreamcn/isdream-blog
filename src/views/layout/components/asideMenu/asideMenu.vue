@@ -32,7 +32,7 @@ import { useRouter } from 'vue-router'
 import { ref, watch, computed } from 'vue'
 import { useAppSetting, useAppLayoutEl, useUserStore } from '@/store'
 import { ToggleDark, Search } from '../index'
-import blogger from '@/assets/img/blogger.png'
+import blogger from '@/assets/img/blogger.webp'
 
 defineOptions({
   name: 'LayoutCpnAsideMenu'

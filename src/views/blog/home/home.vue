@@ -11,8 +11,8 @@
       >
         <div class="home__content-cover">
           <MImgDefault
-            :src="article.cover?.url"
-            :thumb="article.cover?.thumbUrl"
+            :src="filePathQuery(article.cover?.url, { w: 750, f: 'webp' })"
+            :thumb="filePathQuery(article.cover?.url, { w: 100, f: 'webp' })"
             lazy
           ></MImgDefault>
         </div>
@@ -57,6 +57,7 @@
 <script setup lang="ts">
 import { ref, nextTick, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { filePathQuery } from '@/utils'
 import homeHeader from './components/homeHeader/homeHeader.vue'
 import loadingData from '@/assets/lottie/loading.json'
 import { useShowElClassName } from '@/hooks'

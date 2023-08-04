@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import blogger from '@/assets/img/blogger.png'
+import blogger from '@/assets/img/blogger.webp'
 
 defineOptions({
   name: 'About'

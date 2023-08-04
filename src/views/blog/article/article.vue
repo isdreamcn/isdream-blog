@@ -2,8 +2,8 @@
   <div v-if="articleInfo" :class="`article ${appMedia}`">
     <div class="blogLayout-header article__header">
       <MImgDefault
-        :src="articleInfo.cover?.url"
-        :thumb="articleInfo.cover?.thumbUrl"
+        :src="filePathQuery(articleInfo.cover?.url, { w: 2560, f: 'webp' })"
+        :thumb="filePathQuery(articleInfo.cover?.url, { w: 100, f: 'webp' })"
       >
         <div class="blogLayout-card">
           <h1 class="article-title">{{ articleInfo.title }}</h1>
@@ -78,8 +78,12 @@
           @click="showArticle(preArticleInfo!.id)"
         >
           <MImgDefault
-            :src="preArticleInfo.cover?.url"
-            :thumb="preArticleInfo.cover?.thumbUrl"
+            :src="
+              filePathQuery(preArticleInfo.cover?.url, { w: 750, f: 'webp' })
+            "
+            :thumb="
+              filePathQuery(preArticleInfo.cover?.url, { w: 100, f: 'webp' })
+            "
           >
             <div class="article-pre-next__articleInfo">
               <div>上一篇</div>
@@ -93,8 +97,12 @@
           @click="showArticle(nextArticleInfo!.id)"
         >
           <MImgDefault
-            :src="nextArticleInfo.cover?.url"
-            :thumb="nextArticleInfo.cover?.thumbUrl"
+            :src="
+              filePathQuery(nextArticleInfo.cover?.url, { w: 750, f: 'webp' })
+            "
+            :thumb="
+              filePathQuery(nextArticleInfo.cover?.url, { w: 100, f: 'webp' })
+            "
           >
             <div class="article-pre-next__articleInfo">
               <div>下一篇</div>
@@ -115,7 +123,8 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAppSetting } from '@/store'
-import blogger from '@/assets/img/blogger.png'
+import { filePathQuery } from '@/utils'
+import blogger from '@/assets/img/blogger.webp'
 import { useArticle } from './hooks/useArticle'
 
 defineOptions({
