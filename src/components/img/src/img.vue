@@ -93,12 +93,7 @@ onBeforeUnmount(() => {
     user-select: none;
     transition: var(--animate-duration);
     &.ground-glass {
-      filter: blur(15px);
-      // 隐藏白边
-      width: calc(100% + 50px);
-      height: calc(100% + 50px);
-      top: -25px;
-      left: -25px;
+      filter: blur(0.1rem);
     }
   }
 }
