@@ -3,7 +3,7 @@
   <div class="blogLayout" ref="blogLayoutElRef">
     <header>
       <BlogHeader></BlogHeader>
-      <ProgressBar></ProgressBar>
+      <!-- <ProgressBar></ProgressBar> -->
     </header>
     <BackTop></BackTop>
     <main class="blogLayout__main">
@@ -36,7 +36,7 @@ import { useAppStore } from '@/store'
 import {
   BlogHeader,
   BackTop,
-  ProgressBar,
+  // ProgressBar,
   AsideMenu
 } from '../components/index'
 

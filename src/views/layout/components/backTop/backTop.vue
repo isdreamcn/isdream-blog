@@ -63,7 +63,7 @@ watch(
   width: 0.8rem;
   transition: var(--animate-duration);
   z-index: 90;
-  animation: upDownFloat var(--animate-duration) linear alternate infinite;
+  // animation: upDownFloat var(--animate-duration) linear alternate infinite;
   display: flex;
   flex-direction: column;
   &::before {
