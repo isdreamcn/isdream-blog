@@ -2,7 +2,7 @@ import type { RouteMeta } from 'vue-router'
 import type { StorageConfig } from '@/storage'
 import type { ServiceTokenConfig } from '@/service'
 import type { RoutesHandlerOptions } from '@/router/utils'
-import { wrapperImportMetaEnv } from '@/utils'
+import { wrapperLoadViteEnv } from '@/../build/utils'
 
 export type DefaultRouteMeta = Required<
   Pick<
@@ -37,7 +37,7 @@ export interface AppConfig {
   useMock: boolean
 }
 
-const viteEnv = wrapperImportMetaEnv(import.meta.env)
+const viteEnv = wrapperLoadViteEnv(import.meta.env)
 
 const config: Readonly<AppConfig> = {
   // store
