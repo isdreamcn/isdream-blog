@@ -12,8 +12,9 @@
           class="navbar-item bottom-border"
           v-for="item in userMenu"
           :key="item.path"
+          @click="clickMenuItem(item)"
         >
-          <a class="m-flex hc" @click="clickMenuItem(item)"
+          <a class="m-flex hc"
             ><MIcon :name="item.icon"></MIcon> {{ item.title }}</a
           >
         </li>
