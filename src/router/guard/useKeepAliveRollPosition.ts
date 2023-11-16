@@ -9,7 +9,7 @@ export const useKeepAliveRollPosition = (router: Router) => {
   let timer: NodeJS.Timer | undefined = undefined
   let attemptCount = 0
 
-  router.beforeEach((to, form) => {
+  router.beforeEach((_, form) => {
     if (form.meta.keepAlive ?? appConfig.defaultRouteMeta.keepAlive) {
       map.set(form.fullPath, appLayoutEl.value?.scrollTop)
     }

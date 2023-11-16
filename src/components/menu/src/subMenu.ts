@@ -21,6 +21,5 @@ export const subMenuProps = buildProps({
 } as const)
 
 export const subMenuEmits = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  click: (e: any) => true
+  click: (e: any) => true || e
 }

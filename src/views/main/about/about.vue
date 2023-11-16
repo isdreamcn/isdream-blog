@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import packageData from '~/package.json'
+import packageData from '@/../package.json'
 
 defineOptions({
   name: 'About'

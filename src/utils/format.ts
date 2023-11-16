@@ -31,7 +31,7 @@ interface FilePathQuery {
   w?: number
   h?: number
   q?: number
-  f?: typeof FileFormat[number]
+  f?: (typeof FileFormat)[number]
 }
 
 function objectToQueryString(obj: Record<string, number | string | undefined>) {

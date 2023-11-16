@@ -97,7 +97,7 @@ const onPreview: UploadProps['onPreview'] = (uploadFile: UploadFile) => {
 }
 
 const onRemove: UploadProps['onRemove'] = (
-  uploadFile: UploadFile,
+  _: UploadFile,
   uploadFiles: UploadFile[]
 ) => {
   fileList.value = [...uploadFiles]
