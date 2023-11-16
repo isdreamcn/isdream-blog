@@ -2,7 +2,6 @@ import type { RouteMeta } from 'vue-router'
 import type { StorageConfig } from '@/storage'
 import type { ServiceTokenConfig } from '@/service'
 import type { RoutesHandlerOptions } from '@/router/utils'
-import { wrapperLoadViteEnv } from '@/../build/utils'
 
 export type DefaultRouteMeta = Required<
   Pick<
@@ -34,10 +33,9 @@ export interface AppConfig {
   routeLoginName: symbol
   baseUrlApi: string
   baseUrlFile: string
-  useMock: boolean
 }
 
-const viteEnv = wrapperLoadViteEnv(import.meta.env)
+const viteEnv = import.meta.env
 
 const config: Readonly<AppConfig> = {
   // store
@@ -81,8 +79,7 @@ const config: Readonly<AppConfig> = {
   routeLoginName: Symbol('login'),
 
   baseUrlApi: viteEnv.VITE_BASE_URL_API,
-  baseUrlFile: viteEnv.VITE_BASE_URL_FILE,
-  useMock: viteEnv.VITE_USE_MOCK
+  baseUrlFile: viteEnv.VITE_BASE_URL_FILE
 }
 
 config.routesHandlerOptions.addRouteParentName = config.routeMainName
