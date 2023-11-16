@@ -18,10 +18,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       host: '0.0.0.0',
       proxy: viteEnv.VITE_BASE_URL_API
         ? {
-            '^/api/.*': {
+            '^/proxyApi/.*': {
               target: viteEnv.VITE_BASE_URL_API,
               changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/api/, '')
+              rewrite: (path) => path.replace(/^\/proxyApi/, '')
             }
           }
         : {}

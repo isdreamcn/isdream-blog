@@ -4,13 +4,13 @@ import type {
   UserLoginResult,
   UserSigninParams
 } from './types/login.type'
-import service, { serviceNotMessage } from '@/service'
+import service, { serviceNotMessage, mockService } from '@/service'
 
 enum Api {
-  Login = '/api/user/login',
-  Signin = '/api/user/signin',
-  Menu = '/api/user/menu',
-  Permissions = '/api/user/permissions'
+  Login = 'user/login',
+  Signin = 'user/signin',
+  Menu = 'user/menu',
+  Permissions = 'user/permissions'
 }
 
 export const userLogin = (data: UserLoginParams, showMessage = true) => {
@@ -23,7 +23,7 @@ export const userLogin = (data: UserLoginParams, showMessage = true) => {
 }
 
 export const userSignin = (data: UserSigninParams) => {
-  return service.request({
+  return mockService.request({
     url: Api.Signin,
     method: 'POST',
     data
@@ -32,7 +32,7 @@ export const userSignin = (data: UserSigninParams) => {
 
 // 用户菜单
 export const getUserMenu = () => {
-  return service.request<Service.Result<UserLoginMenu[]>>({
+  return mockService.request<Service.Result<UserLoginMenu[]>>({
     url: Api.Menu,
     method: 'GET'
   })
@@ -41,7 +41,7 @@ export const getUserMenu = () => {
 // 用户按钮权限
 export const getUserPermissions = () => {
   return Promise.resolve({ data: [] })
-  return service.request<Service.Result<string[]>>({
+  return mockService.request<Service.Result<string[]>>({
     url: Api.Permissions,
     method: 'GET'
   })

@@ -8,11 +8,11 @@ import type {
 import service from '@/service'
 
 enum Api {
-  Reply = '/api/comment',
-  List = '/api/comment/main',
-  ReplyList = '/api/comment/reply',
-  Like = '/api/comment/like',
-  Dislike = '/api/comment/dislike'
+  Reply = 'comment',
+  List = 'comment/main',
+  ReplyList = 'comment/reply',
+  Like = 'comment/like',
+  Dislike = 'comment/dislike'
 }
 
 // 一级评论

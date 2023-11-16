@@ -2,7 +2,7 @@ import type { Pigeonhole } from './types/pigeonhole.type'
 import { service } from '@/service'
 
 enum Api {
-  Main = '/api/statistic/pigeonhole'
+  Main = 'statistic/pigeonhole'
 }
 
 export const getPigeonhole = () => {

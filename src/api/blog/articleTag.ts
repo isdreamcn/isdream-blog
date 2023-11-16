@@ -2,7 +2,7 @@ import type { ArticleTag } from './types/articleTag.type'
 import { service } from '@/service'
 
 enum Api {
-  Main = '/api/article_tag/main'
+  Main = 'article_tag/main'
 }
 
 // 文章标签

@@ -6,9 +6,9 @@ import type {
 import service from '@/service'
 
 enum Api {
-  List = '/api/article/main',
-  Details = '/api/article/main',
-  Commend = '/api/article/commend'
+  List = 'article/main',
+  Details = 'article/main',
+  Commend = 'article/commend'
 }
 
 export const getArticleList = (params?: ArticleListParams) => {

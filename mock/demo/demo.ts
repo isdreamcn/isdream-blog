@@ -1,9 +1,10 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { HttpStatusCode } from '@/constants'
+import { formatUrl, formatMsg } from '../_utils'
 
 export default [
   {
-    url: '/api/demo/list1',
+    url: formatUrl('demo/list1'),
     method: 'get',
     timeout: 1000,
     statusCode: HttpStatusCode.OK,
@@ -11,12 +12,12 @@ export default [
       return {
         data: [{ id: 1, name: 'demo1' }],
         code: HttpStatusCode.OK,
-        message: 'ok'
+        message: formatMsg('OK')
       }
     }
   },
   {
-    url: '/api/demo/list2',
+    url: formatUrl('demo/list2'),
     method: 'get',
     timeout: 2000,
     statusCode: HttpStatusCode.Not_Found,
@@ -24,7 +25,7 @@ export default [
       return {
         data: [],
         code: HttpStatusCode.Not_Found,
-        message: 'demo测试错误'
+        message: formatMsg('demo测试错误')
       }
     }
   }

@@ -2,7 +2,7 @@ import type { LinkType } from './types/links.type'
 import { service } from '@/service'
 
 enum APi {
-  Main = '/api/link_type/main'
+  Main = 'link_type/main'
 }
 
 export const getLinks = () => {

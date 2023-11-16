@@ -2,7 +2,7 @@ import type { EmojiType } from './types/emoji.type'
 import { service } from '@/service'
 
 enum APi {
-  Main = '/api/emoji_type/main'
+  Main = 'emoji_type/main'
 }
 
 export const getEmojiType = () => {

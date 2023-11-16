@@ -2,8 +2,8 @@ import type { TotalData, TrendItem } from './types/statistics.type'
 import { service } from '@/service'
 
 enum Api {
-  Total = '/api/statistic/total',
-  Trend = '/api/statistic/trend'
+  Total = 'statistic/total',
+  Trend = 'statistic/trend'
 }
 
 // 统计

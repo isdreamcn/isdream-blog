@@ -1,6 +1,7 @@
 export interface UserLoginParams {
   email: string
   username?: string
+  password?: string
   avatar?: string
   website?: string
 }
