@@ -1,3 +1,4 @@
+import { useServiceInterceptors } from '@/service'
 import { useAppStore, useRouterStore, useUserStore } from './modules'
 
 export const useStores = () => ({
@@ -7,6 +8,10 @@ export const useStores = () => ({
 })
 
 export const setupStore = () => {
+  // 避免出现以下错误
+  // Cannot access 'useUserStore' before initialization
+  useServiceInterceptors()
+
   const { user, app, router } = useStores()
   user.setupState()
   app.setupState()

@@ -1,4 +1,4 @@
-import type { RequestInterceptors } from '../types'
+import type { ServiceInterceptors } from '../service'
 import { ElMessage } from 'element-plus'
 import { HttpStatusCode } from '@/constants'
 
@@ -46,7 +46,7 @@ const handleError = (code: number, message?: string) => {
   return false
 }
 
-export const useHandleError = (): RequestInterceptors => {
+export const useHandleError = (): ServiceInterceptors => {
   return {
     responseInterceptor(config) {
       const data = config.data
