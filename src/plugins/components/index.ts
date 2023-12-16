@@ -42,3 +42,5 @@ export const useComponentsAll: AppUsePlugin = (app) => {
 
   useIcons(app)
 }
+
+export type GlobalComponents = keyof typeof components
