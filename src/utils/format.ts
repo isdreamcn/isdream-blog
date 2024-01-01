@@ -2,7 +2,7 @@ import { appConfig } from '@/config'
 
 export const setBaseUrlFile = (str: string) => {
   return str.replaceAll(
-    /(!\[.*\]\(|<img src=")(?!http)/g,
+    /(!\[.*\]\(|<img.*src=")(?!blob:http|http)/g,
     `$1${appConfig.baseUrlFile}`
   )
 }

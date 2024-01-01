@@ -12,7 +12,7 @@ export const menuProps = buildProps({
   },
   endLevel: {
     type: Number,
-    default: 3
+    default: 4
   }
 } as const)
 
