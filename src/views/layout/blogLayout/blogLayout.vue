@@ -84,6 +84,7 @@ const setHtmlFontSize = () => {
 setHtmlFontSize()
 window.addEventListener('resize', setHtmlFontSize)
 window.addEventListener('orientationchange', setHtmlFontSize)
+document.body.style.fontSize = '0.16rem'
 
 onMounted(() => {
   appStore.setAppLayoutEl(blogLayoutElRef.value)
@@ -93,7 +94,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .blogLayout {
-  font-size: 0.16rem;
   transition: var(--animate-duration);
   height: 100vh;
   display: flex;
