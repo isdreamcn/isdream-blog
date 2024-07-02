@@ -1,7 +1,7 @@
 <template>
   <div v-if="appMedia === 'pc'" :class="`header-container ${className}`">
     <a class="header-container__logo bottom-border" @click="goHome">
-      ISDREAM
+      ISDREAM-BLOG
     </a>
     <nav class="header-container__navbar">
       <ul class="m-flex hc">
@@ -61,7 +61,7 @@ const goHome = () => {
 
 // 滚动修改class
 const className = ref('')
-let scrollTop = 0
+// let scrollTop = 0
 
 const appLayoutEl = useAppLayoutEl()
 watch(
@@ -74,15 +74,16 @@ watch(
           return
         }
         const _scrollTop = appLayoutEl.value.scrollTop
-        if (scrollTop < _scrollTop) {
-          className.value = 'hidden'
-        } else {
-          className.value = 'show'
-        }
+        className.value = 'show'
+        // if (scrollTop < _scrollTop) {
+        //   className.value = 'hidden'
+        // } else {
+        //   className.value = 'show'
+        // }
         if (_scrollTop !== 0) {
           className.value += ' has-bg'
         }
-        scrollTop = _scrollTop
+        // scrollTop = _scrollTop
       },
       {
         passive: true

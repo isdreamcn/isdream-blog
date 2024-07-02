@@ -1,7 +1,7 @@
 <template>
   <div class="blogLayout-header home__header">
     <MImgDefault class="m-flex whc">
-      <h1 class="blogLayout-header-title">ISDREAM-BLOG</h1>
+      <!-- <h1 class="blogLayout-header-title">ISDREAM-BLOG</h1> -->
       <div class="home__header-tip">
         <MIcon @click="showContent" name="icon-ArrowDownBold"></MIcon>
       </div>
@@ -36,10 +36,10 @@ const showContent = () => {
   .home__header-tip {
     cursor: pointer;
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 0.4rem;
     font-size: 0.4rem;
     color: #ffffff;
-    animation: upDownFloat var(--animate-duration) linear alternate infinite;
+    // animation: upDownFloat var(--animate-duration) linear alternate infinite;
     z-index: 5;
   }
 }
