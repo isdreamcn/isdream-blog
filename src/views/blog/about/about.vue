@@ -84,6 +84,7 @@ defineOptions({
         height: 1rem;
         border-radius: 50%;
         overflow: hidden;
+        flex-shrink: 0;
       }
       .blogger-info-desc {
         margin-left: 0.32rem;

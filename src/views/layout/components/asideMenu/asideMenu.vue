@@ -81,10 +81,10 @@ watch(
           updateVisible()
         }
         const _scrollTop = appLayoutEl.value.scrollTop
-        if (scrollTop < _scrollTop) {
-          btnClassName.value = 'is-hidden'
-        } else {
+        if (_scrollTop === 0 || scrollTop > _scrollTop) {
           btnClassName.value = 'is-show'
+        } else {
+          btnClassName.value = 'is-hidden'
         }
         scrollTop = _scrollTop
       },

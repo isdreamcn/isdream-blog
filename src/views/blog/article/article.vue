@@ -211,10 +211,13 @@ const showArticle = (id: number) => {
   .article__content {
     .m-markdown-view {
       font-size: 0.16rem;
-      overflow: hidden;
+      overflow: visible;
     }
     :deep(*) {
       max-width: 100% !important;
+    }
+    :deep(.hljs) {
+      max-height: unset !important;
     }
   }
 
