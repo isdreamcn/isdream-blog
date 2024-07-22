@@ -1,8 +1,8 @@
 <template>
-  <div v-if="appMedia === 'pc'" :class="`layout-back-top ${className}`">
+  <div :class="`media-pc layout-back-top ${className}`">
     <img
       src="@/assets/img/scroll_icon.svg"
-      @mousedown="(e) => e.preventDefault()"
+      @mousedown="(e: any) => e.preventDefault()"
       @click="goBackTop"
     />
   </div>
@@ -10,12 +10,10 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useAppLayoutEl, useAppSetting } from '@/store'
+import { useAppLayoutEl } from '@/store'
 defineOptions({
   name: 'BackTop'
 })
-
-const { appMedia } = useAppSetting()
 
 const appLayoutEl = useAppLayoutEl()
 const className = ref('is-hidden')

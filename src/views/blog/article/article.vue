@@ -1,5 +1,5 @@
 <template>
-  <div v-if="articleInfo" :class="`article ${appMedia}`">
+  <div v-if="articleInfo" class="article">
     <div class="blogLayout-header article__header">
       <MImgDefault
         :src="filePathQuery(articleInfo.cover?.url, { w: 2560, f: 'webp' })"
@@ -42,15 +42,15 @@
               style="border-width: 0"
               src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
             />
-            <template v-if="appMedia === 'pc'"
-              >知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</template
-            >
-            <template v-else>
+            <div class="media-pc">
+              知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+            </div>
+            <div class="media-phone">
               <abbr
                 title="知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议"
                 >CC BY-NC-SA 4.0</abbr
               >
-            </template>
+            </div>
           </a>
         </div>
         <div class="article-actions">
@@ -122,7 +122,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAppSetting } from '@/store'
 import { filePathQuery } from '@/utils'
 import blogger from '@/assets/img/blogger.webp'
 import { useArticle } from './hooks/useArticle'
@@ -132,8 +131,6 @@ defineOptions({
 })
 
 const containerElRef = ref<HTMLElement>()
-
-const { appMedia } = useAppSetting()
 
 const route = useRoute()
 const id = Number(route.params.id)
@@ -326,7 +323,7 @@ const showArticle = (id: number) => {
     }
   }
 
-  &.phone {
+  @media (max-width: 768px) {
     .article-pre-next {
       display: block;
       .article-pre-next__articleInfo {

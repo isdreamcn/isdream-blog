@@ -1,5 +1,5 @@
 <template>
-  <div :class="['m-comment-textarea', appMedia]">
+  <div class="m-comment-textarea">
     <div class="replyer-avatar">
       <MImgAvatar
         :src="userInfo.avatar"
@@ -54,7 +54,6 @@
 import { ref, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { commentTextAreaProps, commentTextAreaEmits } from './comment-textarea'
-import { useAppSetting } from '@/store'
 import { useUser } from './hooks/useUser'
 import { comment } from '@/api/blog/comment'
 import CommentEmoji from './comment-emoji.vue'
@@ -80,7 +79,6 @@ const focusHandler = (focus: boolean, _canBlur?: boolean) => {
   }
 }
 
-const { appMedia } = useAppSetting()
 const { userInfo, getUserInfoByEmail, login } = useUser()
 
 // 回复
@@ -219,7 +217,8 @@ const reply = () => {
       }
     }
   }
-  &.phone {
+
+  @media (max-width: 768px) {
     .basic-info {
       div {
         display: block;

@@ -30,7 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Media } from '@/store'
 import { ref, onMounted } from 'vue'
 import { useAppStore } from '@/store'
 import {
@@ -46,18 +45,6 @@ defineOptions({
 
 // elRef
 const blogLayoutElRef = ref<HTMLElement>()
-const setMediaClass = (media: Media) => {
-  const el = blogLayoutElRef.value
-  if (!el) {
-    return
-  }
-  if (media === 'pc') {
-    el.classList.remove('phone')
-  } else {
-    el.classList.remove('pc')
-  }
-  el.classList.add(media)
-}
 
 // rem
 const htmlEl = document.documentElement
@@ -71,14 +58,6 @@ const setHtmlFontSize = () => {
     fontSize *= scale
   }
   htmlEl.style.fontSize = fontSize + 'px'
-
-  const media = width > 768 ? 'pc' : 'phone'
-  // 响应式
-  appStore.setAppSetting({
-    media
-  })
-
-  setMediaClass(media)
 }
 
 setHtmlFontSize()
@@ -88,7 +67,6 @@ document.body.style.fontSize = '0.16rem'
 
 onMounted(() => {
   appStore.setAppLayoutEl(blogLayoutElRef.value)
-  setMediaClass(appStore.appSetting.media)
 })
 </script>
 
@@ -152,13 +130,15 @@ onMounted(() => {
     padding: 0.32rem;
     border-radius: 0.08rem;
   }
-  &.pc {
+
+  @media (min-width: 768px) {
     :deep(.blogLayout-card) {
       min-width: 750px;
       width: 50%;
     }
   }
-  &.phone {
+
+  @media (max-width: 768px) {
     :deep(.blogLayout-card) {
       width: calc(100% - 0.32rem);
       padding: 0.16rem;

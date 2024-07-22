@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="appMedia === 'phone'"
-    :class="{ 'm-aside-menu': true, 'show-dialog': visible }"
-  >
+  <div class="media-phone m-aside-menu" :class="{ 'show-dialog': visible }">
     <div class="menu__content">
       <MImg :src="blogger" :lazy="false" class="avatar"></MImg>
       <div class="blogger-name">isdream</div>
@@ -30,15 +27,13 @@
 import type { UserMenu } from '@/store'
 import { useRouter } from 'vue-router'
 import { ref, watch, computed } from 'vue'
-import { useAppSetting, useAppLayoutEl, useUserStore } from '@/store'
+import { useAppLayoutEl, useUserStore } from '@/store'
 import { ToggleDark, Search } from '../index'
 import blogger from '@/assets/img/blogger.webp'
 
 defineOptions({
   name: 'LayoutCpnAsideMenu'
 })
-
-const { appMedia } = useAppSetting()
 
 // navbar
 const userStore = useUserStore()

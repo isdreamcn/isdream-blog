@@ -72,3 +72,15 @@ html.dark {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #f8980e;
 }
+
+@media (min-width: 768px) {
+  .media-phone {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .media-pc {
+    display: none !important;
+  }
+}

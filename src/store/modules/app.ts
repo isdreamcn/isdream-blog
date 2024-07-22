@@ -7,12 +7,10 @@ import { mergeObjDeep } from '@/utils'
 import { useCssVariable, useDark } from '@/hooks'
 
 export type Theme = 'light' | 'dark'
-export type Media = 'pc' | 'phone'
 
 export interface AppSetting {
   colorPrimary: string
   layout: LayoutKeys
-  media: Media
   showLogo: boolean
   menu: {
     // 折叠
@@ -38,7 +36,6 @@ export interface AppSetting {
 const useAppSettingDefault = (): AppSetting => ({
   colorPrimary: '#409EFF',
   layout: 'blogLayout',
-  media: 'pc',
   showLogo: true,
   menu: {
     collapsed: false,
@@ -126,13 +123,11 @@ export const useAppSetting = () => {
 
   const appTheme = computed(() => appStore.theme)
   const appIsDark = computed(() => appStore.theme === 'dark')
-  const appMedia = computed(() => appStore.appSetting.media)
 
   return {
     appSetting,
     appTheme,
-    appIsDark,
-    appMedia
+    appIsDark
   }
 }
 

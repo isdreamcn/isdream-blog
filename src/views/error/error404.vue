@@ -55,8 +55,8 @@ const goBack = () => {
   justify-content: center;
   transform: translateY(-60px);
   .lottie-box {
-    width: 600px;
-    height: 600px;
+    width: 550px;
+    height: auto;
   }
   .actions {
     font-size: 18px;
@@ -64,6 +64,18 @@ const goBack = () => {
     .actions-item {
       margin-top: 20px;
       font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .error-404 {
+    flex-direction: column;
+    .lottie-box {
+      width: 70%;
+    }
+    .actions {
+      text-align: center;
     }
   }
 }
