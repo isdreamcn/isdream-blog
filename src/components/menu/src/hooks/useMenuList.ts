@@ -1,10 +1,9 @@
 import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
-
+import { useScrollListener } from '@/hooks'
 interface UseMenuListOptions {
   startLevel: number
   endLevel: number
-  scrollElRef?: Ref<HTMLElement | undefined>
 }
 
 interface MenuListItem {
@@ -89,7 +88,7 @@ const getMenuList = (containerEl: HTMLElement, selectors: string) => {
 
 export const useMenuList = (
   containerElRef: Ref<HTMLElement | undefined>,
-  { startLevel, endLevel, scrollElRef }: UseMenuListOptions
+  { startLevel, endLevel }: UseMenuListOptions
 ) => {
   // h1,h2
   const selectors = new Array(endLevel - startLevel + 1)
@@ -130,39 +129,13 @@ export const useMenuList = (
   }
 
   const scrollElScrollTop = ref(0)
-  const scrollHandler = () => {
-    const scrollEl = scrollElRef?.value
-    if (!scrollEl) return
-
-    const offsetTop = scrollEl.offsetTop + 1
-    const scrollTop = scrollEl.scrollTop + 1
-    scrollElScrollTop.value = scrollTop
-
-    const item = nodes.find((v) => v.offsetTop - offsetTop <= scrollTop)
-    activedId.value = item?.id || 0
-  }
-
-  const scrollHandlerCancel = () => {
-    if (scrollElRef?.value) {
-      scrollElRef.value.removeEventListener('scroll', scrollHandler)
+  const { removeScrollListener } = useScrollListener(
+    ({ offsetTop, scrollTop }) => {
+      scrollElScrollTop.value = scrollTop
+      const item = nodes.find((v) => v.offsetTop - offsetTop <= scrollTop)
+      activedId.value = item?.id || 0
     }
-  }
-
-  if (scrollElRef) {
-    watch(
-      scrollElRef,
-      (scrollEl) => {
-        scrollHandlerCancel()
-        scrollElScrollTop.value = 0
-        if (scrollEl) {
-          scrollEl.addEventListener('scroll', scrollHandler, {
-            passive: true
-          })
-        }
-      },
-      { immediate: true }
-    )
-  }
+  )
 
   return {
     menuList,
@@ -170,7 +143,7 @@ export const useMenuList = (
     scrollElScrollTop,
     cancel: () => {
       watchElHeightCancel()
-      scrollHandlerCancel()
+      removeScrollListener()
     },
     scrollIntoView
   }

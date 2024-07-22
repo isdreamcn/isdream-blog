@@ -17,7 +17,10 @@
         </li>
       </ul>
     </div>
-    <button :class="`menu__btn ${btnClassName}`" @click="updateVisible">
+    <button
+      :class="`menu__btn ${btnClassName}`"
+      @click="updateVisible(!visible)"
+    >
       MENU
     </button>
   </div>
@@ -25,9 +28,10 @@
 
 <script setup lang="ts">
 import type { UserMenu } from '@/store'
-import { useRouter } from 'vue-router'
-import { ref, watch, computed } from 'vue'
-import { useAppLayoutEl, useUserStore } from '@/store'
+import { useRouter, useRoute } from 'vue-router'
+import { ref, computed, watch } from 'vue'
+import { useUserStore } from '@/store'
+import { useScrollListener } from '@/hooks'
 import { ToggleDark, Search } from '../index'
 import blogger from '@/assets/img/blogger.webp'
 
@@ -41,12 +45,8 @@ const userMenu = computed(() => userStore.userMenu)
 
 // 弹框
 const visible = ref(false)
-const appLayoutEl = useAppLayoutEl()
-const updateVisible = () => {
-  visible.value = !visible.value
-  if (appLayoutEl.value) {
-    appLayoutEl.value.style.transform = `translateX(${visible.value ? 42 : 0}%)`
-  }
+const updateVisible = (value: boolean) => {
+  visible.value = value
 }
 
 // 跳转
@@ -56,52 +56,38 @@ const clickMenuItem = (item: UserMenu) => {
     window.open(item.link)
     return
   }
-  updateVisible()
+  updateVisible(false)
   router.push(item.path)
 }
 
 // 滚动修改class
 const btnClassName = ref('is-show')
 let scrollTop = 0
-watch(
-  () => appLayoutEl.value,
-  () => {
-    appLayoutEl.value?.addEventListener(
-      'scroll',
-      () => {
-        if (!appLayoutEl.value) {
-          return
-        }
-        if (visible.value) {
-          updateVisible()
-        }
-        const _scrollTop = appLayoutEl.value.scrollTop
-        if (_scrollTop === 0 || scrollTop > _scrollTop) {
-          btnClassName.value = 'is-show'
-        } else {
-          btnClassName.value = 'is-hidden'
-        }
-        scrollTop = _scrollTop
-      },
-      {
-        passive: true
-      }
-    )
-  },
-  {
-    immediate: true
+useScrollListener(({ scrollTop: _scrollTop }) => {
+  if (visible.value) {
+    return
   }
-)
+  if (_scrollTop === 0 || scrollTop > _scrollTop) {
+    btnClassName.value = 'is-show'
+  } else {
+    btnClassName.value = 'is-hidden'
+  }
+  scrollTop = _scrollTop
+})
+
+watch(useRoute(), () => {
+  updateVisible(false)
+})
 </script>
 
 <style lang="scss" scoped>
 .m-aside-menu {
   position: fixed;
+  top: 0;
+  height: 100vh;
   z-index: 90;
-  width: 40%;
   display: flex;
   align-items: flex-start;
-  height: 0;
   .menu__btn {
     position: relative;
     margin-top: 0.16rem;
@@ -121,18 +107,18 @@ watch(
     }
   }
   .menu__content {
-    opacity: 0;
+    opacity: 1;
+    width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 0;
     flex-shrink: 0;
-    transition: var(--animate-duration);
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     background-color: var(--m-card-bg-color);
     box-shadow: 0 0.02rem 0.16rem -0.05rem rgba(0, 0, 0, 0.4);
+    transition: var(--animate-duration);
     .avatar {
       width: 0.8rem;
       height: 0.8rem;
@@ -163,10 +149,9 @@ watch(
   }
 
   &.show-dialog {
-    height: 100%;
     .menu__content {
       opacity: 1;
-      width: 100%;
+      width: 40vw;
     }
     .menu__btn {
       border-color: var(--el-color-primary);

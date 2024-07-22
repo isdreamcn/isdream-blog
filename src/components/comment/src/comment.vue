@@ -40,11 +40,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, onBeforeUnmount } from 'vue'
+import { ref, reactive, onBeforeUnmount } from 'vue'
 import { commentProps } from './comment'
 import MCommentItem from './comment-item.vue'
 import MCommentTextarea from './comment-textarea.vue'
-import { useAppLayoutEl } from '@/store'
+import { useScrollListener } from '@/hooks'
 import { getCommentList, Comment } from '@/api/blog/comment'
 import { useUser } from './hooks/useUser'
 
@@ -108,39 +108,19 @@ const setParamsSort = (sort: 1 | 2) => {
 
 // 滚动加载
 params.page++
-const appLayoutEl = useAppLayoutEl()
-const scrollFn = () => {
-  if (!appLayoutEl.value) {
-    return
-  }
-  const el = appLayoutEl.value
-  // 滚动条触底
-  if (el.scrollHeight - el.clientHeight - el.scrollTop <= 1) {
-    _getCommentList()?.then((res) => {
-      params.page++
-      if (!res.data.length) {
-        appLayoutEl.value?.removeEventListener('scroll', scrollFn)
-      }
-    })
-  }
-}
-
-watch(
-  () => [appLayoutEl.value, params.sort],
-  () => {
-    appLayoutEl.value?.addEventListener('scroll', scrollFn, {
-      passive: true
-    })
-  },
-  {
-    immediate: true
+const { removeScrollListener } = useScrollListener(
+  ({ scrollHeight, clientHeight, scrollTop }) => {
+    // 滚动条触底
+    if (scrollHeight - clientHeight - scrollTop <= 1) {
+      _getCommentList()?.then(() => {
+        params.page++
+      })
+    }
   }
 )
 
 // 移除滚动加载
-onBeforeUnmount(() =>
-  appLayoutEl.value?.removeEventListener('scroll', scrollFn)
-)
+onBeforeUnmount(() => removeScrollListener())
 </script>
 
 <style lang="scss" scoped>

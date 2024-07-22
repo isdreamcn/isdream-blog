@@ -10,22 +10,20 @@
 </template>
 
 <script setup lang="ts">
-import { useAppLayoutEl } from '@/store'
+import { useScrollEl } from '@/hooks'
 
 defineOptions({
   name: 'Demo'
 })
 
 // 设置滚动条
-const appLayoutEl = useAppLayoutEl()
 const showContent = () => {
-  if (!appLayoutEl.value) {
-    return
-  }
-  appLayoutEl.value.scrollTo({
-    top: document.body.clientHeight,
-    behavior: 'smooth'
-  })
+  useScrollEl(({ scrollTo, clientHeight }) =>
+    scrollTo({
+      top: clientHeight,
+      behavior: 'smooth'
+    })
+  )
 }
 </script>
 
@@ -41,6 +39,12 @@ const showContent = () => {
     color: #ffffff;
     // animation: upDownFloat var(--animate-duration) linear alternate infinite;
     z-index: 5;
+  }
+}
+
+.blogLayout-header {
+  &::after {
+    background-color: transparent !important;
   }
 }
 </style>

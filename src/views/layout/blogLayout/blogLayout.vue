@@ -1,6 +1,6 @@
 <template>
   <AsideMenu style="font-size: 0.16rem"></AsideMenu>
-  <div class="blogLayout" ref="blogLayoutElRef">
+  <div class="blogLayout">
     <header>
       <BlogHeader></BlogHeader>
       <!-- <ProgressBar></ProgressBar> -->
@@ -30,8 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useAppStore } from '@/store'
 import {
   BlogHeader,
   BackTop,
@@ -43,12 +41,8 @@ defineOptions({
   name: 'BlogLayout'
 })
 
-// elRef
-const blogLayoutElRef = ref<HTMLElement>()
-
 // rem
 const htmlEl = document.documentElement
-const appStore = useAppStore()
 
 const setHtmlFontSize = () => {
   const width = document.body.clientWidth
@@ -64,21 +58,15 @@ setHtmlFontSize()
 window.addEventListener('resize', setHtmlFontSize)
 window.addEventListener('orientationchange', setHtmlFontSize)
 document.body.style.fontSize = '0.16rem'
-
-onMounted(() => {
-  appStore.setAppLayoutEl(blogLayoutElRef.value)
-})
 </script>
 
 <style lang="scss" scoped>
 .blogLayout {
   transition: var(--animate-duration);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-y: auto;
-  overflow-x: hidden;
   background-color: var(--m-bg-color);
   .blogLayout__main {
     flex: 1;
@@ -106,7 +94,7 @@ onMounted(() => {
       left: 0;
       right: 0;
       bottom: 0;
-      // background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.2);
     }
     .blogLayout-header-title {
       position: absolute;

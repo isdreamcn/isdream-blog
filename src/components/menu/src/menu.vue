@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
 import { computed, toRef, onUnmounted, CSSProperties } from 'vue'
-import { useAppLayoutEl } from '@/store'
 import { menuProps } from './menu'
 import { useMenuList } from './hooks'
 import SubMenu from './subMenu.vue'
@@ -26,8 +25,7 @@ const containerEl = toRef(props, 'containerEl')
 const { menuList, activedId, scrollElScrollTop, scrollIntoView, cancel } =
   useMenuList(containerEl, {
     startLevel: props.startLevel,
-    endLevel: props.endLevel,
-    scrollElRef: useAppLayoutEl()
+    endLevel: props.endLevel
   })
 
 const menuStyle = computed(() => {

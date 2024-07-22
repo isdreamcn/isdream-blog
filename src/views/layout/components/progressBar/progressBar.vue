@@ -3,39 +3,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useAppLayoutEl } from '@/store'
+import { ref } from 'vue'
+import { useScrollListener } from '@/hooks'
 
 defineOptions({
   name: 'ProgressBar'
 })
 
 const width = ref(0)
-const appLayoutEl = useAppLayoutEl()
-watch(
-  () => appLayoutEl.value,
-  () => {
-    appLayoutEl.value?.addEventListener(
-      'scroll',
-      () => {
-        if (!appLayoutEl.value) {
-          return
-        }
-        const { scrollTop, clientHeight, scrollHeight } = appLayoutEl.value
-        width.value = Math.min(
-          Math.ceil(((scrollTop + clientHeight) * 100) / scrollHeight),
-          100
-        )
-      },
-      {
-        passive: true
-      }
-    )
-  },
-  {
-    immediate: true
-  }
-)
+useScrollListener(({ scrollTop, clientHeight, scrollHeight }) => {
+  width.value = Math.min(
+    Math.ceil(((scrollTop + clientHeight) * 100) / scrollHeight),
+    100
+  )
+})
 </script>
 
 <style lang="scss" scoped>

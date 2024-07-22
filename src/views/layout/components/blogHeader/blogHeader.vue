@@ -28,9 +28,10 @@
 
 <script setup lang="ts">
 import type { UserMenu } from '@/store'
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore, useAppLayoutEl } from '@/store'
+import { useUserStore } from '@/store'
+import { useScrollListener } from '@/hooks'
 import appConfig from '@/config'
 import { ToggleDark, Search } from '../index'
 
@@ -61,37 +62,18 @@ const goHome = () => {
 const className = ref('')
 // let scrollTop = 0
 
-const appLayoutEl = useAppLayoutEl()
-watch(
-  () => appLayoutEl.value,
-  () => {
-    appLayoutEl.value?.addEventListener(
-      'scroll',
-      () => {
-        if (!appLayoutEl.value) {
-          return
-        }
-        const _scrollTop = appLayoutEl.value.scrollTop
-        className.value = 'show'
-        // if (scrollTop < _scrollTop) {
-        //   className.value = 'hidden'
-        // } else {
-        //   className.value = 'show'
-        // }
-        if (_scrollTop !== 0) {
-          className.value += ' has-bg'
-        }
-        // scrollTop = _scrollTop
-      },
-      {
-        passive: true
-      }
-    )
-  },
-  {
-    immediate: true
+useScrollListener(({ scrollTop: _scrollTop }) => {
+  className.value = 'show'
+  // if (scrollTop < _scrollTop) {
+  //   className.value = 'hidden'
+  // } else {
+  //   className.value = 'show'
+  // }
+  if (_scrollTop !== 0) {
+    className.value += ' has-bg'
   }
-)
+  // scrollTop = _scrollTop
+})
 </script>
 
 <style lang="scss" scoped>

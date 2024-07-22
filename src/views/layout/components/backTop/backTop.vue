@@ -9,38 +9,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useAppLayoutEl } from '@/store'
+import { ref } from 'vue'
+import { useScrollEl, useScrollListener } from '@/hooks'
+
 defineOptions({
   name: 'BackTop'
 })
 
-const appLayoutEl = useAppLayoutEl()
 const className = ref('is-hidden')
 
-const updateClassName = () => {
-  className.value = appLayoutEl.value?.scrollTop ? 'is-show' : 'is-hidden'
-}
-
-const goBackTop = () => {
-  appLayoutEl.value?.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
-}
-
-watch(
-  () => appLayoutEl.value,
-  () => {
-    appLayoutEl.value?.addEventListener('scroll', updateClassName, {
-      passive: true
+const goBackTop = () =>
+  useScrollEl(({ scrollTo }) =>
+    scrollTo({
+      top: 0,
+      behavior: 'smooth'
     })
-    updateClassName()
-  },
-  {
-    immediate: true
-  }
-)
+  )
+
+useScrollListener(({ scrollTop }) => {
+  className.value = scrollTop ? 'is-show' : 'is-hidden'
+})
 </script>
 
 <style lang="scss" scoped>

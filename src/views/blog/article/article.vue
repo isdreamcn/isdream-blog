@@ -150,11 +150,13 @@ const goSearch = (id: number, name: string) => {
 }
 
 const showArticle = (id: number) => {
-  router.push({
-    name: 'article',
-    params: {
-      id
-    }
+  router.push('/').then(() => {
+    router.replace({
+      name: 'article',
+      params: {
+        id
+      }
+    })
   })
 }
 </script>
