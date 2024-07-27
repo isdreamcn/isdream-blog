@@ -42,6 +42,10 @@
       <div class="statistics-chart">
         <TagProportion></TagProportion>
       </div>
+      <MComment
+        v-if="articleInfo?.isCommented"
+        :article="articleInfo.id"
+      ></MComment>
     </div>
   </div>
 </template>
@@ -51,10 +55,13 @@ import { ref } from 'vue'
 import ArticleMonthly from './components/ArticleMonthly.vue'
 import TagProportion from './components/TagProportion.vue'
 import { getTotal, TotalData } from '@/api/blog/statistics'
+import { useArticle, ArticleId } from '@/views/blog/article/hooks/useArticle'
 
 defineOptions({
   name: 'Statistics'
 })
+
+const { articleInfo } = useArticle(ArticleId.Statistics)
 
 const totalData = ref<TotalData>()
 getTotal().then((res) => {

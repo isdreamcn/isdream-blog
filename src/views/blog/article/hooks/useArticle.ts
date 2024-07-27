@@ -6,6 +6,13 @@ import {
   commendArticle
 } from '@/api/blog/article'
 
+// 其他模块关联的文章id
+export enum ArticleId {
+  Link = 75,
+  About = 76,
+  Statistics = 77
+}
+
 export const useArticle = (id: number) => {
   const articleInfo = ref<ArticleDetails['data']>()
   const preArticleInfo = ref<ArticleDetails['prev']>()

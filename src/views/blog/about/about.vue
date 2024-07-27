@@ -62,16 +62,23 @@
           >
         </li>
       </ol>
+      <MComment
+        v-if="articleInfo?.isCommented"
+        :article="articleInfo.id"
+      ></MComment>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useArticle, ArticleId } from '@/views/blog/article/hooks/useArticle'
 import blogger from '@/assets/img/blogger.webp'
 
 defineOptions({
   name: 'About'
 })
+
+const { articleInfo } = useArticle(ArticleId.About)
 </script>
 
 <style lang="scss" scoped>

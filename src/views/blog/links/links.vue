@@ -56,6 +56,11 @@
           </li>
         </ul>
       </div>
+
+      <MComment
+        v-if="articleInfo?.isCommented"
+        :article="articleInfo.id"
+      ></MComment>
     </div>
   </div>
 </template>
@@ -63,10 +68,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { getLinks, LinkType } from '@/api/blog/links'
+import { useArticle, ArticleId } from '@/views/blog/article/hooks/useArticle'
 
 defineOptions({
   name: 'Links'
 })
+
+const { articleInfo } = useArticle(ArticleId.Link)
 
 const links = ref<LinkType[]>([])
 getLinks().then((res) => {

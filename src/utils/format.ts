@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { appConfig } from '@/config'
 
 export const setBaseUrlFile = (str: string) => {
@@ -62,4 +63,19 @@ export const filePathQuery = (
   }
 
   return `${url}?${queryStr}`
+}
+
+export const dateFormat = (
+  value: dayjs.ConfigType,
+  template = 'YYYY-MM-DD HH:mm:ss'
+) => {
+  try {
+    const date = dayjs(value).format(template)
+    if (date === 'Invalid Date') {
+      throw new Error('Invalid Date')
+    }
+    return date
+  } catch {
+    return value?.toString() || ''
+  }
 }

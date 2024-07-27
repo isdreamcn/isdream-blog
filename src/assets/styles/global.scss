@@ -18,6 +18,10 @@
   --m-border: 0.02rem solid var(--el-border-color);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 html.light {
   // element-plus
   // menu
