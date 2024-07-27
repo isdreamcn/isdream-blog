@@ -160,23 +160,21 @@ export const useUserStore = defineStore('user', {
       return !!this.userPermissionMap.get(permission)
     },
     // 重载当前页
-    reloadCurrentPage(promises: Promise<any>[]) {
-      setTimeout(() => {
-        const routerStore = useRouterStore()
-        routerStore.setState({
-          loading: true,
-          closeLoading: false
-        })
-        Promise.all(promises).then(() => {
-          router
-            .replace(location.hash ? location.hash.slice(1) : location.pathname)
-            .then(() => {
-              routerStore.setState({
-                loading: false,
-                closeLoading: true
-              })
-            })
-        })
+    async reloadCurrentPage(promises: Promise<any>[]) {
+      const routerStore = useRouterStore()
+      routerStore.setState({
+        loading: true,
+        closeLoading: false
+      })
+
+      await Promise.all(promises)
+
+      const { hash, pathname, search } = window.location
+      await router.replace(hash ? hash.slice(1) : pathname + search)
+
+      routerStore.setState({
+        loading: false,
+        closeLoading: true
       })
     }
   }

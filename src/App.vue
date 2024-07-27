@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRouterStore } from '@/store'
 import { ElConfigProvider } from 'element-plus'
 import { MLoadingLottie } from '@/components'
@@ -9,6 +9,17 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 // loading
 const routerStore = useRouterStore()
 const loading = computed(() => routerStore.loading)
+
+const el = document.documentElement
+watch(
+  loading,
+  (val) => {
+    el.style.overflowY = val ? 'hidden' : 'auto'
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <template>

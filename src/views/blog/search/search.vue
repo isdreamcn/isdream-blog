@@ -49,19 +49,26 @@ const { q, tagName, tag } = route.query
 
 // 文章数据
 const artilces = ref<Article[]>([])
-getArticleList({
-  page: 1,
-  pageSize: 999,
-  tag: tag ? Number(tag) : undefined,
-  q: q && String(q)
-}).then((res) => {
-  const _q = q ? String(q) : ''
-  artilces.value = res.data.map((v) => ({
-    ...v,
-    title: emphasizeQ(v.title, _q, 100),
-    text: emphasizeQ(v.text, _q, 100)
-  }))
-})
+const getArtilces = () => {
+  if (!tag && !q) {
+    return
+  }
+  getArticleList({
+    page: 1,
+    pageSize: 999,
+    tag: tag ? Number(tag) : undefined,
+    q: q && String(q)
+  }).then((res) => {
+    const _q = q ? String(q) : ''
+    artilces.value = res.data.map((v) => ({
+      ...v,
+      title: emphasizeQ(v.title, _q, 100),
+      text: emphasizeQ(v.text, _q, 100)
+    }))
+  })
+}
+
+getArtilces()
 
 const title = computed(() => {
   let _title = ' '
