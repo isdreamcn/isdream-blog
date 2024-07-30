@@ -1,16 +1,18 @@
 import {
   createRouter,
-  // createWebHashHistory
+  createWebHashHistory,
   createWebHistory
 } from 'vue-router'
-
+import { appConfig } from '@/config'
 import routes from './routes'
 import useGuard from './guard'
 
 const router = createRouter({
-  routes,
-  // history: createWebHashHistory()
-  history: createWebHistory(import.meta.env.VITE_BASE_URL)
+  routes: routes,
+  history:
+    appConfig.routerHistory === 'Hash'
+      ? createWebHashHistory()
+      : createWebHistory(import.meta.env.VITE_BASE_URL)
 })
 
 useGuard(router)

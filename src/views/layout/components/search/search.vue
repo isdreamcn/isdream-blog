@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useTagFontSize } from './hooks/useTagFontSize'
 import { getArticleTags, ArticleTag } from '@/api/blog/articleTag'
 
@@ -86,22 +86,12 @@ const closeDialog = () => {
 
 // 显示搜索内容
 const router = useRouter()
-const route = useRoute()
 const goPage = (query = {}) => {
   closeDialog()
-  if (route.name === 'search') {
-    router.push('/').then(() =>
-      router.replace({
-        name: 'search',
-        query
-      })
-    )
-  } else {
-    router.push({
-      name: 'search',
-      query
-    })
-  }
+  router.push({
+    name: 'search',
+    query
+  })
 }
 </script>
 

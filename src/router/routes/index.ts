@@ -26,6 +26,14 @@ const routes: RouteRecordRaw[] = [
     children: loadRoutes(import.meta.glob('./user/*.ts', { eager: true }))
   },
   {
+    path: '/refresh',
+    name: 'refresh',
+    meta: {
+      needRouteHistory: false
+    },
+    component: () => import('@/views/refresh/refresh.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     meta: {
       needRouteHistory: false

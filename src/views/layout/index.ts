@@ -5,6 +5,7 @@ import { h, defineComponent, computed, KeepAlive, Transition } from 'vue'
 import { RouterView } from 'vue-router'
 import { appConfig } from '@/config'
 import { useRouterStore } from '@/store'
+import { isFunction, isPromise, isObject } from '@/utils'
 
 export const createEmptyVNode = (tag = 'div') => h(tag)
 
@@ -18,7 +19,7 @@ type BasicLayoutOptions = Pick<DefaultRouteMeta, 'keepAlive'> & {
 
 const createKeepAliveVNode = (
   path: string,
-  Component: RouterViewProps['Component']
+  component: RouterViewProps['Component']
 ) => {
   const routerStore = useRouterStore()
   const aliveInclude = computed(() => routerStore.getAlive(path))
@@ -28,22 +29,22 @@ const createKeepAliveVNode = (
     {
       include: aliveInclude.value
     },
-    Component
+    component
   )
 }
 
-export const createTransitionVNode = (Component: VNode) => {
+export const createTransitionVNode = (component: VNode) => {
   return h(
     Transition,
     {
       // 初次显示动画
       appear: true,
       // 先执行离开动画，然后在其完成之后再执行元素的进入动画
-      mode: 'out-in'
-      // 'enter-active-class': 'animate__animated animate__lightSpeedInRight'
+      mode: 'out-in',
+      'enter-active-class': 'animate__animated animate__lightSpeedInRight'
     },
     {
-      default: () => Component
+      default: () => component
     }
   )
 }
@@ -71,7 +72,7 @@ export const createBasicLayout = (
     name: path,
     setup() {
       const {
-        keepAlive = appConfig.defaultRouteMeta.keepAlive,
+        keepAlive = appConfig.needKeepAlive,
         // 使用过渡
         transition = false
       } = options || {}
@@ -90,3 +91,25 @@ export const createBasicLayout = (
         })
     }
   })
+
+export const createHasNameComponent = (component: any, name: string) => {
+  return () => {
+    if (isFunction(component)) {
+      component = component()
+    }
+    if (isPromise(component)) {
+      component.then((res: any) => {
+        if (isObject(res?.default)) {
+          res.default.name = name
+        } else if (isObject(res)) {
+          res.name = name
+        }
+        return res
+      })
+    }
+    if (isObject(component)) {
+      component.name = name
+    }
+    return component
+  }
+}
