@@ -1,5 +1,5 @@
 <template>
-  <MLoading :loading="props.loading">
+  <MLoading :loading="props.loading" :zIndex="zIndex">
     <MLottie :data="loadingData" style="width: 3.5rem"></MLottie>
   </MLoading>
 </template>

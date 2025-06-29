@@ -18,103 +18,115 @@
         </div>
       </MImgDefault>
     </div>
-    <div class="blogLayout-card">
-      <MMenu :containerEl="containerElRef"></MMenu>
-      <!-- 内容 -->
-      <article class="article__content" ref="containerElRef">
-        <MMarkdownView
-          v-if="articleInfo.render === 1"
-          :value="articleInfo.content"
-        ></MMarkdownView>
-        <div v-if="articleInfo.render === 2" v-html="articleInfo.content"></div>
-      </article>
-      <!-- 协议、标签、操作 -->
-      <div class="article-footer">
-        <div class="license">
-          <a
-            class="m-flex hc"
-            rel="license"
-            target="_blank"
-            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-          >
-            <img
-              alt="知识共享许可协议"
-              style="border-width: 0"
-              src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
-            />
-            <div class="media-pc">
-              知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
-            </div>
-            <div class="media-phone">
-              <abbr
-                title="知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议"
-                >CC BY-NC-SA 4.0</abbr
+    <div class="article__container">
+      <div class="blogLayout-card">
+        <!-- 内容 -->
+        <article class="article__content" ref="containerElRef">
+          <MMarkdownView
+            v-if="articleInfo.render === 1"
+            :value="articleInfo.content"
+          ></MMarkdownView>
+          <div
+            v-if="articleInfo.render === 2"
+            v-html="articleInfo.content"
+          ></div>
+        </article>
+        <!-- 协议、标签、操作 -->
+        <div class="article-footer">
+          <div class="license">
+            <a
+              class="m-flex hc"
+              rel="license"
+              target="_blank"
+              href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            >
+              <img
+                alt="知识共享许可协议"
+                style="border-width: 0"
+                src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
+              />
+              <div class="media-pc">
+                知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+              </div>
+              <div class="media-phone">
+                <abbr
+                  title="知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议"
+                  >CC BY-NC-SA 4.0</abbr
+                >
+              </div>
+            </a>
+          </div>
+          <div class="article-actions">
+            <div class="article-actions__tags m-flex hc">
+              <MIcon
+                v-if="articleInfo.tags.length"
+                name="icon-PriceTag"
+              ></MIcon>
+              <a
+                v-for="tag in articleInfo.tags"
+                :key="tag.id"
+                @click="goSearch(tag.id, tag.title)"
+                >{{ tag.title }}</a
               >
             </div>
-          </a>
+            <div class="article-actions__btns">
+              <div class="btns-item" @click="commend">
+                <MIcon name="icon-star"></MIcon>{{ articleInfo.commends }}
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="article-actions">
-          <div class="article-actions__tags m-flex hc">
-            <MIcon v-if="articleInfo.tags.length" name="icon-PriceTag"></MIcon>
-            <a
-              v-for="tag in articleInfo.tags"
-              :key="tag.id"
-              @click="goSearch(tag.id, tag.title)"
-              >{{ tag.title }}</a
+        <!-- 上一篇/下一篇 -->
+        <div class="article-pre-next">
+          <div
+            v-if="preArticleInfo"
+            class="article-pre"
+            @click="showArticle(preArticleInfo!.id)"
+          >
+            <MImgDefault
+              :src="
+                filePathQuery(preArticleInfo.cover?.url, { w: 750, f: 'webp' })
+              "
+              :thumb="
+                filePathQuery(preArticleInfo.cover?.url, { w: 100, f: 'webp' })
+              "
             >
+              <div class="article-pre-next__articleInfo">
+                <div>上一篇</div>
+                <div class="m-ellipsis">{{ preArticleInfo.title }}</div>
+              </div>
+            </MImgDefault>
           </div>
-          <div class="article-actions__btns">
-            <div class="btns-item" @click="commend">
-              <MIcon name="icon-star"></MIcon>{{ articleInfo.commends }}
-            </div>
+          <div
+            v-if="nextArticleInfo"
+            class="article-next"
+            @click="showArticle(nextArticleInfo!.id)"
+          >
+            <MImgDefault
+              :src="
+                filePathQuery(nextArticleInfo.cover?.url, { w: 750, f: 'webp' })
+              "
+              :thumb="
+                filePathQuery(nextArticleInfo.cover?.url, { w: 100, f: 'webp' })
+              "
+            >
+              <div class="article-pre-next__articleInfo">
+                <div>下一篇</div>
+                <div class="m-ellipsis">{{ nextArticleInfo.title }}</div>
+              </div>
+            </MImgDefault>
           </div>
         </div>
+        <MComment
+          v-if="articleInfo.isCommented"
+          :article="articleInfo.id"
+        ></MComment>
       </div>
-      <!-- 上一篇/下一篇 -->
-      <div class="article-pre-next">
-        <div
-          v-if="preArticleInfo"
-          class="article-pre"
-          @click="showArticle(preArticleInfo!.id)"
-        >
-          <MImgDefault
-            :src="
-              filePathQuery(preArticleInfo.cover?.url, { w: 750, f: 'webp' })
-            "
-            :thumb="
-              filePathQuery(preArticleInfo.cover?.url, { w: 100, f: 'webp' })
-            "
-          >
-            <div class="article-pre-next__articleInfo">
-              <div>上一篇</div>
-              <div class="m-ellipsis">{{ preArticleInfo.title }}</div>
-            </div>
-          </MImgDefault>
-        </div>
-        <div
-          v-if="nextArticleInfo"
-          class="article-next"
-          @click="showArticle(nextArticleInfo!.id)"
-        >
-          <MImgDefault
-            :src="
-              filePathQuery(nextArticleInfo.cover?.url, { w: 750, f: 'webp' })
-            "
-            :thumb="
-              filePathQuery(nextArticleInfo.cover?.url, { w: 100, f: 'webp' })
-            "
-          >
-            <div class="article-pre-next__articleInfo">
-              <div>下一篇</div>
-              <div class="m-ellipsis">{{ nextArticleInfo.title }}</div>
-            </div>
-          </MImgDefault>
-        </div>
-      </div>
-      <MComment
-        v-if="articleInfo.isCommented"
-        :article="articleInfo.id"
-      ></MComment>
+      <MOutline
+        v-if="animationEnded && containerElRef"
+        :containerEl="containerElRef"
+      ></MOutline>
+      <div v-else class="m-outline"></div>
     </div>
   </div>
 </template>
@@ -130,12 +142,18 @@ defineOptions({
   name: 'Article'
 })
 
+// 等待css动画加载完，防止m-outline位置计算错误
+const animationEnded = ref(false)
 const containerElRef = ref<HTMLElement>()
 
 const route = useRoute()
 const id = Number(route.params.id)
 
 const { articleInfo, preArticleInfo, nextArticleInfo, commend } = useArticle(id)
+
+setTimeout(() => {
+  animationEnded.value = true
+}, 1000)
 
 // 查看相同标签的文章
 const router = useRouter()
@@ -201,6 +219,32 @@ const showArticle = (id: number) => {
             }
           }
         }
+      }
+    }
+  }
+
+  .article__container {
+    display: flex;
+    justify-content: center;
+    margin: 0.24rem 0;
+    transform: translateX(1.5rem);
+    .blogLayout-card {
+      margin: 0;
+    }
+    .m-outline {
+      position: sticky;
+      top: 0.8rem;
+      width: 2.8rem;
+      margin-left: 0.2rem;
+      height: 50vh;
+    }
+  }
+
+  @media (max-width: 1600px) {
+    .article__container {
+      transform: translateX(0);
+      .m-outline {
+        display: none;
       }
     }
   }

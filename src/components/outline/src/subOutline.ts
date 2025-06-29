@@ -1,14 +1,14 @@
 import { definePropType, buildProps } from '@/utils'
 
-interface MenuListItem {
+interface NodeItem {
   id: number
   label: string
-  children?: MenuListItem[]
+  children?: NodeItem[]
 }
 
-export const subMenuProps = buildProps({
-  menuList: {
-    type: definePropType<MenuListItem[]>(Array),
+export const subOutlineProps = buildProps({
+  nodeTree: {
+    type: definePropType<NodeItem[]>(Array),
     default: () => []
   },
   activedId: {
@@ -20,6 +20,6 @@ export const subMenuProps = buildProps({
   }
 } as const)
 
-export const subMenuEmits = {
+export const subOutlineEmits = {
   click: (e: any) => true || e
 }
