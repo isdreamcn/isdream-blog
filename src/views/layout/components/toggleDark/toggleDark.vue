@@ -1,5 +1,5 @@
 <template>
-  <div class="toggleDark-container" ref="switchRef" @click="beforeChange">
+  <div class="toggleDark-container" ref="switchRef" @click="toggleDarkHandler">
     <m-icon name="icon-sunny" v-show="!isDark"></m-icon>
     <m-icon name="icon-moon" v-show="isDark"></m-icon>
   </div>
@@ -15,9 +15,9 @@ const switchRef = ref<any>()
 const beforeChange = () => {
   return new Promise<boolean>((resolve) => {
     const isAppearanceTransition =
-      typeof (document as any).startViewTransition === 'function' &&
+      // @ts-expect-error: Transition API
+      document.startViewTransition &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
     if (!isAppearanceTransition) {
       resolve(true)
       return
@@ -33,14 +33,19 @@ const beforeChange = () => {
       Math.max(y, innerHeight - y)
     )
 
-    const transition = (document as any).startViewTransition(async () => {
+    const ratioX = (100 * x) / innerWidth
+    const ratioY = (100 * y) / innerHeight
+    const referR = Math.hypot(innerWidth, innerHeight) / Math.SQRT2
+    const ratioR = (100 * endRadius) / referR
+
+    const transition = document.startViewTransition(async () => {
       resolve(true)
       await nextTick()
     })
     transition.ready.then(() => {
       const clipPath = [
-        `circle(0px at ${x}px ${y}px)`,
-        `circle(${endRadius}px at ${x}px ${y}px)`
+        `circle(0% at ${ratioX}% ${ratioY}%)`,
+        `circle(${ratioR}% at ${ratioX}% ${ratioY}%)`
       ]
       document.documentElement.animate(
         {
@@ -49,14 +54,21 @@ const beforeChange = () => {
         {
           duration: 400,
           easing: 'ease-in',
+          fill: 'both',
           pseudoElement: isDark.value
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)'
         }
       )
     })
-  }).finally(() => {
-    toggleDark()
+  })
+}
+
+const toggleDarkHandler = () => {
+  beforeChange().then((result) => {
+    if (result) {
+      toggleDark()
+    }
   })
 }
 </script>

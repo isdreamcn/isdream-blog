@@ -9,3 +9,7 @@ const app = createApp(App)
 app.use(setupAppPlugins)
 
 app.mount('#app')
+
+requestAnimationFrame(() => {
+  document.documentElement.setAttribute('data-prerender-ready', 'true')
+})
