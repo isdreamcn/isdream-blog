@@ -38,7 +38,7 @@ const beforeChange = () => {
     const referR = Math.hypot(innerWidth, innerHeight) / Math.SQRT2
     const ratioR = (100 * endRadius) / referR
 
-    const transition = document.startViewTransition(async () => {
+    const transition = (document as any).startViewTransition(async () => {
       resolve(true)
       await nextTick()
     })
