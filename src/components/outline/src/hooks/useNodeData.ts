@@ -136,6 +136,8 @@ export const useNodeData = (containerEl: HTMLElement, options: Options) => {
   const activedId = ref(0)
   let scrollEl: HTMLElement | Window = window
   let containerTop = 0
+  // 导航栏高度
+  const headerHeight = (document.querySelector('#blog-header')?.clientHeight || 0) * 1.2
 
   // 更新节点数据
   const updateNodeData = () => {
@@ -184,7 +186,7 @@ export const useNodeData = (containerEl: HTMLElement, options: Options) => {
     const targetTop = item.absoluteTop - containerTop
     if (scrollEl === window) {
       window.scrollTo({
-        top: targetTop,
+        top: targetTop - headerHeight,
         behavior: 'smooth'
       })
     } else {

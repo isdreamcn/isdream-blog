@@ -1,5 +1,5 @@
 <template>
-  <div :class="`media-pc header-container ${className}`">
+  <div id="blog-header" :class="`media-pc header-container ${className}`">
     <a class="header-container__logo bottom-border" @click="goHome">
       ISDREAM-BLOG
     </a>
@@ -80,11 +80,13 @@ useScrollListener(({ scrollTop: _scrollTop }) => {
 .header-container {
   position: fixed;
   z-index: 98;
-  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 0.6rem;
+  box-sizing: border-box;
   width: 100%;
-  padding: 0.16rem 0.32rem 0.13rem 0.32rem;
+  padding: 0 0.32rem;
   transition: var(--animate-duration);
   color: #ffffff;
   &.hidden {
@@ -93,7 +95,8 @@ useScrollListener(({ scrollTop: _scrollTop }) => {
   &.has-bg {
     background-color: rgba(255, 255, 255, 0.7);
     color: #000000;
-    box-shadow: 0 0.01rem 0.4rem -0.05rem rgb(0 0 0 / 50%);
+    backdrop-filter: saturate(50%) blur(0.04rem);
+    box-shadow: 0 0.02rem 0.1rem -0.05rem rgb(0 0 0 / 50%);
     .bottom-border {
       &:hover {
         color: var(--el-color-primary);
