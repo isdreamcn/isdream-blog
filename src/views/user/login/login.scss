@@ -1,13 +1,13 @@
 section {
   position: relative;
   min-height: 100vh;
-  background: #579FC8;
+  background: #579fc8;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: var(--animate-duration);
   &.active {
-    background: #F6F494;
+    background: #f6f494;
   }
   .container {
     position: relative;
@@ -102,14 +102,13 @@ section {
     }
     .signupBx {
       pointer-events: none;
-        transition: var(--animate-duration);
+      transition: var(--animate-duration);
       .formBx {
         top: 100%;
         transition: var(--animate-duration);
         input[type='button'] {
           background: #e73e49;
         }
-
       }
       .imgBx {
         top: -100%;
@@ -149,7 +148,7 @@ section {
 }
 
 @media (max-width: 991px) {
-  section{
+  section {
     .container {
       max-width: 400px;
       &.active {
